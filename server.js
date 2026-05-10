@@ -3,21 +3,18 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const path = require("path");
 
 const app = express();
 
-/* =========================
-   MIDDLEWARE
-========================= */
-
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
-/* =========================
-   NODEMAILER TRANSPORTER
-========================= */
 
+// ===============================
+// GMAIL TRANSPORTER
+// ===============================
 const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",
@@ -35,10 +32,9 @@ const transporter = nodemailer.createTransport({
     }
 
 });
-
-/* =========================
-   CONTACT API
-========================= */
+// ===============================
+// CONTACT API
+// ===============================
 
 app.post("/api/contact", async (req, res) => {
 
@@ -46,72 +42,47 @@ app.post("/api/contact", async (req, res) => {
 
         const { name, email, message } = req.body;
 
-        console.log(req.body);
-
         await transporter.sendMail({
 
             from: process.env.EMAIL_USER,
 
-            to: "devmallyachakraborty456@gmail.com",
+            to: process.env.EMAIL_USER,
 
             subject: `New Contact From ${name}`,
 
             html: `
+                <h2>New Contact Message</h2>
 
-                <div style="font-family:Poppins,sans-serif;padding:20px;">
+                <p><b>Name:</b> ${name}</p>
 
-                    <h2 style="color:#ff4f93;">
-                        New Website Message ❤️
-                    </h2>
+                <p><b>Email:</b> ${email}</p>
 
-                    <p>
-                        <b>Name:</b> ${name}
-                    </p>
+                <p><b>Message:</b></p>
 
-                    <p>
-                        <b>Email:</b> ${email}
-                    </p>
-
-                    <p>
-                        <b>Message:</b>
-                    </p>
-
-                    <p>
-                        ${message}
-                    </p>
-
-                </div>
-
+                <p>${message}</p>
             `
-
         });
 
         res.json({
-
-            success: true
-
+            success: true,
+            message: "Email Sent Successfully"
         });
 
-    }
+    } catch (error) {
 
-    catch (err) {
-
-        console.log(err);
+        console.log(error);
 
         res.status(500).json({
-
             success: false,
-            message: "Failed to send email"
-
+            message: "Failed To Send Email"
         });
-
     }
-
 });
 
-/* =========================
-   ADMIN LOGIN
-========================= */
+
+// ===============================
+// ADMIN LOGIN
+// ===============================
 
 app.post("/api/admin", (req, res) => {
 
@@ -120,28 +91,21 @@ app.post("/api/admin", (req, res) => {
     if (password === "admin123") {
 
         res.json({
-
             success: true
-
         });
 
-    }
-
-    else {
+    } else {
 
         res.json({
-
             success: false
-
         });
-
     }
-
 });
 
-/* =========================
-   PORT
-========================= */
+
+// ===============================
+// SERVER
+// ===============================
 
 const PORT = process.env.PORT || 10000;
 
