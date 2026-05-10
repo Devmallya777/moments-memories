@@ -1,154 +1,170 @@
 const menuToggle =
-    document.querySelector(".menu-toggle");
+document.querySelector(".menu-toggle");
 
 const navLinks =
-    document.querySelector(".nav-links");
-
-/* MOBILE MENU */
+document.querySelector(".nav-links");
 
 if(menuToggle){
 
-    menuToggle.addEventListener("click",()=>{
+menuToggle.addEventListener("click",()=>{
 
-        navLinks.classList.toggle("active");
+navLinks.classList.toggle("active");
 
-    });
+});
 
 }
-
-/* TOAST */
 
 function showToast(message,color="#ff4f93"){
 
-    const toast =
-        document.createElement("div");
+const toast =
+document.createElement("div");
 
-    toast.innerText = message;
+toast.innerText = message;
 
-    toast.style.position = "fixed";
-    toast.style.bottom = "20px";
-    toast.style.right = "20px";
-    toast.style.background = color;
-    toast.style.color = "white";
-    toast.style.padding = "15px 25px";
-    toast.style.borderRadius = "12px";
-    toast.style.fontWeight = "600";
-    toast.style.zIndex = "9999";
-    toast.style.boxShadow =
-        "0 10px 25px rgba(0,0,0,0.2)";
+toast.style.position = "fixed";
+toast.style.bottom = "20px";
+toast.style.right = "20px";
+toast.style.background = color;
+toast.style.color = "white";
+toast.style.padding = "15px 25px";
+toast.style.borderRadius = "12px";
+toast.style.zIndex = "9999";
 
-    document.body.appendChild(toast);
+document.body.appendChild(toast);
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        toast.remove();
+toast.remove();
 
-    },3000);
+},3000);
 
 }
 
-/* CONTACT FORM */
+/* CONTACT */
 
 const contactForm =
-    document.getElementById("contactForm");
+document.getElementById("contactForm");
 
 if(contactForm){
 
-    contactForm.addEventListener(
-        "submit",
-        async(e)=>{
+contactForm.addEventListener(
+"submit",
+async(e)=>{
 
-        e.preventDefault();
+e.preventDefault();
 
-        const button =
-            contactForm.querySelector("button");
+const button =
+contactForm.querySelector("button");
 
-        const name =
-            document.getElementById("name").value;
+button.innerText = "Sending...";
+button.disabled = true;
 
-        const email =
-            document.getElementById("email").value;
+try{
 
-        const message =
-            document.getElementById("message").value;
+const response =
+await fetch("/api/contact",{
 
-        button.innerText = "Sending...";
-        button.disabled = true;
+method:"POST",
 
-        try{
+headers:{
+"Content-Type":"application/json"
+},
 
-            const controller =
-                new AbortController();
+body:JSON.stringify({
 
-            const timeout =
-                setTimeout(()=>{
+name:
+document.getElementById("name").value,
 
-                    controller.abort();
+email:
+document.getElementById("email").value,
 
-                },10000);
+message:
+document.getElementById("message").value
 
-            const res = await fetch(
-                "/api/contact",
-                {
+})
 
-                method:"POST",
+});
 
-                headers:{
-                    "Content-Type":"application/json"
-                },
+const data =
+await response.json();
 
-                body:JSON.stringify({
+if(data.success){
 
-                    name,
-                    email,
-                    message
+showToast(
+"Message Sent ❤️",
+"green"
+);
 
-                }),
+contactForm.reset();
 
-                signal:controller.signal
+}
 
-            });
+else{
 
-            clearTimeout(timeout);
+showToast(
+"Failed To Send ❌",
+"crimson"
+);
 
-            const data = await res.json();
+}
 
-            if(data.success){
+}
 
-                showToast(
-                    "Message Sent ❤️",
-                    "green"
-                );
+catch(err){
 
-                contactForm.reset();
+showToast(
+"Server Not Responding ❌",
+"crimson"
+);
 
-            }
+}
 
-            else{
+button.innerText = "Send Message";
+button.disabled = false;
 
-                showToast(
-                    "Failed To Send ❌",
-                    "crimson"
-                );
+});
 
-            }
+}
 
-        }
+/* ADMIN */
 
-        catch(err){
+async function loginAdmin(){
 
-            console.log(err);
+const password =
+document.getElementById("adminPassword").value;
 
-            showToast(
-                "Server Not Responding ❌",
-                "crimson"
-            );
+const res =
+await fetch("/api/admin",{
 
-        }
+method:"POST",
 
-        button.innerText = "Send Message";
-        button.disabled = false;
+headers:{
+"Content-Type":"application/json"
+},
 
-    });
+body:JSON.stringify({
+password
+})
+
+});
+
+const data =
+await res.json();
+
+if(data.success){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+else{
+
+showToast(
+"Wrong Password ❌",
+"crimson"
+);
+
+}
 
 }
