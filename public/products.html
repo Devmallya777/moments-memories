@@ -1,206 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#fff7f0;
-}
-
-nav{
-background:#111;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-color:#ffb347;
-font-size:28px;
-font-weight:bold;
-}
-
-nav ul{
-display:flex;
-gap:25px;
-list-style:none;
-}
-
-nav ul li a{
-color:white;
-text-decoration:none;
-font-size:18px;
-}
-
-.hero{
-height:300px;
-background:url('https://images.pexels.com/photos/264771/pexels-photo-264771.jpeg') center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.hero h1{
-font-size:55px;
-color:white;
-background:rgba(0,0,0,0.5);
-padding:20px 40px;
-border-radius:10px;
-}
-
-.products{
-padding:70px 8%;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:35px;
-}
-
-.card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
-}
-
-.card img{
-width:100%;
-height:250px;
-object-fit:cover;
-}
-
-.content{
-padding:20px;
-}
-
-.content h3{
-font-size:28px;
-margin-bottom:10px;
-}
-
-.content p{
-color:#555;
-line-height:1.6;
-margin-bottom:15px;
-}
-
-.price{
-font-size:24px;
-font-weight:bold;
-color:#ff6600;
-margin-bottom:15px;
-}
-
-button{
-width:100%;
-padding:14px;
-background:#ff6600;
-border:none;
-color:white;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
-}
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-
-</style>
+    <title>Products</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav>
+    <div class="logo">Moments & Memories</div>
 
-<div class="logo">Moments & Memories</div>
-
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="admin-dashboard.html">Admin</a></li>
-</ul>
-
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
 </nav>
-
-<div class="hero">
-<h1>Our Products ❤️</h1>
-</div>
 
 <section class="products">
 
-<div class="card">
+    <h2>Our Gift Boxes 💖</h2>
 
-<img src="https://images.pexels.com/photos/1303081/pexels-photo-1303081.jpeg">
+    <div class="product-grid">
 
-<div class="content">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1200">
 
-<h3>Luxury Gift Box</h3>
+            <div class="card-content">
+                <h3>Basic Surprise Box</h3>
+                <p>Chocolate, photos, perfume & handwritten letter.</p>
+                <div class="price">₹499</div>
+            </div>
+        </div>
 
-<p>Beautiful handcrafted luxury surprise box.</p>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1200">
 
-<div class="price">₹1499</div>
+            <div class="card-content">
+                <h3>Premium Teddy Box</h3>
+                <p>Luxury gifts, teddy, chocolates & video message.</p>
+                <div class="price">₹799</div>
+            </div>
+        </div>
 
-<button>Order Now</button>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=1200">
 
-</div>
-</div>
+            <div class="card-content">
+                <h3>Couple Memory Box</h3>
+                <p>Customized romantic surprise box for couples.</p>
+                <div class="price">₹999</div>
+            </div>
+        </div>
 
-<div class="card">
-
-<img src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg">
-
-<div class="content">
-
-<h3>Birthday Box</h3>
-
-<p>Creative birthday memory surprise gift box.</p>
-
-<div class="price">₹1999</div>
-
-<button>Order Now</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<img src="https://images.pexels.com/photos/264771/pexels-photo-264771.jpeg">
-
-<div class="content">
-
-<h3>Anniversary Box</h3>
-
-<p>Romantic anniversary gift collection.</p>
-
-<div class="price">₹2499</div>
-
-<button>Order Now</button>
-
-</div>
-</div>
+    </div>
 
 </section>
 
 <footer>
-© 2026 Moments & Memories | Made by dev
+    Made with 💖 by Moments & Memories
 </footer>
 
 <script src="script.js"></script>

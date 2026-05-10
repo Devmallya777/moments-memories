@@ -1,155 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#fffaf5;
-}
-
-nav{
-background:#111;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-color:#ffb347;
-font-size:28px;
-font-weight:bold;
-}
-
-nav ul{
-display:flex;
-gap:25px;
-list-style:none;
-}
-
-nav ul li a{
-color:white;
-text-decoration:none;
-font-size:18px;
-}
-
-.hero{
-height:300px;
-background:url('https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg') center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.hero h1{
-font-size:55px;
-color:white;
-background:rgba(0,0,0,0.5);
-padding:20px 40px;
-border-radius:10px;
-}
-
-.contact{
-padding:80px 10%;
-display:flex;
-justify-content:center;
-}
-
-form{
-background:white;
-padding:40px;
-width:500px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
-}
-
-form h2{
-margin-bottom:25px;
-font-size:35px;
-}
-
-input, textarea{
-width:100%;
-padding:15px;
-margin-bottom:20px;
-border:1px solid #ccc;
-border-radius:10px;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:15px;
-background:#ff6600;
-border:none;
-color:white;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
-}
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-
-</style>
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav>
+    <div class="logo">Moments & Memories</div>
 
-<div class="logo">Moments & Memories</div>
-
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="admin-dashboard.html">Admin</a></li>
-</ul>
-
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
 </nav>
-
-<div class="hero">
-<h1>Contact Us</h1>
-</div>
 
 <section class="contact">
 
-<form id="contactForm">
+    <div class="contact-box">
 
-<h2>Send Message ❤️</h2>
+        <h2>Contact Us 💌</h2>
 
-<input type="text" id="name" placeholder="Your Name" required>
+        <form>
 
-<input type="email" id="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Your Name" required>
 
-<textarea id="message" rows="6" placeholder="Your Message"></textarea>
+            <input type="email" placeholder="Your Email" required>
 
-<button type="submit">Send Message</button>
+            <textarea rows="6" placeholder="Your Message"></textarea>
 
-</form>
+            <button type="submit">Send Message</button>
+
+        </form>
+
+    </div>
 
 </section>
 
 <footer>
-© 2026 Moments & Memories | Made by dev
+    Contact: mm.giftboxes04@gmail.com
 </footer>
 
 <script src="script.js"></script>

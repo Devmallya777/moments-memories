@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="admin-box">
+<div class="admin-page">
 
-    <h1>Admin Login</h1>
+    <div class="admin-box">
 
-    <input type="password" id="password" placeholder="Enter Password">
+        <h1>Admin Login</h1>
 
-    <button onclick="login()">Login</button>
+        <input type="password" id="password" placeholder="Enter Password">
+
+        <button onclick="login()">Login</button>
+
+    </div>
 
 </div>
 
@@ -20,17 +24,15 @@
 
 function login(){
 
-    const password = document.getElementById('password').value;
+    const pass = document.getElementById("password").value;
 
-    if(password === 'admin123'){
+    if(pass === "moments2026"){
 
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = "admin-dashboard.html";
 
-    }
+    } else {
 
-    else {
-
-        alert('Wrong Password');
+        alert("Wrong Password");
 
     }
 
