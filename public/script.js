@@ -1,30 +1,64 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
+// MOBILE MENU FIX
 if(menuToggle){
-    menuToggle.addEventListener("click",()=>{
+    menuToggle.addEventListener("click", () => {
         navLinks.classList.toggle("active");
     });
 }
 
-// contact form
-const form = document.getElementById("contactForm");
+// CONTACT FORM FIX
+const contactForm = document.getElementById("contactForm");
 
-if(form){
-    form.addEventListener("submit",e=>{
+if(contactForm){
+    contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        alert("Thank you so much for shopping ❤️");
-        form.reset();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message })
+            });
+
+            const data = await res.json();
+
+            if(data.success){
+                alert("Message sent successfully ❤️");
+                contactForm.reset();
+            } else {
+                alert("Failed to send message");
+            }
+
+        } catch (err) {
+            alert("Server not working");
+        }
     });
 }
 
-// admin login
-function loginAdmin(){
+// ADMIN LOGIN FIX (IMPORTANT)
+async function loginAdmin(){
     const pass = document.getElementById("adminPass").value;
 
-    if(pass === "admin123"){
+    const res = await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pass })
+    });
+
+    const data = await res.json();
+
+    if(data.success){
         alert("Welcome Admin 🔥");
-    }else{
+
+        // 🚀 THIS WAS MISSING (MAIN BUG FIX)
+        window.location.href = "admin-dashboard.html";
+    } else {
         alert("Wrong password");
     }
 }

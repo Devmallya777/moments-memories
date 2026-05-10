@@ -95,3 +95,27 @@ body{
         display:none;
     }
 }
+.nav-links.active{
+    display:flex;
+}
+
+@media(max-width:768px){
+    .nav-links{
+        position:absolute;
+        top:70px;
+        right:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        display:none;
+        text-align:center;
+        padding:20px;
+        gap:15px;
+    }
+
+    .menu-toggle{
+        display:block;
+        font-size:28px;
+        cursor:pointer;
+    }
+}
