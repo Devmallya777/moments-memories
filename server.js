@@ -32,13 +32,13 @@ app.post("/api/contact", async (req, res) => {
 
                     name: "Moments & Memories",
 
-                    email: "pendingworkers29@gmail.com"
+                    email: "27eshnasingha@gmail.com"
                 },
 
                 to: [
 
                     {
-                        email: "pendingworkers29@gmail.com"
+                        email: "27eshnasingha@gmail.com"
                     }
 
                 ],
