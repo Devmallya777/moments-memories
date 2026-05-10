@@ -18,24 +18,25 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-/* HOME ROUTE */
+/* HOME */
 
-app.get("/", (req, res) => {
+app.get("/",(req,res)=>{
 
     res.sendFile(
-        path.join(__dirname, "public", "index.html")
+        path.join(
+            __dirname,
+            "public",
+            "index.html"
+        )
     );
 
 });
 
-/* CONTACT API */
+/* CONTACT */
 
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", async(req,res)=>{
 
     try{
-
-        const nodemailer =
-            require("nodemailer");
 
         const {
             name,
@@ -49,8 +50,11 @@ app.post("/api/contact", async (req, res) => {
             service:"gmail",
 
             auth:{
+
                 user:process.env.EMAIL_USER,
+
                 pass:process.env.EMAIL_PASS
+
             }
 
         });
@@ -61,15 +65,26 @@ app.post("/api/contact", async (req, res) => {
 
             to:"mm.giftboxes04@gmail.com",
 
-            subject:`New Contact From ${name}`,
+            subject:`💌 New Message From ${name}`,
 
-            text:`
+            html:`
 
-                Name: ${name}
+                <h2>New Website Inquiry</h2>
 
-                Email: ${email}
+                <p>
+                    <b>Name:</b>
+                    ${name}
+                </p>
 
-                Message: ${message}
+                <p>
+                    <b>Email:</b>
+                    ${email}
+                </p>
+
+                <p>
+                    <b>Message:</b>
+                    ${message}
+                </p>
 
             `
 
@@ -92,54 +107,40 @@ app.post("/api/contact", async (req, res) => {
     }
 
 });
-/* ADMIN LOGIN */
 
-app.post("/api/admin", (req, res) => {
+/* ADMIN */
+
+app.post("/api/admin",(req,res)=>{
 
     const { password } = req.body;
 
-    if (password === "admin123") {
+    if(password === "admin123"){
 
         res.json({
-            success: true
+            success:true
         });
 
     }
 
-    else {
+    else{
 
         res.json({
-            success: false
+            success:false
         });
 
     }
 
 });
 
-/* DASHBOARD DATA */
+/* SERVER */
 
-app.get("/api/dashboard", (req, res) => {
+const PORT =
+    process.env.PORT || 3000;
 
-    res.json({
+app.listen(PORT,()=>{
 
-        orders: 124,
-
-        messages: 38,
-
-        products: 12,
-
-        revenue: "48K"
-
-    });
-
-});
-
-/* START SERVER */
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-
-    console.log(`Server running on port ${PORT}`);
+    console.log(
+        `Server Running On ${PORT}`
+    );
 
 });
