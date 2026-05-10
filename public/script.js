@@ -1,8 +1,17 @@
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if(menuToggle){
+    menuToggle.addEventListener('click',()=>{
+        navLinks.classList.toggle('active');
+    });
+}
+
 const contactForm = document.getElementById('contactForm');
 
 if(contactForm){
 
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', async(e)=>{
 
         e.preventDefault();
 
@@ -10,48 +19,28 @@ if(contactForm){
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
-        try {
+        try{
 
-            const response = await fetch('/api/contact', {
-
-                method: 'POST',
-
-                headers: {
-                    'Content-Type': 'application/json'
+            const response = await fetch('/api/contact',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
                 },
-
-                body: JSON.stringify({
-                    name,
-                    email,
-                    message
-                })
-
+                body:JSON.stringify({name,email,message})
             });
 
             const data = await response.json();
 
             if(data.success){
-
-                alert('Message Sent Successfully ❤️');
-
+                alert('Thank you so much for shopping ❤️');
                 contactForm.reset();
-
-            } else {
-
-                alert('Failed To Send Message');
-
+            }else{
+                alert('Something went wrong');
             }
 
-        }
-
-        catch(error){
-
-            console.log(error);
-
-            alert('Something Went Wrong');
-
+        }catch(error){
+            alert('Server Error');
         }
 
     });
-
 }

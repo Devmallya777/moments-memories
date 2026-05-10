@@ -1,79 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Contact Us</title>
-
+    <title>Contact</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
-    <nav class="navbar">
+<nav class="navbar">
+    <div class="logo">Moments & Memories</div>
 
-        <div class="logo">
-            Moments & Memories
-        </div>
+    <div class="menu-toggle">☰</div>
 
-        <ul class="nav-links">
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
+</nav>
 
-            <li><a href="index.html">Home</a></li>
+<section class="contact-section">
 
-            <li><a href="products.html">Products</a></li>
+    <div class="contact-box">
 
-            <li><a href="about.html">About</a></li>
+        <h1>Contact Us</h1>
 
-            <li><a href="contact.html">Contact</a></li>
+        <form id="contactForm" class="contact-form">
 
-        </ul>
+            <input type="text" id="name" placeholder="Enter Your Name" required>
 
-    </nav>
+            <input type="email" id="email" placeholder="Enter Your Email" required>
 
-    <section class="contact-section">
+            <textarea id="message" placeholder="Write Your Message" required></textarea>
 
-        <div class="contact-box">
+            <button type="submit" class="btn">Send Message</button>
 
-            <h1>Contact Us</h1>
+        </form>
 
-            <form id="contactForm" class="contact-form">
+    </div>
 
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter Your Name"
-                    required
-                >
+</section>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter Your Email"
-                    required
-                >
+<div class="footer">
+    © 2026 Moments & Memories
+</div>
 
-                <textarea
-                    id="message"
-                    placeholder="Enter Your Message"
-                    required
-                ></textarea>
-
-                <button type="submit">
-                    Send Message
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
-
-    <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>

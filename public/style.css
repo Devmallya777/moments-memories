@@ -1,61 +1,273 @@
-const contactForm = document.getElementById('contactForm');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-if(contactForm){
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-    contactForm.addEventListener('submit', async (e) => {
+body{
+    background:#f8eef3;
+    color:#222;
+}
 
-        e.preventDefault();
+html{
+    scroll-behavior:smooth;
+}
 
-        const name = document.getElementById('name').value;
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
 
-        const email = document.getElementById('email').value;
+.logo{
+    font-size:2rem;
+    font-weight:700;
+    color:#ff4f93;
+}
 
-        const message = document.getElementById('message').value;
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
 
-        try{
+.nav-links a{
+    text-decoration:none;
+    color:#222;
+    font-size:1rem;
+    font-weight:500;
+    transition:0.3s;
+}
 
-            const response = await fetch('/api/contact', {
+.nav-links a:hover{
+    color:#ff4f93;
+}
 
-                method: 'POST',
+.hero{
+    min-height:90vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:80px 8%;
+    gap:50px;
+}
 
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+.hero-content{
+    flex:1;
+}
 
-                body: JSON.stringify({
-                    name,
-                    email,
-                    message
-                })
+.hero-content h1{
+    font-size:4rem;
+    line-height:1.2;
+    margin-bottom:20px;
+}
 
-            });
+.hero-content p{
+    font-size:1.1rem;
+    color:#555;
+    margin-bottom:30px;
+}
 
-            const data = await response.json();
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:#ff4f93;
+    color:#fff;
+    text-decoration:none;
+    border-radius:40px;
+    font-weight:600;
+    transition:0.3s;
+}
 
-            if(data.success){
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(255,79,147,0.3);
+}
 
-                alert('Thank You Soo Much For Shopping ❤️');
+.hero-image{
+    flex:1;
+}
 
-                contactForm.reset();
+.hero-image img{
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
 
-            }
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:50px;
+}
 
-            else{
+.products{
+    padding:80px 8%;
+}
 
-                alert('Failed To Send Message');
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+}
 
-            }
+.card{
+    background:#fff;
+    border-radius:25px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
 
-        }
+.card:hover{
+    transform:translateY(-8px);
+}
 
-        catch(error){
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
 
-            console.log(error);
+.card-content{
+    padding:20px;
+}
 
-            alert('Something Went Wrong');
+.card-content h3{
+    font-size:1.7rem;
+    margin-bottom:10px;
+}
 
-        }
+.price{
+    color:#ff4f93;
+    font-size:1.4rem;
+    font-weight:700;
+    margin-bottom:20px;
+}
 
-    });
+.about-section,
+.contact-section{
+    padding:80px 8%;
+}
 
+.about-box,
+.contact-box{
+    background:#fff;
+    padding:60px;
+    border-radius:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+.about-box h1,
+.contact-box h1{
+    font-size:3rem;
+    margin-bottom:25px;
+}
+
+.about-box p{
+    font-size:1.1rem;
+    line-height:2;
+    color:#555;
+}
+
+.contact-form{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:18px;
+    border:none;
+    background:#f6f6f6;
+    border-radius:15px;
+    font-size:1rem;
+    outline:none;
+}
+
+.contact-form textarea{
+    resize:none;
+    height:150px;
+}
+
+.contact-form button{
+    border:none;
+    cursor:pointer;
+}
+
+.footer{
+    background:#fff;
+    text-align:center;
+    padding:25px;
+    margin-top:50px;
+}
+
+.menu-toggle{
+    display:none;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+@media(max-width:900px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:40px;
+    }
+
+    .hero-content h1{
+        font-size:2.8rem;
+    }
+
+    .navbar{
+        padding:20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:80px;
+        right:0;
+        width:100%;
+        background:#fff;
+        flex-direction:column;
+        align-items:center;
+        gap:20px;
+        padding:30px 0;
+        display:none;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .about-box,
+    .contact-box{
+        padding:35px 25px;
+    }
+
+    .about-box h1,
+    .contact-box h1,
+    .section-title{
+        font-size:2.2rem;
+    }
 }
