@@ -3,63 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>About Us</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#fffaf5;
+}
+
+nav{
+background:#111;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+nav h2{
+color:#ffb347;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav ul li a{
+color:white;
+text-decoration:none;
+font-size:18px;
+}
+
+.hero{
+height:350px;
+background:url('https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1600&auto=format&fit=crop') center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.hero h1{
+font-size:55px;
+color:white;
+background:rgba(0,0,0,0.5);
+padding:20px 40px;
+border-radius:12px;
+}
+
+.about{
+padding:80px 10%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.text h2{
+font-size:45px;
+margin-bottom:20px;
+}
+
+.text p{
+font-size:20px;
+line-height:1.8;
+color:#555;
+margin-bottom:20px;
+}
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media(max-width:900px){
+
+.about{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+}
+
+</style>
+
 </head>
-
 <body>
 
-<nav class="navbar">
+<nav>
 
-    <div class="logo">
-        Moments & Memories
-    </div>
+<h2>Moments & Memories</h2>
 
-    <div class="menu-toggle">☰</div>
-
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="admin.html">Admin</a></li>
-    </ul>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
 
 </nav>
 
-<section class="about-section">
+<div class="hero">
+<h1>About Us</h1>
+</div>
 
-    <div class="about-box">
+<section class="about">
 
-        <h1>About Moments & Memories</h1>
+<img src="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21d?q=80&w=1200&auto=format&fit=crop">
 
-        <p>
-            At Moments & Memories, we don’t just create gift boxes — we create emotions wrapped in love.
-        </p>
+<div class="text">
 
-        <p>
-            Every box is carefully handcrafted with attention to detail, designed to bring smiles, surprise, and unforgettable joy to your special ones.
-        </p>
+<h2>We Create Emotions ❤️</h2>
 
-        <p>
-            Whether it's a birthday, anniversary, proposal, or just a “thinking of you” moment — we help you express feelings in the most beautiful way possible.
-        </p>
+<p>
+At Moments & Memories, we believe gifts are more than products —
+they are feelings, memories, and unforgettable emotions.
+</p>
 
-        <p>
-            Because we believe — memories should not just be made… they should be felt forever.
-        </p>
+<p>
+Every surprise box is handcrafted with love, creativity, and attention
+to detail to make your special moments magical.
+</p>
 
-    </div>
+<p>
+From birthdays to anniversaries, we turn ordinary moments into lifelong memories.
+</p>
+
+</div>
 
 </section>
 
-<footer class="footer">
-    © 2026 Moments & Memories
+<footer>
+© 2026 Moments & Memories | Made with ❤️
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>

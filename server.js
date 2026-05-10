@@ -70,3 +70,24 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+const Product = require("./models/Product");
+const Contact = require("./models/Contact");
+const Order = require("./models/Order");
+
+app.get("/api/dashboard", async (req, res) => {
+
+    const products = await Product.countDocuments();
+
+    const contacts = await Contact.countDocuments();
+
+    const orders = await Order.countDocuments();
+
+    res.json({
+
+        products,
+        contacts,
+        orders
+
+    });
+
+});

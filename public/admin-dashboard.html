@@ -1,35 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Dashboard</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-    <h1>Admin Dashboard</h1>
+        <h1>
+            Admin Dashboard
+        </h1>
 
-    <div class="dashboard-grid">
+        <div class="stats-grid">
 
-        <div class="card">
-            <h2>Total Products</h2>
-            <p>24</p>
-        </div>
+            <div class="stat-card">
 
-        <div class="card">
-            <h2>Total Orders</h2>
-            <p>52</p>
-        </div>
+                <h2 id="productsCount">0</h2>
 
-        <div class="card">
-            <h2>Total Contacts</h2>
-            <p>13</p>
+                <p>Total Products</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="contactsCount">0</h2>
+
+                <p>Total Contacts</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="ordersCount">0</h2>
+
+                <p>Total Orders</p>
+
+            </div>
+
         </div>
 
     </div>
 
-</div>
+    <script>
+
+        async function loadDashboard() {
+
+            const res = await fetch("/api/dashboard");
+
+            const data = await res.json();
+
+            document.getElementById("productsCount").innerText = data.products;
+
+            document.getElementById("contactsCount").innerText = data.contacts;
+
+            document.getElementById("ordersCount").innerText = data.orders;
+
+        }
+
+        loadDashboard();
+
+    </script>
 
 </body>
+
 </html>
