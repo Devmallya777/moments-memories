@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <nav class="navbar">
-    <div class="logo">Moments & Memories</div>
+
+    <div class="logo">
+        Moments & Memories
+    </div>
+
     <div class="menu-toggle">☰</div>
 
     <ul class="nav-links">
@@ -19,24 +27,36 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admin.html">Admin</a></li>
     </ul>
+
 </nav>
 
 <section class="contact-section">
+
     <div class="contact-box">
+
         <h1>Contact Us</h1>
 
         <form id="contactForm" class="contact-form">
-            <input type="text" id="name" placeholder="Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <textarea id="message" placeholder="Message" required></textarea>
-            <button class="btn" type="submit">Send</button>
+
+            <input type="text" id="name" placeholder="Your Name" required>
+
+            <input type="email" id="email" placeholder="Your Email" required>
+
+            <textarea id="message" placeholder="Your Message" required></textarea>
+
+            <button type="submit" class="btn">
+                Send Message
+            </button>
+
         </form>
+
     </div>
+
 </section>
 
-<div class="footer">
+<footer class="footer">
     © 2026 Moments & Memories
-</div>
+</footer>
 
 <script src="script.js"></script>
 </body>
