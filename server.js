@@ -3,33 +3,19 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-const path = require("path");
 
 const app = express();
+
+/* =========================
+   MIDDLEWARE
+========================= */
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
 /* =========================
-   NODEMAILER
-========================= */
-
-const transporter = nodemailer.createTransport({
-
-    service: "gmail",
-
-    auth: {
-
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-
-    }
-
-});
-
-/* =========================
-   TRANSPORTER HERE
+   NODEMAILER TRANSPORTER
 ========================= */
 
 const transporter = nodemailer.createTransport({
@@ -60,6 +46,8 @@ app.post("/api/contact", async (req, res) => {
 
         const { name, email, message } = req.body;
 
+        console.log(req.body);
+
         await transporter.sendMail({
 
             from: process.env.EMAIL_USER,
@@ -70,22 +58,38 @@ app.post("/api/contact", async (req, res) => {
 
             html: `
 
-                <h2>New Website Message 💖</h2>
+                <div style="font-family:Poppins,sans-serif;padding:20px;">
 
-                <p><b>Name:</b> ${name}</p>
+                    <h2 style="color:#ff4f93;">
+                        New Website Message ❤️
+                    </h2>
 
-                <p><b>Email:</b> ${email}</p>
+                    <p>
+                        <b>Name:</b> ${name}
+                    </p>
 
-                <p><b>Message:</b></p>
+                    <p>
+                        <b>Email:</b> ${email}
+                    </p>
 
-                <p>${message}</p>
+                    <p>
+                        <b>Message:</b>
+                    </p>
+
+                    <p>
+                        ${message}
+                    </p>
+
+                </div>
 
             `
 
         });
 
         res.json({
+
             success: true
+
         });
 
     }
@@ -97,7 +101,7 @@ app.post("/api/contact", async (req, res) => {
         res.status(500).json({
 
             success: false,
-            message: "Server error"
+            message: "Failed to send email"
 
         });
 
@@ -113,10 +117,12 @@ app.post("/api/admin", (req, res) => {
 
     const { password } = req.body;
 
-    if (password === "eshna@1429") {
+    if (password === "admin123") {
 
         res.json({
+
             success: true
+
         });
 
     }
@@ -124,7 +130,9 @@ app.post("/api/admin", (req, res) => {
     else {
 
         res.json({
+
             success: false
+
         });
 
     }
