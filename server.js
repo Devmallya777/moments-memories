@@ -13,13 +13,7 @@ const productSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Product", productSchema);
-```
 
----
-
-# 3. server.js
-
-```js
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
