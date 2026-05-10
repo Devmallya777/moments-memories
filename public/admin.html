@@ -1,44 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="admin-page">
-
-    <div class="admin-box">
-
-        <h1>Admin Login</h1>
-
-        <input type="password" id="password" placeholder="Enter Password">
-
-        <button onclick="login()">Login</button>
-
-    </div>
-
-</div>
 
 <script>
 
-function login(){
+const pass = prompt("Enter Admin Password");
 
-    const pass = document.getElementById("password").value;
+if(pass !== "moments2026"){
 
-    if(pass === "moments2026"){
-
-        window.location.href = "admin-dashboard.html";
-
-    } else {
-
-        alert("Wrong Password");
-
-    }
+  window.location.href = "index.html";
 
 }
 
 </script>
 
+
+<nav>
+
+  <div class="logo">
+    Admin Dashboard 💖
+  </div>
+
+  <ul>
+
+    <li><a href="index.html">Home</a></li>
+
+    <li><a href="products.html">Products</a></li>
+
+    <li><a href="contact.html">Contact</a></li>
+
+  </ul>
+
+</nav>
+
+
+<section class="contact-section">
+
+  <h2 class="section-title">
+
+    Website Analytics 📊
+
+  </h2>
+
+  <p>Total Orders : 120</p>
+
+  <br>
+
+  <p>Total Customers : 95</p>
+
+  <br>
+
+  <p>Total Messages : 48</p>
+
+</section>
+
+
+<footer>
+
+  © 2026 Moments & Memories 💖
+
+</footer>
+
 </body>
+
 </html>
