@@ -1,101 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Moments & Memories</title>
-
+    <title>Products</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <nav>
+<nav class="navbar">
+    <div class="logo">Moments & Memories</div>
+    <div class="menu-toggle">☰</div>
 
-        <div class="logo">
-            Moments & Memories
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
+</nav>
+
+<section class="products">
+    <h1 class="section-title">Our Gift Collections</h1>
+
+    <div class="product-grid">
+
+        <div class="card">
+            <div class="card-content">
+                <h3>Birthday Explosion Box</h3>
+                <p class="price">₹899</p>
+                <a href="contact.html" class="btn">Order Now</a>
+            </div>
         </div>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-
-    </nav>
-
-    <section class="products">
-
-        <h1 class="section-title">
-            Our Gift Collections
-        </h1>
-
-        <div class="product-grid">
-
-            <div class="card">
-
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="card-content">
-
-                    <h3>Birthday Explosion Box</h3>
-
-                    <p class="price">₹899</p>
-
-                    <button class="order-btn">
-                        Order Now
-                    </button>
-
-                </div>
-
+        <div class="card">
+            <div class="card-content">
+                <h3>Chocolate Hamper</h3>
+                <p class="price">₹1299</p>
+                <a href="contact.html" class="btn">Order Now</a>
             </div>
-
-            <div class="card">
-
-                <img src="https://images.unsplash.com/photo-1548907040-4baa42d10919?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="card-content">
-
-                    <h3>Chocolate Hamper</h3>
-
-                    <p class="price">₹1299</p>
-
-                    <button class="order-btn">
-                        Order Now
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="card-content">
-
-                    <h3>Anniversary Box</h3>
-
-                    <p class="price">₹1599</p>
-
-                    <button class="order-btn">
-                        Order Now
-                    </button>
-
-                </div>
-
-            </div>
-
         </div>
 
-    </section>
+        <div class="card">
+            <div class="card-content">
+                <h3>Anniversary Box</h3>
+                <p class="price">₹1599</p>
+                <a href="contact.html" class="btn">Order Now</a>
+            </div>
+        </div>
 
-    <footer>
-        © 2026 Moments & Memories | Crafted with Love
-    </footer>
+    </div>
+</section>
 
+<div class="footer">
+    © 2026 Moments & Memories
+</div>
+
+<script src="script.js"></script>
 </body>
-
 </html>
