@@ -154,7 +154,7 @@ await res.json();
 if(data.success){
 
 window.location.href =
-"dashboard.html";
+"admin-dashboard.html";
 
 }
 
