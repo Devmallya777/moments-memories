@@ -42,7 +42,7 @@ app.post("/api/contact", async (req, res) => {
 
             from: process.env.EMAIL_USER,
 
-            to: "mm.giftboxes04@gmail.com",
+            to: "devmallyachakraborty456@gmail.com",
 
             subject: `New Contact From ${name}`,
 
@@ -91,7 +91,7 @@ app.post("/api/admin", (req, res) => {
 
     const { password } = req.body;
 
-    if (password === "admin123") {
+    if (password === "eshna@1429") {
 
         res.json({
             success: true
