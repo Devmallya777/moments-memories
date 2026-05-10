@@ -1,140 +1,267 @@
-const mongoose = require("mongoose");
-
-const productSchema = new mongoose.Schema({
-
-    title: String,
-
-    price: String,
-
-    image: String,
-
-    description: String
-
-});
-
-module.exports = mongoose.model("Product", productSchema);
-
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const path = require("path");
 const axios = require("axios");
-const mongoose = require("mongoose");
 require("dotenv").config();
-
-const Contact = require("./models/Contact");
-const Product = require("./models/Product");
 
 const app = express();
 
+
+// ================= MIDDLEWARE =================
+
 app.use(cors());
 app.use(express.json());
+
 app.use(express.static(path.join(__dirname, "public")));
 
+
+// ================= MONGODB CONNECTION =================
+
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log(err));
+
+.then(() => {
+    console.log("MongoDB Connected");
+})
+
+.catch((err) => {
+    console.log(err);
+});
 
 
-// CONTACT FORM
+// ================= MODELS =================
+
+const Contact = require("./models/Contact");
+const Product = require("./models/Product");
+const User = require("./models/User");
+
+
+// ================= HOME ROUTE =================
+
+app.get("/", (req, res) => {
+
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+
+});
+
+
+// ================= CONTACT FORM =================
+
 app.post("/api/contact", async (req, res) => {
 
     try {
 
         const { name, email, message } = req.body;
 
-        await Contact.create({
+        console.log(req.body);
+
+        // SAVE TO DATABASE
+
+        const newContact = new Contact({
+
             name,
             email,
             message
+
         });
+
+        await newContact.save();
+
+
+        // SEND EMAIL USING BREVO
 
         await axios.post(
 
             "https://api.brevo.com/v3/smtp/email",
 
             {
+
                 sender: {
+
                     name: "Moments & Memories",
                     email: "mm.giftboxes04@gmail.com"
+
                 },
 
                 to: [
+
                     {
                         email: "mm.giftboxes04@gmail.com"
                     }
+
                 ],
 
-                subject: `Moments & Memories Website Inquiry`,
+                subject: `New Message From ${name}`,
 
                 htmlContent: `
 
-                    <h2>New Contact Message</h2>
+                    <div style="font-family:Poppins,sans-serif;padding:20px;">
 
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Message:</strong> ${message}</p>
+                        <h2 style="color:#ff4f93;">
+                            New Contact Message ❤️
+                        </h2>
 
-                `,
+                        <p>
+                            <strong>Name:</strong> ${name}
+                        </p>
 
-                textContent: `
-                Name: ${name}
-                Email: ${email}
-                Message: ${message}
+                        <p>
+                            <strong>Email:</strong> ${email}
+                        </p>
+
+                        <p>
+                            <strong>Message:</strong>
+                        </p>
+
+                        <p>
+                            ${message}
+                        </p>
+
+                    </div>
+
                 `
+
             },
 
             {
+
                 headers: {
-                    accept: "application/json",
+
                     "api-key": process.env.BREVO_API_KEY,
-                    "content-type": "application/json"
+                    "Content-Type": "application/json"
+
                 }
+
             }
+
         );
 
         res.json({
-            success: true
+
+            success: true,
+            message: "Message Sent Successfully"
+
         });
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.log(error.response?.data || error.message);
 
         res.status(500).json({
-            success: false
+
+            success: false,
+            message: "Failed To Send Email"
+
         });
+
     }
+
 });
 
 
-// GET CONTACT MESSAGES
-app.get("/api/messages", async (req, res) => {
+// ================= GET CONTACTS =================
+
+app.get("/api/contacts", async (req, res) => {
 
     try {
 
-        const messages = await Contact.find().sort({ createdAt: -1 });
+        const contacts = await Contact.find().sort({ createdAt: -1 });
 
-        res.json(messages);
+        res.json(contacts);
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         res.status(500).json({
-            error: error.message
+
+            message: "Error fetching contacts"
+
         });
+
     }
+
 });
 
 
-// PRODUCTS API
+// ================= PRODUCTS API =================
+
 app.get("/api/products", async (req, res) => {
 
-    const products = await Product.find();
+    try {
 
-    res.json(products);
+        const products = await Product.find();
+
+        res.json(products);
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: "Error fetching products"
+
+        });
+
+    }
+
 });
 
 
-// ADMIN LOGIN
+// ================= ADD PRODUCT =================
+
+app.post("/api/products", async (req, res) => {
+
+    try {
+
+        const {
+
+            name,
+            price,
+            image,
+            description
+
+        } = req.body;
+
+        const newProduct = new Product({
+
+            name,
+            price,
+            image,
+            description
+
+        });
+
+        await newProduct.save();
+
+        res.json({
+
+            success: true,
+            message: "Product Added"
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            success: false,
+            message: "Failed To Add Product"
+
+        });
+
+    }
+
+});
+
+
+// ================= ADMIN LOGIN =================
+
 app.post("/api/admin", (req, res) => {
 
     const { password } = req.body;
@@ -142,20 +269,32 @@ app.post("/api/admin", (req, res) => {
     if(password === "admin123"){
 
         res.json({
+
             success: true
+
         });
 
-    } else {
+    }
+
+    else {
 
         res.json({
+
             success: false
+
         });
+
     }
+
 });
 
+
+// ================= SERVER =================
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+
     console.log(`Server running on port ${PORT}`);
+
 });
