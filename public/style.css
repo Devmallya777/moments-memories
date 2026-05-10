@@ -214,3 +214,98 @@ body{
     }
 
 }
+/* ========================== */
+/* MOBILE FIX */
+/* ========================== */
+
+html,
+body{
+    overflow-x:hidden;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.card{
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.btn{
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        padding:15px 5%;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding:40px 5%;
+    }
+
+    .hero-content h1{
+        font-size:36px;
+    }
+
+    .hero-content p{
+        font-size:15px;
+    }
+
+    .hero-image img{
+        margin-top:20px;
+        border-radius:20px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card img{
+        height:220px;
+        object-fit:cover;
+    }
+
+    .section-title{
+        font-size:32px;
+    }
+
+    .about-box,
+    .contact-box{
+        padding:25px;
+    }
+
+    .contact-links{
+        grid-template-columns:1fr;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero-content h1{
+        font-size:30px;
+    }
+
+}

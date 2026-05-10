@@ -4,6 +4,8 @@ const menuToggle =
 const navLinks =
     document.querySelector(".nav-links");
 
+/* MOBILE MENU */
+
 if(menuToggle){
 
     menuToggle.addEventListener("click",()=>{
@@ -14,10 +16,7 @@ if(menuToggle){
 
 }
 
-/* CONTACT FORM */
-
-const contactForm =
-    document.getElementById("contactForm");
+/* TOAST */
 
 function showToast(message,color="#ff4f93"){
 
@@ -32,8 +31,11 @@ function showToast(message,color="#ff4f93"){
     toast.style.background = color;
     toast.style.color = "white";
     toast.style.padding = "15px 25px";
-    toast.style.borderRadius = "15px";
+    toast.style.borderRadius = "12px";
+    toast.style.fontWeight = "600";
     toast.style.zIndex = "9999";
+    toast.style.boxShadow =
+        "0 10px 25px rgba(0,0,0,0.2)";
 
     document.body.appendChild(toast);
 
@@ -45,11 +47,21 @@ function showToast(message,color="#ff4f93"){
 
 }
 
+/* CONTACT FORM */
+
+const contactForm =
+    document.getElementById("contactForm");
+
 if(contactForm){
 
-    contactForm.addEventListener("submit",async(e)=>{
+    contactForm.addEventListener(
+        "submit",
+        async(e)=>{
 
         e.preventDefault();
+
+        const button =
+            contactForm.querySelector("button");
 
         const name =
             document.getElementById("name").value;
@@ -60,14 +72,24 @@ if(contactForm){
         const message =
             document.getElementById("message").value;
 
-        const button =
-            contactForm.querySelector("button");
-
         button.innerText = "Sending...";
+        button.disabled = true;
 
         try{
 
-            const res = await fetch("/api/contact",{
+            const controller =
+                new AbortController();
+
+            const timeout =
+                setTimeout(()=>{
+
+                    controller.abort();
+
+                },10000);
+
+            const res = await fetch(
+                "/api/contact",
+                {
 
                 method:"POST",
 
@@ -81,9 +103,13 @@ if(contactForm){
                     email,
                     message
 
-                })
+                }),
+
+                signal:controller.signal
 
             });
+
+            clearTimeout(timeout);
 
             const data = await res.json();
 
@@ -101,7 +127,7 @@ if(contactForm){
             else{
 
                 showToast(
-                    "Failed ❌",
+                    "Failed To Send ❌",
                     "crimson"
                 );
 
@@ -111,14 +137,17 @@ if(contactForm){
 
         catch(err){
 
+            console.log(err);
+
             showToast(
-                "Server Error ❌",
+                "Server Not Responding ❌",
                 "crimson"
             );
 
         }
 
         button.innerText = "Send Message";
+        button.disabled = false;
 
     });
 

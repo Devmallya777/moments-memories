@@ -32,93 +32,66 @@ app.get("/", (req, res) => {
 
 app.post("/api/contact", async (req, res) => {
 
-    const { name, email, message } = req.body;
+    try{
 
-    try {
+        const nodemailer =
+            require("nodemailer");
 
-        const transporter = nodemailer.createTransport({
+        const {
+            name,
+            email,
+            message
+        } = req.body;
 
-            service: "gmail",
+        const transporter =
+            nodemailer.createTransport({
 
-            auth: {
+            service:"gmail",
 
-                user: process.env.EMAIL_USER,
-
-                pass: process.env.EMAIL_PASS
-
+            auth:{
+                user:process.env.EMAIL_USER,
+                pass:process.env.EMAIL_PASS
             }
 
         });
 
         await transporter.sendMail({
 
-            from: process.env.EMAIL_USER,
+            from:process.env.EMAIL_USER,
 
-            to: "mm.giftboxes04@gmail.com",
+            to:"mm.giftboxes04@gmail.com",
 
-            subject: `💌 New Message From ${name}`,
+            subject:`New Contact From ${name}`,
 
-            html: `
+            text:`
 
-                <div style="
-                    font-family:Poppins,sans-serif;
-                    background:#fff7fa;
-                    padding:30px;
-                    border-radius:20px;
-                ">
+                Name: ${name}
 
-                    <h1 style="
-                        color:#ff4f93;
-                        margin-bottom:20px;
-                    ">
-                        New Customer Inquiry
-                    </h1>
+                Email: ${email}
 
-                    <p>
-                        <b>Name:</b> ${name}
-                    </p>
-
-                    <p>
-                        <b>Email:</b> ${email}
-                    </p>
-
-                    <p>
-                        <b>Message:</b>
-                    </p>
-
-                    <div style="
-                        background:white;
-                        padding:20px;
-                        border-radius:15px;
-                        margin-top:10px;
-                    ">
-                        ${message}
-                    </div>
-
-                </div>
+                Message: ${message}
 
             `
 
         });
 
         res.json({
-            success: true
+            success:true
         });
 
     }
 
-    catch (err) {
+    catch(err){
 
         console.log(err);
 
-        res.json({
-            success: false
+        res.status(500).json({
+            success:false
         });
 
     }
 
 });
-
 /* ADMIN LOGIN */
 
 app.post("/api/admin", (req, res) => {
