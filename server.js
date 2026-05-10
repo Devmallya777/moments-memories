@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ================= CONTACT =================
+// ================= CONTACT FORM =================
 
 app.post("/api/contact", async (req, res) => {
 
@@ -32,13 +32,13 @@ app.post("/api/contact", async (req, res) => {
 
                     name: "Moments & Memories",
 
-                    email: "devmallyachakraborty456@gmail.com"
+                    email: "pendingworkers29@gmail.com"
                 },
 
                 to: [
 
                     {
-                        email: "devmallyachakraborty456@gmail.com"
+                        email: "pendingworkers29@gmail.com"
                     }
 
                 ],
@@ -47,15 +47,29 @@ app.post("/api/contact", async (req, res) => {
 
                 htmlContent: `
 
-                    <h2>New Contact Message</h2>
+                    <div style="font-family:Poppins,sans-serif;padding:20px;">
 
-                    <p><b>Name:</b> ${name}</p>
+                        <h2 style="color:#ff4f93;">
+                            New Contact Message ❤️
+                        </h2>
 
-                    <p><b>Email:</b> ${email}</p>
+                        <p>
+                            <strong>Name:</strong> ${name}
+                        </p>
 
-                    <p><b>Message:</b></p>
+                        <p>
+                            <strong>Email:</strong> ${email}
+                        </p>
 
-                    <p>${message}</p>
+                        <p>
+                            <strong>Message:</strong>
+                        </p>
+
+                        <p>
+                            ${message}
+                        </p>
+
+                    </div>
 
                 `
             },
@@ -76,7 +90,8 @@ app.post("/api/contact", async (req, res) => {
 
         res.json({
 
-            success: true
+            success: true,
+            message: "Message Sent Successfully"
 
         });
 
@@ -89,7 +104,7 @@ app.post("/api/contact", async (req, res) => {
         res.status(500).json({
 
             success: false,
-            error: error.response?.data || error.message
+            message: "Failed To Send Email"
 
         });
 
@@ -98,7 +113,7 @@ app.post("/api/contact", async (req, res) => {
 });
 
 
-// ================= ADMIN =================
+// ================= ADMIN LOGIN =================
 
 app.post("/api/admin", (req, res) => {
 
