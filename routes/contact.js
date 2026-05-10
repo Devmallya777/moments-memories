@@ -1,86 +1,60 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
+const contactForm = document.getElementById("contactForm");
 
-const router = express.Router();
+if (contactForm) {
 
-router.post('/', async (req, res) => {
+    contactForm.addEventListener("submit", async (e) => {
 
-    try {
+        e.preventDefault();
 
-        const { name, email, message } = req.body;
+        const btn = document.querySelector(".contact-btn");
 
-        const transporter = nodemailer.createTransport({
+        btn.innerText = "Sending...";
+        btn.disabled = true;
 
-            service: 'gmail',
+        const name = document.getElementById("name").value;
 
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.EMAIL_PASSWORD
+        const email = document.getElementById("email").value;
+
+        const message = document.getElementById("message").value;
+
+        try {
+
+            const response = await fetch("/api/contact", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                alert("Message Sent Successfully ❤️");
+
+                contactForm.reset();
+
+            } else {
+
+                alert("Failed To Send Message");
             }
 
-        });
+        } catch (error) {
 
-        await transporter.sendMail({
+            alert("Server Error");
 
-            from: process.env.EMAIL,
+            console.log(error);
+        }
 
-            to: process.env.EMAIL,
-
-            subject: 'New Contact Message - Moments & Memories',
-
-            html: `
-
-                <div style="font-family:Poppins,sans-serif;padding:20px;">
-                
-                    <h2 style="color:#ff4f93;">
-                        New Contact Message
-                    </h2>
-
-                    <p>
-                        <b>Name:</b> ${name}
-                    </p>
-
-                    <p>
-                        <b>Email:</b> ${email}
-                    </p>
-
-                    <p>
-                        <b>Message:</b>
-                    </p>
-
-                    <div style="
-                        background:#f7f7f7;
-                        padding:15px;
-                        border-radius:10px;
-                        margin-top:10px;
-                    ">
-                        ${message}
-                    </div>
-
-                </div>
-
-            `
-
-        });
-
-        res.status(200).json({
-            success: true,
-            message: 'Message Sent Successfully'
-        });
-
-    }
-
-    catch (error) {
-
-        console.log(error);
-
-        res.status(500).json({
-            success: false,
-            message: 'Failed To Send Message'
-        });
-
-    }
-
-});
-
-module.exports = router;
+        btn.innerText = "Send Message";
+        btn.disabled = false;
+    });
+}

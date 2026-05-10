@@ -12,9 +12,19 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ===============================
+// ==========================
+// TEST ROUTE
+// ==========================
+
+app.get("/", (req, res) => {
+    res.send("Moments & Memories Server Running");
+});
+
+
+// ==========================
 // GMAIL TRANSPORTER
-// ===============================
+// ==========================
+
 const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",
@@ -29,18 +39,25 @@ const transporter = nodemailer.createTransport({
 
         pass: process.env.EMAIL_PASS
 
-    }
+    },
 
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
-// ===============================
+
+
+// ==========================
 // CONTACT API
-// ===============================
+// ==========================
 
 app.post("/api/contact", async (req, res) => {
 
     try {
 
         const { name, email, message } = req.body;
+
+        console.log(req.body);
 
         await transporter.sendMail({
 
@@ -64,8 +81,7 @@ app.post("/api/contact", async (req, res) => {
         });
 
         res.json({
-            success: true,
-            message: "Email Sent Successfully"
+            success: true
         });
 
     } catch (error) {
@@ -74,15 +90,15 @@ app.post("/api/contact", async (req, res) => {
 
         res.status(500).json({
             success: false,
-            message: "Failed To Send Email"
+            message: "Email Failed"
         });
     }
 });
 
 
-// ===============================
+// ==========================
 // ADMIN LOGIN
-// ===============================
+// ==========================
 
 app.post("/api/admin", (req, res) => {
 
@@ -103,9 +119,9 @@ app.post("/api/admin", (req, res) => {
 });
 
 
-// ===============================
-// SERVER
-// ===============================
+// ==========================
+// PORT
+// ==========================
 
 const PORT = process.env.PORT || 10000;
 
