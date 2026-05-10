@@ -1,144 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Moments & Memories</title>
 
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#fffaf5;
-}
-
-nav{
-background:#111;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-color:#ffb347;
-font-size:28px;
-font-weight:bold;
-}
-
-nav ul{
-display:flex;
-gap:25px;
-list-style:none;
-}
-
-nav ul li a{
-color:white;
-text-decoration:none;
-font-size:18px;
-}
-
-.dashboard{
-padding:70px 8%;
-}
-
-.dashboard h1{
-font-size:50px;
-margin-bottom:40px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-
-.card{
-background:white;
-padding:40px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
-}
-
-.card h2{
-font-size:35px;
-margin-bottom:20px;
-}
-
-.counter{
-font-size:45px;
-font-weight:bold;
-color:#ff6600;
-}
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:60px;
-}
-
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav>
+<!-- PASSWORD PROTECTION -->
 
-<div class="logo">Moments & Memories</div>
+<script>
 
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="admin-dashboard.html">Admin</a></li>
-</ul>
+const pass = prompt("Enter Admin Password");
+
+if(pass !== "moments2026"){
+
+  alert("Wrong Password");
+  window.location.href = "index.html";
+
+}
+
+</script>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+  <div class="logo">
+    Moments <span>& Memories</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="admin.html">Admin</a>
+  </div>
 
 </nav>
 
-<section class="dashboard">
+<!-- DASHBOARD -->
 
-<h1>Admin Dashboard 🚀</h1>
+<section class="section">
 
-<div class="cards">
+  <h1 class="section-title">Admin Dashboard</h1>
 
-<div class="card">
-<h2>Total Products</h2>
-<div class="counter" data-target="120">0</div>
-</div>
+  <div class="dashboard">
 
-<div class="card">
-<h2>Total Orders</h2>
-<div class="counter" data-target="350">0</div>
-</div>
+    <div class="card">
+      <h2 id="productsCount">0</h2>
+      <p>Total Products</p>
+    </div>
 
-<div class="card">
-<h2>Total Users</h2>
-<div class="counter" data-target="900">0</div>
-</div>
+    <div class="card">
+      <h2 id="ordersCount">0</h2>
+      <p>Total Orders</p>
+    </div>
 
-<div class="card">
-<h2>Total Contacts</h2>
-<div class="counter" data-target="180">0</div>
-</div>
+    <div class="card">
+      <h2 id="contactsCount">0</h2>
+      <p>Total Contacts</p>
+    </div>
 
-</div>
+  </div>
 
 </section>
 
+<!-- FOOTER -->
+
 <footer>
-© 2026 Moments & Memories | Made by dev
+
+  <p>
+    © 2026 Moments & Memories | Admin Panel
+  </p>
+
 </footer>
 
-<script src="script.js"></script>
+<!-- SCRIPT -->
+
+<script>
+
+async function loadDashboard(){
+
+  try{
+
+    // PRODUCTS
+    const productsRes = await fetch("/api/products");
+    const products = await productsRes.json();
+
+    // CONTACTS
+    const contactsRes = await fetch("/api/contact");
+    const contacts = await contactsRes.json();
+
+    // ORDERS
+    const ordersRes = await fetch("/api/orders");
+    const orders = await ordersRes.json();
+
+    document.getElementById("productsCount").innerText = products.length;
+
+    document.getElementById("contactsCount").innerText = contacts.length;
+
+    document.getElementById("ordersCount").innerText = orders.length;
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+loadDashboard();
+
+</script>
 
 </body>
 </html>
