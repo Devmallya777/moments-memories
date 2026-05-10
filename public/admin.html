@@ -1,18 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="about-box">
-    <h1>Admin Login</h1>
+<!-- NAVBAR -->
 
-    <input type="password" id="adminPass" placeholder="Enter password">
-    <button class="btn" onclick="loginAdmin()">Login</button>
-</div>
+<nav class="navbar">
+
+    <div class="logo">
+        Moments & Memories
+    </div>
+
+    <div class="menu-toggle">
+        ☰
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+</nav>
+
+<!-- LOGIN -->
+
+<section class="admin-login-section">
+
+    <div class="admin-login-box">
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p>
+            Access your business dashboard securely.
+        </p>
+
+        <input
+            type="password"
+            id="adminPass"
+            placeholder="Enter Admin Password"
+        >
+
+        <button
+            class="btn"
+            onclick="loginAdmin()"
+        >
+            Login
+        </button>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+    © 2026 Moments & Memories
+</footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
