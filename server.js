@@ -31,9 +31,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ================= MODELS =================
 
-const Contact = require("./models/Contact");
-const Product = require("./models/Product");
 const User = require("./models/User");
+const Product = require("./models/Product");
+const Contact = require("./models/Contact");
+const Order = require("./models/Order");
 
 
 // ================= HOME ROUTE =================
