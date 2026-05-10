@@ -3,7 +3,7 @@ const otpGenerator = require('otp-generator');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
-const User = require("../models/User");
+const User = require("../models/user");
 
 const router = express.Router();
 
