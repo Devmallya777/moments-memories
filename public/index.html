@@ -1,182 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Moments & Memories</title>
-
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-  <nav>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Moments & Memories</div>
 
-    <div class="logo">
-      Moments & Memories 💖
-    </div>
-
-    <ul>
-
-      <li><a href="index.html">Home</a></li>
-
-      <li><a href="products.html">Products</a></li>
-
-      <li><a href="about.html">About</a></li>
-
-      <li><a href="contact.html">Contact</a></li>
-
-      <li><a href="admin.html">Admin</a></li>
-
-    </ul>
-
-  </nav>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
 
 
+  <!-- HERO SECTION -->
   <section class="hero">
 
-    <div class="hero-content">
-
-      <h1>
-        Create Beautiful Memories 💖
-      </h1>
+    <div class="hero-left">
+      <h3>Trust the</h3>
+      <h1>Gift Wizard!</h1>
 
       <p>
-
-        Elegant gift boxes, surprise hampers,
-        flower bouquets and unforgettable decorations
-        crafted with love for your special moments.
-
+        Create unforgettable memories with handcrafted gift boxes made specially for birthdays, anniversaries, surprises and every beautiful moment.
       </p>
 
-      <div class="hero-buttons">
+      <a href="products.html" class="hero-btn">Explore Gifts</a>
+    </div>
 
-        <button onclick="location.href='products.html'">
 
-          Explore Gifts
-
-        </button>
-
-        <button class="secondary-btn"
-        onclick="location.href='contact.html'">
-
-          Contact Us
-
-        </button>
-
-      </div>
-
+    <div class="hero-right">
+      <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff?q=80&w=1200&auto=format&fit=crop" alt="Gift Boxes">
     </div>
 
   </section>
 
 
-  <section class="home-about">
+  <!-- FEATURES -->
+  <section class="features">
 
-    <div class="home-about-text">
+    <div class="feature-box">
+      <h2>🎁</h2>
+      <p>Customized Gifts</p>
+    </div>
 
-      <h2>
-        Making Every Celebration Special ✨
-      </h2>
+    <div class="feature-box">
+      <h2>💖</h2>
+      <p>Made With Love</p>
+    </div>
 
+    <div class="feature-box">
+      <h2>✨</h2>
+      <p>Premium Packaging</p>
+    </div>
+
+    <div class="feature-box">
+      <h2>📸</h2>
+      <p>Memories Forever</p>
+    </div>
+
+  </section>
+
+
+  <!-- MINI SECTION -->
+  <section class="mini-banner">
+    <div class="mini-content">
+      <h2>Make Every Moment Special 💕</h2>
       <p>
-
-        At Moments & Memories, we believe every gift
-        should feel magical. From personalised hampers
-        to aesthetic decorations, we design experiences
-        that bring smiles, emotions and unforgettable memories.
-
+        Surprise your loved ones with aesthetic customized boxes crafted specially for them.
       </p>
-
     </div>
-
-
-    <img
-    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop"
-    alt="friends">
-
   </section>
 
 
-  <section>
-
-    <h2 class="section-title">
-
-      Featured Gifts 💝
-
-    </h2>
-
-
-    <div class="products">
-
-
-      <div class="product-card">
-
-        <img
-        src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff?q=80&w=1200&auto=format&fit=crop"
-        >
-
-        <div class="product-info">
-
-          <h3>Luxury Gift Box</h3>
-
-          <p>Elegant customised gift hampers.</p>
-
-        </div>
-
-      </div>
-
-
-      <div class="product-card">
-
-        <img
-        src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop"
-        >
-
-        <div class="product-info">
-
-          <h3>Flower Bouquet</h3>
-
-          <p>Fresh flowers for every occasion.</p>
-
-        </div>
-
-      </div>
-
-
-      <div class="product-card">
-
-        <img
-        src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200&auto=format&fit=crop"
-        >
-
-        <div class="product-info">
-
-          <h3>Birthday Surprise</h3>
-
-          <p>Beautiful surprise decorations.</p>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
+  <!-- FOOTER -->
   <footer>
-
-    © 2026 Moments & Memories 💖
-
+    <p>© 2026 Moments & Memories | Made with ❤️</p>
   </footer>
 
 </body>
-
 </html>
