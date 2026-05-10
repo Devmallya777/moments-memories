@@ -1,151 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Contact | Moments & Memories</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet"
-/>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<nav class="navbar">
+<header>
+    <nav>
+        <h1>Moments & Memories</h1>
 
-<a href="index.html" class="logo">
-Moments & Memories
-</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+    </nav>
+</header>
 
-<div class="menu-toggle">☰</div>
+<section class="contact-section">
 
-<ul class="nav-links">
+    <form id="contactForm" class="contact-form">
 
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="admin.html">Admin</a></li>
+        <input type="text" id="name" placeholder="Your Name" required>
 
-</ul>
+        <input type="email" id="email" placeholder="Your Email" required>
 
-</nav>
+        <textarea id="message" placeholder="Your Message" required></textarea>
 
-<section class="contact-premium">
+        <button type="submit" class="contact-btn">
+            Send Message
+        </button>
 
-<div class="contact-card">
-
-<h1>
-Contact Us 💌
-</h1>
-
-<p class="contact-text">
-We would love to create your
-perfect surprise gift box ❤️
-</p>
-
-<form
-id="contactForm"
-class="contact-form"
->
-
-<input
-type="text"
-id="name"
-placeholder="Your Name"
-required
->
-
-<input
-type="email"
-id="email"
-placeholder="Your Email"
-required
->
-
-<textarea
-id="message"
-placeholder="Write your message..."
-required
-></textarea>
-
-<button
-type="submit"
-class="btn"
->
-Send Message
-</button>
-
-</form>
-
-<div class="contact-links">
-
-<a
-href="https://instagram.com/_mm.giftboxes__"
-target="_blank"
-class="contact-box"
->
-
-<h3>Instagram</h3>
-
-<p>
-@_mm.giftboxes__
-</p>
-
-</a>
-
-<a
-href="mailto:devmallyachakraborty456@gmail.com"
-class="contact-box"
->
-
-<h3>Email</h3>
-
-<p>
-mm.giftboxes04@gmail.com
-</p>
-
-</a>
-
-<a
-href="tel:+919933067839"
-class="contact-box"
->
-
-<h3>Phone</h3>
-
-<p>
-+91 9933067839
-</p>
-
-</a>
-
-</div>
-
-</div>
+    </form>
 
 </section>
-
-<footer class="footer">
-
-<p>
-Because Some Stories Deserve
-The Perfect Gift ❤️
-</p>
-
-</footer>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>

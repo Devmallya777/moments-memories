@@ -1,170 +1,81 @@
-const menuToggle =
-document.querySelector(".menu-toggle");
-
-const navLinks =
-document.querySelector(".nav-links");
-
-if(menuToggle){
-
-menuToggle.addEventListener("click",()=>{
-
-navLinks.classList.toggle("active");
-
-});
-
-}
-
-function showToast(message,color="#ff4f93"){
-
-const toast =
-document.createElement("div");
-
-toast.innerText = message;
-
-toast.style.position = "fixed";
-toast.style.bottom = "20px";
-toast.style.right = "20px";
-toast.style.background = color;
-toast.style.color = "white";
-toast.style.padding = "15px 25px";
-toast.style.borderRadius = "12px";
-toast.style.zIndex = "9999";
-
-document.body.appendChild(toast);
-
-setTimeout(()=>{
-
-toast.remove();
-
-},3000);
-
-}
-
-/* CONTACT */
-
-const contactForm =
-document.getElementById("contactForm");
+const contactForm = document.getElementById("contactForm");
 
 if(contactForm){
 
-contactForm.addEventListener(
-"submit",
-async(e)=>{
+    contactForm.addEventListener("submit", async(e)=>{
 
-e.preventDefault();
+        e.preventDefault();
 
-const button =
-contactForm.querySelector("button");
+        const btn = document.querySelector(".contact-btn");
 
-button.innerText = "Sending...";
-button.disabled = true;
+        btn.innerText = "Sending...";
 
-try{
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
 
-const response =
-await fetch("/api/contact",{
+        const response = await fetch("/api/contact", {
 
-method:"POST",
+            method:"POST",
 
-headers:{
-"Content-Type":"application/json"
-},
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-body:JSON.stringify({
+            body:JSON.stringify({
+                name,
+                email,
+                message
+            })
+        });
 
-name:
-document.getElementById("name").value,
+        const data = await response.json();
 
-email:
-document.getElementById("email").value,
+        if(data.success){
 
-message:
-document.getElementById("message").value
+            alert("Message Sent Successfully ❤️");
 
-})
+            contactForm.reset();
 
-});
+        } else {
 
-const data =
-await response.json();
+            alert("Failed To Send Message");
+        }
 
-if(data.success){
-
-showToast(
-"Message Sent ❤️",
-"green"
-);
-
-contactForm.reset();
-
+        btn.innerText = "Send Message";
+    });
 }
 
-else{
 
-showToast(
-"Failed To Send ❌",
-"crimson"
-);
+// PRODUCTS
 
-}
+const productsContainer = document.getElementById("productsContainer");
 
-}
+if(productsContainer){
 
-catch(err){
+    fetch("/api/products")
 
-showToast(
-"Server Not Responding ❌",
-"crimson"
-);
+    .then(res => res.json())
 
-}
+    .then(data => {
 
-button.innerText = "Send Message";
-button.disabled = false;
+        data.forEach(product => {
 
-});
+            productsContainer.innerHTML += `
 
-}
+                <div class="product-card">
 
-/* ADMIN */
+                    <img src="${product.image}">
 
-async function loginAdmin(){
+                    <h3>${product.title}</h3>
 
-const password =
-document.getElementById("adminPassword").value;
+                    <p>${product.description}</p>
 
-const res =
-await fetch("/api/admin",{
+                    <h4>${product.price}</h4>
 
-method:"POST",
+                </div>
 
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-password
-})
-
-});
-
-const data =
-await res.json();
-
-if(data.success){
-
-window.location.href =
-"admin-dashboard.html";
-
-}
-
-else{
-
-showToast(
-"Wrong Password ❌",
-"crimson"
-);
-
-}
-
+            `;
+        });
+    });
 }

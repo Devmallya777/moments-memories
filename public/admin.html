@@ -1,87 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
-
-<title>
-Admin Login
-</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<nav class="navbar">
+<section class="admin-dashboard">
 
-<a href="index.html" class="logo">
-Moments & Memories
-</a>
+    <h2>Customer Messages</h2>
 
-<div class="menu-toggle">
-☰
-</div>
-
-<ul class="nav-links">
-
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-
-</ul>
-
-</nav>
-
-<section class="admin-page">
-
-<div class="admin-box">
-
-<h1>
-Admin Dashboard
-</h1>
-
-<p>
-Access business dashboard securely.
-</p>
-
-<input
-type="password"
-id="adminPassword"
-placeholder="Enter Admin Password"
->
-
-<button
-onclick="loginAdmin()"
-class="btn"
->
-
-Login
-
-</button>
-
-</div>
+    <div id="messagesContainer"></div>
 
 </section>
 
-<footer class="footer">
-
-<p>
-© 2026 Moments & Memories
-</p>
-
-</footer>
-
-<script src="script.js"></script>
+<script src="admin.js"></script>
 
 </body>
-
 </html>
