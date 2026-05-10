@@ -1,79 +1,87 @@
+<!-- admin.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Admin Dashboard</title>
+<title>Admin Dashboard</title>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+
+<script>
+
+const password = prompt("Enter Admin Password");
+
+if(password !== "moments2026"){
+
+alert("Wrong Password");
+
+window.location.href = "index.html";
+
+}
+
+</script>
 
 </head>
 
 <body>
 
 
-<script>
+<div class="admin-container">
 
-const pass = prompt("Enter Admin Password");
-
-if(pass !== "moments2026"){
-
-  window.location.href = "index.html";
-
-}
-
-</script>
+<h1>
+Admin Dashboard 💖
+</h1>
 
 
-<nav>
-
-  <div class="logo">
-    Admin Dashboard 💖
-  </div>
-
-  <ul>
-
-    <li><a href="index.html">Home</a></li>
-
-    <li><a href="products.html">Products</a></li>
-
-    <li><a href="contact.html">Contact</a></li>
-
-  </ul>
-
-</nav>
+<div class="admin-grid">
 
 
-<section class="contact-section">
+<div class="admin-box">
 
-  <h2 class="section-title">
+<h2>Total Orders</h2>
 
-    Website Analytics 📊
+<p>24</p>
 
-  </h2>
-
-  <p>Total Orders : 120</p>
-
-  <br>
-
-  <p>Total Customers : 95</p>
-
-  <br>
-
-  <p>Total Messages : 48</p>
-
-</section>
+</div>
 
 
-<footer>
+<div class="admin-box">
 
-  © 2026 Moments & Memories 💖
+<h2>Pending Orders</h2>
 
-</footer>
+<p>8</p>
+
+</div>
+
+
+<div class="admin-box">
+
+<h2>Delivered Orders</h2>
+
+<p>16</p>
+
+</div>
+
+
+<div class="admin-box">
+
+<h2>Total Customers</h2>
+
+<p>52</p>
+
+</div>
+
+
+</div>
+
+</div>
 
 </body>
 

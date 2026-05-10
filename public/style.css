@@ -484,3 +484,167 @@ footer{
         font-size:24px;
     }
 }
+/* ABOUT PAGE */
+
+.about-hero{
+    width:100%;
+    min-height:90vh;
+    padding:80px 8%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:60px;
+    background:#fff7f5;
+}
+
+.about-image{
+    flex:1;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-text{
+    flex:1;
+}
+
+.about-text h1{
+    font-size:60px;
+    color:#c95b84;
+    margin-bottom:25px;
+}
+
+.about-text p{
+    font-size:18px;
+    line-height:1.9;
+    margin-bottom:20px;
+    color:#555;
+}
+
+.about-btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:#c95b84;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    margin-top:20px;
+    transition:0.3s;
+}
+
+.about-btn:hover{
+    background:#b24770;
+}
+
+
+/* TEAM SECTION */
+
+.team-section{
+    width:100%;
+    padding:80px 8%;
+    background:#fdecef;
+    text-align:center;
+}
+
+.team-section h2{
+    font-size:48px;
+    color:#c95b84;
+    margin-bottom:50px;
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+}
+
+.team-card{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.team-card:hover{
+    transform:translateY(-10px);
+}
+
+.team-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.team-card h3{
+    color:#444;
+}
+
+
+/* ADMIN DASHBOARD */
+
+.admin-container{
+    width:100%;
+    min-height:100vh;
+    background:#fff7f5;
+    padding:80px 8%;
+    text-align:center;
+}
+
+.admin-container h1{
+    font-size:55px;
+    color:#c95b84;
+    margin-bottom:50px;
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.admin-box{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.admin-box h2{
+    color:#c95b84;
+    margin-bottom:15px;
+}
+
+.admin-box p{
+    font-size:40px;
+    font-weight:700;
+    color:#444;
+}
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.about-hero{
+    flex-direction:column;
+}
+
+.about-text h1{
+    font-size:40px;
+}
+
+.team-section h2{
+    font-size:34px;
+}
+
+.admin-container h1{
+    font-size:38px;
+}
+
+}
