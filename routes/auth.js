@@ -3,7 +3,7 @@ const otpGenerator = require('otp-generator');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/User');
+const User = require("../models/User");
 
 const router = express.Router();
 
@@ -28,23 +28,18 @@ router.post('/send-otp', async (req, res) => {
     await user.save();
 
     const transporter = nodemailer.createTransport({
-
         service: 'gmail',
-
         auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASSWORD
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
-
     });
 
     await transporter.sendMail({
-
-        from: process.env.EMAIL,
+        from: process.env.EMAIL_USER,
         to: email,
         subject: 'Your OTP',
         text: `Your OTP is ${otp}`
-
     });
 
     res.json({
@@ -61,7 +56,6 @@ router.post('/verify-otp', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user || user.otp !== otp) {
-
         return res.status(400).json({
             success: false,
             message: 'Invalid OTP'
