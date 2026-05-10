@@ -1,57 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="contact-section">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Moments & Memories</title>
+    <div class="contact-box">
 
-    <link rel="stylesheet" href="style.css">
-</head>
+        <h1>Contact Us</h1>
 
-<body>
+        <form id="contactForm" class="contact-form">
 
-    <nav>
+            <input 
+                type="text" 
+                id="name"
+                placeholder="Enter Your Name"
+                required
+            >
 
-        <div class="logo">
-            Moments & Memories
-        </div>
+            <input 
+                type="email"
+                id="email"
+                placeholder="Enter Your Email"
+                required
+            >
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+            <textarea
+                id="message"
+                placeholder="Enter Your Message"
+                required
+            ></textarea>
 
-    </nav>
-
-    <section class="contact-section">
-
-        <div class="contact-box">
-
-            <h1>
-                Contact Us
-            </h1>
-
-            <input type="text" placeholder="Your Name">
-
-            <input type="email" placeholder="Your Email">
-
-            <textarea placeholder="Your Message"></textarea>
-
-            <button>
+            <button type="submit">
                 Send Message
             </button>
 
-        </div>
+        </form>
 
-    </section>
+    </div>
 
-    <footer>
-        © 2026 Moments & Memories | Crafted with Love
-    </footer>
+</section>
 
-</body>
-
-</html>
+<script src="script.js"></script>

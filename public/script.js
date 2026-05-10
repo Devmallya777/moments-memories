@@ -2,34 +2,56 @@ const contactForm = document.getElementById('contactForm');
 
 if(contactForm){
 
-contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', async (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const data = {
-        name: contactForm.name.value,
-        email: contactForm.email.value,
-        message: contactForm.message.value
-    };
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
 
-    const res = await fetch('/api/contact', {
+        try {
 
-        method: 'POST',
+            const response = await fetch('/api/contact', {
 
-        headers: {
-            'Content-Type': 'application/json'
-        },
+                method: 'POST',
 
-        body: JSON.stringify(data)
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message
+                })
+
+            });
+
+            const data = await response.json();
+
+            if(data.success){
+
+                alert('Message Sent Successfully ❤️');
+
+                contactForm.reset();
+
+            } else {
+
+                alert('Failed To Send Message');
+
+            }
+
+        }
+
+        catch(error){
+
+            console.log(error);
+
+            alert('Something Went Wrong');
+
+        }
 
     });
-
-    const result = await res.json();
-
-    alert(result.message);
-
-    contactForm.reset();
-
-});
 
 }
