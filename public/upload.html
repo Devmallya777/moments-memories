@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upload Product</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="contact-page">
+
+<h1>Upload Product</h1>
+
+<form id="uploadForm">
+
+<input type="text" id="title" placeholder="Product Title">
+
+<input type="number" id="price" placeholder="Price">
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<input type="file" id="image">
+
+<button type="submit">
+Upload Product
+</button>
+
+</form>
+
+</section>
+
+<script>
+
+document.getElementById('uploadForm')
+.addEventListener('submit', async (e) => {
+
+e.preventDefault();
+
+const formData = new FormData();
+
+formData.append(
+'image',
+document.getElementById('image').files[0]
+);
+
+const uploadRes = await fetch('/api/upload', {
+method: 'POST',
+body: formData
+});
+
+const uploadData = await uploadRes.json();
+
+await fetch('/api/products', {
+
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+
+body: JSON.stringify({
+
+title: document.getElementById('title').value,
+price: document.getElementById('price').value,
+description: document.getElementById('description').value,
+image: uploadData.image
+
+})
+
+});
+
+alert('Product Uploaded');
+
+});
+
+</script>
+
+</body>
+</html>
