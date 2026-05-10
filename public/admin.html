@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<section class="admin-dashboard">
+<div class="admin-box">
 
-    <h2>Customer Messages</h2>
+    <h1>Admin Login</h1>
 
-    <div id="messagesContainer"></div>
+    <input type="password" id="password" placeholder="Enter Password">
 
-</section>
+    <button onclick="login()">Login</button>
 
-<script src="admin.js"></script>
+</div>
+
+<script>
+
+function login(){
+
+    const password = document.getElementById('password').value;
+
+    if(password === 'admin123'){
+
+        window.location.href = 'admin-dashboard.html';
+
+    }
+
+    else {
+
+        alert('Wrong Password');
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>

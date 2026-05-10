@@ -1,35 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <nav>
-        <h1>Moments & Memories</h1>
+<h1 class="page-title">Our Products</h1>
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="admin.html">Admin</a></li>
-        </ul>
-    </nav>
-</header>
+<div class="products-container" id="productsContainer"></div>
 
-<section class="products-section">
+<script>
 
-    <h2>Our Products</h2>
+async function loadProducts(){
 
-    <div id="productsContainer" class="products-grid"></div>
+    const res = await fetch('/api/products');
 
-</section>
+    const products = await res.json();
 
-<script src="script.js"></script>
+    const container = document.getElementById('productsContainer');
+
+    products.forEach(product => {
+
+        container.innerHTML += `
+
+            <div class="product-card">
+
+                <img src="${product.image}">
+
+                <h3>${product.title}</h3>
+
+                <p>${product.description}</p>
+
+                <span>₹${product.price}</span>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+loadProducts();
+
+</script>
 
 </body>
 </html>

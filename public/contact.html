@@ -1,45 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <nav>
-        <h1>Moments & Memories</h1>
+<div class="contact-box">
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="admin.html">Admin</a></li>
-        </ul>
-    </nav>
-</header>
+    <h1>Contact Us</h1>
 
-<section class="contact-section">
-
-    <form id="contactForm" class="contact-form">
+    <form id="contactForm">
 
         <input type="text" id="name" placeholder="Your Name" required>
 
         <input type="email" id="email" placeholder="Your Email" required>
 
-        <textarea id="message" placeholder="Your Message" required></textarea>
+        <textarea id="message" placeholder="Your Message"></textarea>
 
-        <button type="submit" class="contact-btn">
-            Send Message
-        </button>
+        <button type="submit">Send</button>
 
     </form>
 
-</section>
+</div>
 
-<script src="script.js"></script>
+<script>
+
+const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    const data = {
+
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+
+    };
+
+    const res = await fetch('/api/contact', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify(data)
+
+    });
+
+    const result = await res.json();
+
+    alert(result.message);
+
+    form.reset();
+
+});
+
+</script>
 
 </body>
 </html>

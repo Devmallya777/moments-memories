@@ -1,167 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- NAVBAR -->
+<div class="dashboard">
 
-<nav class="navbar">
+    <h1>Admin Dashboard</h1>
 
-    <div class="logo">
-        Admin Dashboard
-    </div>
+    <div class="dashboard-grid">
 
-    <div class="menu-toggle">
-        ☰
-    </div>
-
-    <ul class="nav-links">
-        <li><a href="index.html">Website</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="upload.html">Upload</a></li>
-        <li><a href="admin.html">Logout</a></li>
-    </ul>
-
-</nav>
-
-<!-- DASHBOARD -->
-
-<section class="dashboard-section">
-
-    <div class="dashboard-header">
-
-        <h1>
-            Business Overview
-        </h1>
-
-        <p>
-            Manage products, customer messages, and orders.
-        </p>
-
-    </div>
-
-    <!-- STATS -->
-
-    <div class="stats-grid">
-
-        <div class="stats-card">
-
-            <h2>124</h2>
-
-            <p>Total Orders</p>
-
+        <div class="card">
+            <h2>Total Products</h2>
+            <p>24</p>
         </div>
 
-        <div class="stats-card">
-
-            <h2>38</h2>
-
-            <p>Messages</p>
-
+        <div class="card">
+            <h2>Total Orders</h2>
+            <p>52</p>
         </div>
 
-        <div class="stats-card">
-
-            <h2>12</h2>
-
-            <p>Products</p>
-
-        </div>
-
-        <div class="stats-card">
-
-            <h2>₹48K</h2>
-
-            <p>Revenue</p>
-
+        <div class="card">
+            <h2>Total Contacts</h2>
+            <p>13</p>
         </div>
 
     </div>
 
-    <!-- ACTIONS -->
-
-    <div class="dashboard-actions">
-
-        <a href="upload.html" class="btn">
-            Upload Product
-        </a>
-
-        <a href="products.html" class="btn">
-            View Products
-        </a>
-
-        <a href="contact.html" class="btn">
-            Customer Messages
-        </a>
-
-    </div>
-
-    <!-- RECENT ORDERS -->
-
-    <div class="orders-box">
-
-        <h2>
-            Recent Orders
-        </h2>
-
-        <table>
-
-            <tr>
-                <th>Customer</th>
-                <th>Product</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-
-            <tr>
-                <td>Rahul</td>
-                <td>Birthday Box</td>
-                <td>₹899</td>
-                <td class="success">
-                    Delivered
-                </td>
-            </tr>
-
-            <tr>
-                <td>Priya</td>
-                <td>Chocolate Hamper</td>
-                <td>₹1299</td>
-                <td class="pending">
-                    Pending
-                </td>
-            </tr>
-
-            <tr>
-                <td>Aman</td>
-                <td>Anniversary Box</td>
-                <td>₹1599</td>
-                <td class="success">
-                    Delivered
-                </td>
-            </tr>
-
-        </table>
-
-    </div>
-
-</section>
-
-<footer class="footer">
-    © 2026 Moments & Memories
-</footer>
-
-<script src="script.js"></script>
+</div>
 
 </body>
 </html>
