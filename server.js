@@ -1,55 +1,18 @@
-require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
 const path = require("path");
+const axios = require("axios");
+require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ==========================
-// TEST ROUTE
-// ==========================
-
-app.get("/", (req, res) => {
-    res.send("Moments & Memories Server Running");
-});
-
-
-// ==========================
-// GMAIL TRANSPORTER
-// ==========================
-
-const transporter = nodemailer.createTransport({
-
-    host: "smtp.gmail.com",
-
-    port: 465,
-
-    secure: true,
-
-    auth: {
-
-        user: process.env.EMAIL_USER,
-
-        pass: process.env.EMAIL_PASS
-
-    },
-
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
-});
-
-
-// ==========================
-// CONTACT API
-// ==========================
+// ================= CONTACT =================
 
 app.post("/api/contact", async (req, res) => {
 
@@ -59,52 +22,89 @@ app.post("/api/contact", async (req, res) => {
 
         console.log(req.body);
 
-        await transporter.sendMail({
+        await axios.post(
 
-            from: process.env.EMAIL_USER,
+            "https://api.brevo.com/v3/smtp/email",
 
-            to: process.env.EMAIL_USER,
+            {
 
-            subject: `New Contact From ${name}`,
+                sender: {
 
-            html: `
-                <h2>New Contact Message</h2>
+                    name: "Moments & Memories",
 
-                <p><b>Name:</b> ${name}</p>
+                    email: "devmallyachakraborty456@gmail.com"
+                },
 
-                <p><b>Email:</b> ${email}</p>
+                to: [
 
-                <p><b>Message:</b></p>
+                    {
+                        email: "devmallyachakraborty456@gmail.com"
+                    }
 
-                <p>${message}</p>
-            `
-        });
+                ],
+
+                subject: `New Message From ${name}`,
+
+                htmlContent: `
+
+                    <h2>New Contact Message</h2>
+
+                    <p><b>Name:</b> ${name}</p>
+
+                    <p><b>Email:</b> ${email}</p>
+
+                    <p><b>Message:</b></p>
+
+                    <p>${message}</p>
+
+                `
+            },
+
+            {
+
+                headers: {
+
+                    "api-key": process.env.BREVO_API_KEY,
+
+                    "Content-Type": "application/json"
+
+                }
+
+            }
+
+        );
 
         res.json({
+
             success: true
+
         });
 
-    } catch (error) {
+    }
 
-        console.log(error);
+    catch (error) {
+
+        console.log(error.response?.data || error.message);
 
         res.status(500).json({
+
             success: false,
-            message: "Email Failed"
+            error: error.response?.data || error.message
+
         });
+
     }
+
 });
 
 
-// ==========================
-// ADMIN LOGIN
-// ==========================
+// ================= ADMIN =================
 
 app.post("/api/admin", (req, res) => {
 
     const { password } = req.body;
 
-    if (password === "admin123") {
+    if(password === "admin123"){
 
         res.json({
             success: true
@@ -116,14 +116,13 @@ app.post("/api/admin", (req, res) => {
             success: false
         });
     }
+
 });
 
 
-// ==========================
-// PORT
-// ==========================
+// ================= SERVER =================
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 
