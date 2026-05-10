@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>About Us</title>
 
 <style>
@@ -19,21 +18,28 @@ body{
 background:#fffaf5;
 }
 
+/* NAVBAR */
+
 nav{
 background:#111;
 padding:18px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
-nav h2{
+.logo{
 color:#ffb347;
+font-size:28px;
+font-weight:bold;
 }
 
 nav ul{
 display:flex;
-gap:25px;
+gap:30px;
 list-style:none;
 }
 
@@ -41,11 +47,20 @@ nav ul li a{
 color:white;
 text-decoration:none;
 font-size:18px;
+transition:0.3s;
 }
+
+nav ul li a:hover{
+color:#ffb347;
+}
+
+/* HERO */
 
 .hero{
 height:350px;
-background:url('https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1600&auto=format&fit=crop') center/cover;
+background-image:url('https://images.pexels.com/photos/264771/pexels-photo-264771.jpeg');
+background-size:cover;
+background-position:center;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -59,39 +74,48 @@ padding:20px 40px;
 border-radius:12px;
 }
 
+/* ABOUT SECTION */
+
 .about{
 padding:80px 10%;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:50px;
+gap:60px;
 align-items:center;
 }
 
 .about img{
 width:100%;
+height:450px;
+object-fit:cover;
 border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
 .text h2{
-font-size:45px;
+font-size:50px;
 margin-bottom:20px;
 }
 
 .text p{
-font-size:20px;
-line-height:1.8;
+font-size:21px;
+line-height:1.9;
 color:#555;
-margin-bottom:20px;
+margin-bottom:25px;
 }
+
+/* FOOTER */
 
 footer{
 background:#111;
 color:white;
 text-align:center;
-padding:20px;
+padding:25px;
 margin-top:40px;
+font-size:18px;
 }
+
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -103,33 +127,45 @@ grid-template-columns:1fr;
 font-size:38px;
 }
 
+nav{
+flex-direction:column;
+gap:15px;
+}
+
 }
 
 </style>
-
 </head>
+
 <body>
+
+<!-- NAVBAR -->
 
 <nav>
 
-<h2>Moments & Memories</h2>
+<div class="logo">Moments & Memories</div>
 
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="products.html">Products</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="contact.html">Contact</a></li>
+<li><a href="admin-dashboard.html">Admin</a></li>
 </ul>
 
 </nav>
+
+<!-- HERO -->
 
 <div class="hero">
 <h1>About Us</h1>
 </div>
 
+<!-- ABOUT -->
+
 <section class="about">
 
-<img src="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21d?q=80&w=1200&auto=format&fit=crop">
+<img src="https://images.pexels.com/photos/1303081/pexels-photo-1303081.jpeg">
 
 <div class="text">
 
@@ -141,17 +177,20 @@ they are feelings, memories, and unforgettable emotions.
 </p>
 
 <p>
-Every surprise box is handcrafted with love, creativity, and attention
-to detail to make your special moments magical.
+Every surprise box is handcrafted with love, creativity,
+and attention to detail to make your special moments magical.
 </p>
 
 <p>
-From birthdays to anniversaries, we turn ordinary moments into lifelong memories.
+From birthdays to anniversaries, we turn ordinary moments
+into lifelong memories filled with happiness and love.
 </p>
 
 </div>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer>
 © 2026 Moments & Memories | Made with ❤️

@@ -1,76 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
 
-    <meta charset="UTF-8">
+<style>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
 
-    <title>Admin Dashboard</title>
+body{
+background:#fffaf5;
+}
 
-    <link rel="stylesheet" href="style.css">
+nav{
+background:#111;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
+.logo{
+color:#ffb347;
+font-size:28px;
+font-weight:bold;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav ul li a{
+color:white;
+text-decoration:none;
+font-size:18px;
+}
+
+.dashboard{
+padding:70px 8%;
+}
+
+.dashboard h1{
+font-size:50px;
+margin-bottom:40px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card h2{
+font-size:35px;
+margin-bottom:20px;
+}
+
+.counter{
+font-size:45px;
+font-weight:bold;
+color:#ff6600;
+}
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:60px;
+}
+
+</style>
 </head>
 
 <body>
 
-    <div class="dashboard">
+<nav>
 
-        <h1>
-            Admin Dashboard
-        </h1>
+<div class="logo">Moments & Memories</div>
 
-        <div class="stats-grid">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="admin-dashboard.html">Admin</a></li>
+</ul>
 
-            <div class="stat-card">
+</nav>
 
-                <h2 id="productsCount">0</h2>
+<section class="dashboard">
 
-                <p>Total Products</p>
+<h1>Admin Dashboard 🚀</h1>
 
-            </div>
+<div class="cards">
 
-            <div class="stat-card">
+<div class="card">
+<h2>Total Products</h2>
+<div class="counter" data-target="120">0</div>
+</div>
 
-                <h2 id="contactsCount">0</h2>
+<div class="card">
+<h2>Total Orders</h2>
+<div class="counter" data-target="350">0</div>
+</div>
 
-                <p>Total Contacts</p>
+<div class="card">
+<h2>Total Users</h2>
+<div class="counter" data-target="900">0</div>
+</div>
 
-            </div>
+<div class="card">
+<h2>Total Contacts</h2>
+<div class="counter" data-target="180">0</div>
+</div>
 
-            <div class="stat-card">
+</div>
 
-                <h2 id="ordersCount">0</h2>
+</section>
 
-                <p>Total Orders</p>
+<footer>
+© 2026 Moments & Memories | Made by dev
+</footer>
 
-            </div>
-
-        </div>
-
-    </div>
-
-    <script>
-
-        async function loadDashboard() {
-
-            const res = await fetch("/api/dashboard");
-
-            const data = await res.json();
-
-            document.getElementById("productsCount").innerText = data.products;
-
-            document.getElementById("contactsCount").innerText = data.contacts;
-
-            document.getElementById("ordersCount").innerText = data.orders;
-
-        }
-
-        loadDashboard();
-
-    </script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
