@@ -1,146 +1,122 @@
 require("dotenv").config();
 
 const express = require("express");
-
 const cors = require("cors");
-
 const nodemailer = require("nodemailer");
-
 const path = require("path");
 
 const app = express();
 
-/* MIDDLEWARE */
-
 app.use(cors());
-
 app.use(express.json());
-
 app.use(express.static("public"));
 
-/* HOME */
+/* =========================
+   NODEMAILER
+========================= */
 
-app.get("/",(req,res)=>{
+const transporter = nodemailer.createTransport({
 
-    res.sendFile(
-        path.join(
-            __dirname,
-            "public",
-            "index.html"
-        )
-    );
+    service: "gmail",
+
+    auth: {
+
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+
+    }
 
 });
 
-/* CONTACT */
+/* =========================
+   CONTACT API
+========================= */
 
-app.post("/api/contact", async(req,res)=>{
+app.post("/api/contact", async (req, res) => {
 
-    try{
+    try {
 
-        const {
-            name,
-            email,
-            message
-        } = req.body;
-
-        const transporter =
-            nodemailer.createTransport({
-
-            service:"gmail",
-
-            auth:{
-
-                user:process.env.EMAIL_USER,
-
-                pass:process.env.EMAIL_PASS
-
-            }
-
-        });
+        const { name, email, message } = req.body;
 
         await transporter.sendMail({
 
-            from:process.env.EMAIL_USER,
+            from: process.env.EMAIL_USER,
 
-            to:"mm.giftboxes04@gmail.com",
+            to: "mm.giftboxes04@gmail.com",
 
-            subject:`💌 New Message From ${name}`,
+            subject: `New Contact From ${name}`,
 
-            html:`
+            html: `
 
-                <h2>New Website Inquiry</h2>
+                <h2>New Website Message 💖</h2>
 
-                <p>
-                    <b>Name:</b>
-                    ${name}
-                </p>
+                <p><b>Name:</b> ${name}</p>
 
-                <p>
-                    <b>Email:</b>
-                    ${email}
-                </p>
+                <p><b>Email:</b> ${email}</p>
 
-                <p>
-                    <b>Message:</b>
-                    ${message}
-                </p>
+                <p><b>Message:</b></p>
+
+                <p>${message}</p>
 
             `
 
         });
 
         res.json({
-            success:true
+            success: true
         });
 
     }
 
-    catch(err){
+    catch (err) {
 
         console.log(err);
 
         res.status(500).json({
-            success:false
+
+            success: false,
+            message: "Server error"
+
         });
 
     }
 
 });
 
-/* ADMIN */
+/* =========================
+   ADMIN LOGIN
+========================= */
 
-app.post("/api/admin",(req,res)=>{
+app.post("/api/admin", (req, res) => {
 
     const { password } = req.body;
 
-    if(password === "admin123"){
+    if (password === "admin123") {
 
         res.json({
-            success:true
+            success: true
         });
 
     }
 
-    else{
+    else {
 
         res.json({
-            success:false
+            success: false
         });
 
     }
 
 });
 
-/* SERVER */
+/* =========================
+   PORT
+========================= */
 
-const PORT =
-    process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
 
-    console.log(
-        `Server Running On ${PORT}`
-    );
+    console.log(`Server running on port ${PORT}`);
 
 });
