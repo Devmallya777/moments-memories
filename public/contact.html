@@ -3,171 +3,114 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>Order | Moments & Memories</title>
 
-<title>
-Contact
-</title>
+<link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet"
-href="style.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
 <header class="navbar">
 
-<div class="nav-logo">
+<div class="logo-section">
 
-<img src="logo.png" alt="logo">
+<img src="images/logo.png" alt="logo">
 
+<div>
 <h2>Moments & Memories</h2>
+<p>Where Every Gift Tells A Story</p>
+</div>
 
 </div>
 
 <nav>
 
 <ul class="nav-links">
-
 <li><a href="index.html">Home</a></li>
-
 <li><a href="products.html">Products</a></li>
-
 <li><a href="about.html">About</a></li>
-
-<li><a href="order.html">Order</a></li>
-
+<li><a href="contact.html">Order</a></li>
 </ul>
 
 </nav>
 
 </header>
 
+<section class="order-page">
 
-<header class="navbar">
+<div class="order-left">
 
-<div class="logo">
-Moments & Memories 💖
+<h1>Place Your Order 💖</h1>
+
+<p>
+Create unforgettable memories with our customized gift boxes.
+Fill the details below and we will contact you shortly.
+</p>
+
+<img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff">
+
 </div>
 
-<nav>
+<div class="order-right">
 
-<ul class="nav-links">
+<form id="orderForm">
 
-<li><a href="index.html">Home</a></li>
+<div class="input-group">
+<label>Select Product</label>
 
-<li><a href="products.html">Products</a></li>
+<select id="product">
 
-<li><a href="about.html">About</a></li>
+<option value="Basic Box">Basic Box - ₹499</option>
 
-<li><a href="contact.html">Contact</a></li>
+<option value="Premium Box">Premium Box - ₹799</option>
 
-<li><a href="admin.html">Admin</a></li>
+</select>
+</div>
 
-</ul>
+<div class="input-group">
+<label>Your Name</label>
+<input type="text" id="name" required>
+</div>
 
-</nav>
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
 
-</header>
+<div class="input-group">
+<label>Phone Number</label>
+<input type="text" id="phone" required>
+</div>
 
+<div class="input-group">
+<label>Address</label>
+<textarea id="address" required></textarea>
+</div>
 
-<section class="contact-section">
-
-<form id="contactForm"
-class="contact-form">
-
-<h1>
-Contact Us 💌
-</h1>
-
-<input type="text"
-id="name"
-placeholder="Your Name"
-required>
-
-<input type="email"
-id="email"
-placeholder="Your Email"
-required>
-
-<input type="text"
-id="phone"
-placeholder="Phone Number">
-
-<textarea id="message"
-placeholder="Your Message"
-required></textarea>
+<div class="input-group">
+<label>Gift Message</label>
+<textarea id="message"></textarea>
+</div>
 
 <button type="submit">
-
-Send Message
-
+Place Order
 </button>
 
 </form>
 
+<div id="status"></div>
+
+</div>
+
 </section>
 
-<script>
-
-document.getElementById(
-"contactForm"
-).addEventListener(
-"submit",
-async(e)=>{
-
-e.preventDefault();
-
-const response =
-await fetch("/send-email",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-name:
-document.getElementById("name").value,
-
-email:
-document.getElementById("email").value,
-
-phone:
-document.getElementById("phone").value,
-
-message:
-document.getElementById("message").value
-
-})
-
-});
-
-const data =
-await response.json();
-
-if(data.success){
-
-alert("Message Sent 💖");
-
-}else{
-
-alert("Failed To Send");
-
-}
-
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
+```
