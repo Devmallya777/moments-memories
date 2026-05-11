@@ -1,13 +1,18 @@
+Replace your entire `cart.html` with this clean updated version:
 
+```html id="ydl5tl"
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Cart | Moments & Memories</title>
+<title>
+My Cart | Moments & Memories
+</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,63 +20,108 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo"
+        >
 
-        <h1>Moments & Memories 💖</h1>
+        <h1>
+            Moments & Memories 💖
+        </h1>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
-<!-- CART PAGE -->
+<!-- =========================
+     CART PAGE
+========================= -->
 
 <section class="cart-page">
 
-    <div class="cart-box">
+    <div class="cart-container">
 
-```
-<h1>My Cart 🛒</h1>
+        <h1>
+            My Cart 🛒
+        </h1>
 
-<div id="cartItems"></div>
+        <!-- CART ITEMS -->
 
-<p class="cart-total">
-    Total: ₹0
-</p>
+        <div id="cartItems"></div>
 
-<a href="contact.html" class="btn">
-    Proceed To Order 💖
-</a>
-```
+        <!-- TOTAL -->
 
-</div>
+        <h2 class="cart-total">
 
-<script src="script.js"></script>
+            Total: ₹0
 
+        </h2>
+
+        <!-- BUTTON -->
+
+        <a
+        href="contact.html"
+        class="btn checkout-btn"
+        >
+
+            Proceed To Order 💖
+
+        </a>
+
+    </div>
 
 </section>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
+
     Moments & Memories © 2025 💖
+
 </footer>
+
+<!-- =========================
+     SCRIPT
+========================= -->
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
 ```

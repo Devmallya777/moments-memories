@@ -1,87 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Now</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Now | Moments & Memories</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo"
+        >
 
-        <h1>Moments & Memories 💖</h1>
+        <h1>
+            Moments & Memories 💖
+        </h1>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
-<!-- ORDER PAGE -->
+<!-- =========================
+     ORDER PAGE
+========================= -->
 
 <section class="order-page">
 
-<form id="orderForm">
+    <div class="form-box">
 
-<div class="input-group">
-    <input type="text" id="productField" placeholder="Product" readonly>
-</div>
+        <h1 class="section-title">
+            Place Your Order 💌
+        </h1>
 
-<div class="input-group">
-    <input type="text" id="priceField" placeholder="Price" readonly>
-</div>
+        <p class="subtitle">
 
-<div class="input-group">
-    <input type="text" id="name" placeholder="Your Name" required>
-</div>
+            Fill the details below and your beautiful gift
+            order will be confirmed instantly ✨
 
-<div class="input-group">
-    <input type="text" id="phone" placeholder="Phone Number" required>
-</div>
+        </p>
 
-<div class="input-group">
-    <input type="email" id="email" placeholder="Email Address" required>
-</div>
+        <!-- ORDER FORM -->
 
-<div class="input-group">
-    <textarea id="address" rows="5" placeholder="Your Address"></textarea>
-</div>
+        <form id="orderForm">
 
-<div class="input-group">
-    <textarea id="message" rows="5" placeholder="Special Message"></textarea>
-</div>
+            <!-- PRODUCTS -->
 
-<button class="btn" type="submit">
-    Send Order 💖
-</button>
+            <div class="input-group">
 
-</form>
+                <input
+                type="text"
+                id="productField"
+                placeholder="Selected Products"
+                readonly
+                >
 
-<script src="script.js"></script>
+            </div>
 
+            <!-- PRICE -->
+
+            <div class="input-group">
+
+                <input
+                type="text"
+                id="priceField"
+                placeholder="Total Price"
+                readonly
+                >
+
+            </div>
+
+            <!-- NAME -->
+
+            <div class="input-group">
+
+                <input
+                type="text"
+                id="name"
+                placeholder="Your Name"
+                required
+                >
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="input-group">
+
+                <input
+                type="text"
+                id="phone"
+                placeholder="Phone Number"
+                required
+                >
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <input
+                type="email"
+                id="email"
+                placeholder="Email Address"
+                required
+                >
+
+            </div>
+
+            <!-- ADDRESS -->
+
+            <div class="input-group">
+
+                <textarea
+                id="address"
+                rows="5"
+                placeholder="Your Address"
+                required
+                ></textarea>
+
+            </div>
+
+            <!-- MESSAGE -->
+
+            <div class="input-group">
+
+                <textarea
+                id="message"
+                rows="5"
+                placeholder="Special Message"
+                ></textarea>
+
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+
+            <button
+            class="btn"
+            type="submit"
+            >
+
+                Confirm Order 💖
+
+            </button>
+
+        </form>
 
     </div>
 
 </section>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-    Thank You For Choosing Us 💕
+
+    Moments & Memories © 2025 |
+    Made With Love 💖
+
 </footer>
+
+<!-- =========================
+     SCRIPT
+========================= -->
 
 <script src="script.js"></script>
 
