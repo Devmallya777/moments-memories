@@ -1,82 +1,172 @@
+<!-- ========================= index.html ========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moments & Memories</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moments & Memories</title>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- NAVBAR -->
 
-<header class="navbar">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
 
-<div class="nav-logo">
+      <a href="index.html" class="logo-area">
+        <img src="images/logo.png" alt="Moments & Memories">
+        <div>
+          <h2>Moments & Memories</h2>
+          <p>Where Every Gift Tells A Story</p>
+        </div>
+      </a>
 
-<img src="logo.png" alt="logo">
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Order</a>
+      </nav>
 
-<h2>Moments & Memories</h2>
+    </div>
+  </header>
 
-</div>
+  <!-- HERO -->
+  <section class="hero">
 
-<nav>
+    <div class="hero-left">
+      <span class="small-title">Customized Gift Boxes</span>
+      <h1>
+        Gifts Made<br>
+        With Love 💖
+      </h1>
 
-<ul class="nav-links">
+      <p>
+        Beautiful customized surprise boxes for birthdays,
+        anniversaries, friendship gifts and unforgettable memories.
+      </p>
 
-<li><a href="index.html">Home</a></li>
+      <div class="hero-buttons">
+        <a href="products.html" class="primary-btn">Explore Gifts</a>
+        <a href="contact.html" class="secondary-btn">Order Now</a>
+      </div>
+    </div>
 
-<li><a href="products.html">Products</a></li>
+    <div class="hero-right">
+      <div class="floating-card">
+        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
+    </div>
 
-<li><a href="about.html">About</a></li>
+  </section>
 
-<li><a href="order.html">Order</a></li>
+  <!-- CATEGORY -->
+  <section class="category-section">
 
-</ul>
+    <div class="section-title">
+      <span>FOR EVERY OCCASION</span>
+      <h2>Choose Your Gift Style</h2>
+    </div>
 
-</nav>
+    <div class="category-grid">
 
-</header>
+      <!-- FOR HER -->
+      <div class="category-card female-card">
 
+        <div class="overlay"></div>
 
-<section class="home-page">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" alt="">
 
-<div class="logo-section">
-<img src="logo.png" class="main-logo">
-<h1>Moments & Memories</h1>
-<p>Where Every Gift Tells A Story 💖</p>
-</div>
+        <div class="category-content">
+          <h2>FOR HER 🎀</h2>
 
-<div class="gender-wrapper">
+          <p>
+            Elegant gift boxes filled with cute surprises,
+            beauty accessories and memorable keepsakes.
+          </p>
 
-<div class="gender-box female-box">
-<div class="overlay"></div>
-<div class="gender-content">
-<h2>FOR HER 🎀</h2>
-<p>
-Luxury gifts for birthdays, anniversaries,
-friendship surprises and unforgettable moments.
-</p>
-<a href="products.html">Explore Her Collection</a>
-</div>
-</div>
+          <ul>
+            <li>Earrings</li>
+            <li>Pendants</li>
+            <li>Scrunchies</li>
+            <li>Bracelets</li>
+            <li>Handwritten Letters</li>
+          </ul>
 
-<div class="gender-box male-box">
-<div class="overlay"></div>
-<div class="gender-content">
-<h2>FOR HIM 🖤</h2>
-<p>
-Premium stylish gifts for men with elegant packaging
-and customized surprises.
-</p>
-<a href="products.html">Explore Him Collection</a>
-</div>
-</div>
+          <a href="products.html" class="category-btn">View Collection</a>
+        </div>
 
-</div>
+      </div>
 
-</section>
+      <!-- FOR HIM -->
+      <div class="category-card male-card">
 
-<script src="script.js"></script>
+        <div class="overlay"></div>
+
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop" alt="">
+
+        <div class="category-content">
+          <h2>FOR HIM 🖤</h2>
+
+          <p>
+            Premium stylish gifts with elegant packaging
+            and customized surprises for men.
+          </p>
+
+          <ul>
+            <li>Wallet</li>
+            <li>Watch</li>
+            <li>Sunglasses</li>
+            <li>Perfume</li>
+            <li>Chocolate Box</li>
+          </ul>
+
+          <a href="products.html" class="category-btn">View Collection</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+
+    <div class="feature-box">
+      💝 Customized Just For You
+    </div>
+
+    <div class="feature-box">
+      🎀 Handmade With Love
+    </div>
+
+    <div class="feature-box">
+      🎁 Perfect For Every Occasion
+    </div>
+
+    <div class="feature-box">
+      🛡️ Premium Quality Packaging
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <h2>Make Every Moment Memorable 💖</h2>
+
+    <div class="footer-links">
+      <span>📸 @_mm.giftboxes__</span>
+      <span>📧 mm.giftboxes04@gmail.com</span>
+      <span>📞 90837 91493</span>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

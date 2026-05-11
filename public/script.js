@@ -79,3 +79,6 @@ status.innerHTML = "❌ Server Error";
 
 }
 ```
+// ========================= script.js =========================
+
+console.log("Moments & Memories Loaded 💖");

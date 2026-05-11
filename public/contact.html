@@ -1,116 +1,75 @@
-```html
+<!-- ========================= contact.html ========================= -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order | Moments & Memories</title>
 
-<title>Order | Moments & Memories</title>
+  <link rel="stylesheet" href="style.css"/>
 
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="navbar">
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="nav-container">
 
-<div class="logo-section">
+      <a href="index.html" class="logo-area">
+        <img src="images/logo.png" alt="">
+        <div>
+          <h2>Moments & Memories</h2>
+          <p>Where Every Gift Tells A Story</p>
+        </div>
+      </a>
 
-<img src="images/logo.png" alt="logo">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Order</a>
+      </nav>
 
-<div>
-<h2>Moments & Memories</h2>
-<p>Where Every Gift Tells A Story</p>
-</div>
+    </div>
+  </header>
 
-</div>
+  <!-- CONTACT -->
+  <section class="contact-section">
 
-<nav>
+    <div class="contact-card">
 
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Order</a></li>
-</ul>
+      <div class="section-title">
+        <span>PLACE YOUR ORDER</span>
+        <h2>Customized Gift Booking</h2>
+      </div>
 
-</nav>
+      <form class="contact-form">
 
-</header>
+        <div class="input-group">
+          <input type="text" placeholder="Your Name" required>
+        </div>
 
-<section class="order-page">
+        <div class="input-group">
+          <input type="email" placeholder="Email Address" required>
+        </div>
 
-<div class="order-left">
+        <div class="input-group">
+          <input type="tel" placeholder="Phone Number" required>
+        </div>
 
-<h1>Place Your Order 💖</h1>
+        <div class="input-group">
+          <textarea placeholder="Your Message"></textarea>
+        </div>
 
-<p>
-Create unforgettable memories with our customized gift boxes.
-Fill the details below and we will contact you shortly.
-</p>
+        <button type="submit">Place Order 💖</button>
 
-<img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff">
+      </form>
 
-</div>
+    </div>
 
-<div class="order-right">
-
-<form id="orderForm">
-
-<div class="input-group">
-<label>Select Product</label>
-
-<select id="product">
-
-<option value="Basic Box">Basic Box - ₹499</option>
-
-<option value="Premium Box">Premium Box - ₹799</option>
-
-</select>
-</div>
-
-<div class="input-group">
-<label>Your Name</label>
-<input type="text" id="name" required>
-</div>
-
-<div class="input-group">
-<label>Email</label>
-<input type="email" id="email" required>
-</div>
-
-<div class="input-group">
-<label>Phone Number</label>
-<input type="text" id="phone" required>
-</div>
-
-<div class="input-group">
-<label>Address</label>
-<textarea id="address" required></textarea>
-</div>
-
-<div class="input-group">
-<label>Gift Message</label>
-<textarea id="message"></textarea>
-</div>
-
-<button type="submit">
-Place Order
-</button>
-
-</form>
-
-<div id="status"></div>
-
-</div>
-
-</section>
-
-<script src="script.js"></script>
+  </section>
 
 </body>
 </html>
-```
