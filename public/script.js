@@ -1,241 +1,248 @@
-// ========================================
+// =========================================
 // MOMENTS & MEMORIES SCRIPT
-// ========================================
+// =========================================
 
-console.log("Website Loaded 💖");
+console.log("Moments & Memories Loaded 💖");
 
-// ========================================
-// TOAST NOTIFICATION
-// ========================================
+// =========================================
+// SHOW NOTIFICATION
+// =========================================
 
-function showToast(message, color="#b12675") {
+function showNotification(message){
 
-    const toast = document.createElement("div");
+const notification = document.createElement("div");
 
-    toast.innerText = message;
+notification.classList.add("custom-notification");
 
-    toast.style.position = "fixed";
-    toast.style.bottom = "30px";
-    toast.style.right = "30px";
-    toast.style.background = color;
-    toast.style.color = "white";
-    toast.style.padding = "15px 25px";
-    toast.style.borderRadius = "50px";
-    toast.style.fontWeight = "600";
-    toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-    toast.style.zIndex = "99999";
-    toast.style.opacity = "0";
-    toast.style.transition = "0.4s";
+notification.innerHTML = message;
 
-    document.body.appendChild(toast);
+document.body.appendChild(notification);
+
+setTimeout(() => {
+    notification.classList.add("show-notification");
+},100);
+
+setTimeout(() => {
+
+    notification.classList.remove("show-notification");
 
     setTimeout(() => {
-        toast.style.opacity = "1";
-    }, 100);
+        notification.remove();
+    },300);
 
-    setTimeout(() => {
-        toast.style.opacity = "0";
+},2500);
 
-        setTimeout(() => {
-            toast.remove();
-        }, 400);
 
-    }, 2500);
 }
 
-// ========================================
+// =========================================
 // ADD TO CART
-// ========================================
+// =========================================
 
-const cartButtons = document.querySelectorAll(".add-cart-btn");
+function addToCart(productName, productPrice, productImage){
 
-cartButtons.forEach(button => {
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    button.addEventListener("click", () => {
-
-        const product = {
-            name: button.dataset.name,
-            price: button.dataset.price,
-            image: button.dataset.image
-        };
-
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        cart.push(product);
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        showToast("Added To Cart 💖");
-
-    });
-
+cart.push({
+    name: productName,
+    price: productPrice,
+    image: productImage
 });
 
-// ========================================
-// LOAD CART PAGE
-// ========================================
+localStorage.setItem("cart", JSON.stringify(cart));
 
-const cartContainer = document.querySelector(".cart-items");
-const cartTotal = document.querySelector(".cart-total");
+showNotification("💖 Product Added To Cart");
+
+
+}
+
+// =========================================
+// DISPLAY CART
+// =========================================
+
+const cartContainer = document.getElementById("cartItems");
 
 if(cartContainer){
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    let total = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if(cart.length === 0){
+let total = 0;
 
-        cartContainer.innerHTML = `
-        <p style="text-align:center;font-size:20px;">
-        Your Cart Is Empty 💔
-        </p>
-        `;
+if(cart.length === 0){
 
-    }
+    cartContainer.innerHTML = `
+        <h2>Your Cart Is Empty 💔</h2>
+    `;
 
-    else{
+}
 
-        cart.forEach((item,index) => {
+else{
 
-            total += Number(item.price);
+    cart.forEach((item,index)=>{
 
-            cartContainer.innerHTML += `
+        total += Number(item.price);
 
-            <div class="cart-card">
+        cartContainer.innerHTML += `
 
-                <img src="${item.image}" alt="${item.name}">
+        <div class="cart-item">
 
-                <div>
+            <img src="${item.image}" alt="">
 
-                    <h3>${item.name}</h3>
+            <div class="cart-info">
 
-                    <p>₹${item.price}</p>
+                <h3>${item.name}</h3>
 
-                    <button onclick="removeCart(${index})">
-                    Remove
-                    </button>
+                <p>₹${item.price}</p>
 
-                </div>
+                <button onclick="removeCart(${index})">
+                Remove
+                </button>
 
             </div>
 
-            `;
+        </div>
 
-        });
-
-    }
-
-    if(cartTotal){
-
-        cartTotal.innerText = `Total: ₹${total}`;
-
-    }
-
-}
-
-// ========================================
-// REMOVE CART ITEM
-// ========================================
-
-function removeCart(index){
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.splice(index,1);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    showToast("Item Removed ❌","#d63384");
-
-    location.reload();
-
-}
-
-// ========================================
-// ORDER FORM SUBMIT
-// ========================================
-
-const orderForm = document.querySelector("#orderForm");
-
-if(orderForm){
-
-    orderForm.addEventListener("submit", async(e) => {
-
-        e.preventDefault();
-
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        const products = cart.map(item => item.name).join(", ");
-
-        const totalPrice = cart.reduce((sum,item) => {
-            return sum + Number(item.price);
-        },0);
-
-        const data = {
-
-            product: products,
-            price: `₹${totalPrice}`,
-
-            name: document.querySelector("#name").value,
-
-            email: document.querySelector("#email").value,
-
-            phone: document.querySelector("#phone").value,
-
-            address: document.querySelector("#address").value,
-
-            message: document.querySelector("#message").value
-
-        };
-
-        try{
-
-            const response = await fetch("/api/order",{
-
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify(data)
-
-            });
-
-            const result = await response.json();
-
-            if(result.success){
-
-                showToast("Order Confirmed 💖","#28a745");
-
-                localStorage.removeItem("cart");
-
-                setTimeout(() => {
-
-                    window.location.href = "index.html";
-
-                },2000);
-
-            }
-
-            else{
-
-                showToast("Order Failed ❌","#dc3545");
-
-            }
-
-        }
-
-        catch(error){
-
-            console.log(error);
-
-            showToast("Server Error ❌","#dc3545");
-
-        }
+        `;
 
     });
 
 }
 
+const totalBox = document.querySelector(".cart-total");
+
+if(totalBox){
+
+    totalBox.innerHTML = `Total: ₹${total}`;
+
+}
+
+
+}
+
+// =========================================
+// REMOVE CART ITEM
+// =========================================
+
+function removeCart(index){
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.splice(index,1);
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+location.reload();
+
+
+}
+
+// =========================================
+// AUTO FILL ORDER PAGE
+// =========================================
+
+const productField = document.getElementById("productField");
+
+const priceField = document.getElementById("priceField");
+
+if(productField && priceField){
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart.length > 0){
+
+    let names = cart.map(item => item.name).join(", ");
+
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += Number(item.price);
+    });
+
+    productField.value = names;
+
+    priceField.value = "₹" + total;
+
+}
+
+
+}
+
+// =========================================
+// ORDER FORM SUBMIT
+// =========================================
+
+const orderForm = document.getElementById("orderForm");
+
+if(orderForm){
+
+
+orderForm.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const formData = {
+
+        product: document.getElementById("productField").value,
+
+        price: document.getElementById("priceField").value,
+
+        name: document.getElementById("name").value,
+
+        phone: document.getElementById("phone").value,
+
+        email: document.getElementById("email").value,
+
+        address: document.getElementById("address").value,
+
+        message: document.getElementById("message").value
+
+    };
+
+    try{
+
+        const response = await fetch("/api/order",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(formData)
+
+        });
+
+        const data = await response.json();
+
+        if(data.success){
+
+            showNotification("💖 Order Confirmed Successfully");
+
+            localStorage.removeItem("cart");
+
+            orderForm.reset();
+
+        }
+
+        else{
+
+            showNotification("❌ Order Failed");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        showNotification("❌ Server Error");
+
+    }
+
+});
+
+}
