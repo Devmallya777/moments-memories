@@ -1,326 +1,263 @@
-```javascript
-// ORDER FORM
-
-const orderForm = document.getElementById("orderForm");
-
-if(orderForm){
-
-orderForm.addEventListener("submit", async (e)=>{
-
-e.preventDefault();
-
-const product = document.getElementById("product").value;
-
-const name = document.getElementById("name").value;
-
-const email = document.getElementById("email").value;
-
-const phone = document.getElementById("phone").value;
-
-const address = document.getElementById("address").value;
-
-const message = document.getElementById("message").value;
-
-let price = "₹499";
-
-if(product === "Premium Box"){
-price = "₹799";
-}
-
-const status = document.getElementById("status");
-
-status.innerHTML = "Sending Order...";
-
-try{
-
-const response = await fetch("/api/order",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-product,
-price,
-name,
-email,
-phone,
-address,
-message
-
-})
-
-});
-
-const data = await response.json();
-
-if(data.success){
-
-status.innerHTML = "💖 Order Sent Successfully";
-
-orderForm.reset();
-
-}else{
-
-status.innerHTML = "❌ Failed To Send Order";
-
-}
-
-}catch(error){
-
-status.innerHTML = "❌ Server Error";
-
-}
-
-});
-
-}
-```
-// ========================= script.js =========================
+// =========================================
+// MOMENTS & MEMORIES - SCRIPT.JS
+// =========================================
 
 console.log("Moments & Memories Loaded 💖");
-// PRODUCT AUTO SELECT
 
-const productSelect =
-document.getElementById("productSelect");
+// =========================================
+// NAVBAR SCROLL EFFECT
+// =========================================
 
-const productName =
-document.getElementById("productName");
+const navbar = document.querySelector(".navbar");
 
-const productPrice =
-document.getElementById("productPrice");
+window.addEventListener("scroll", () => {
 
-const priceInput =
-document.getElementById("priceInput");
+    if(window.scrollY > 30){
 
+        navbar.style.background = "rgba(255,255,255,0.96)";
+        navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,0.08)";
 
+    }
 
-// URL PRODUCT AUTO SELECT
+    else{
 
-const params =
-new URLSearchParams(window.location.search);
+        navbar.style.background = "rgba(255,255,255,0.90)";
+        navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.05)";
 
-const selectedProduct =
-params.get("product");
-
-if(selectedProduct){
-
-    productSelect.value = selectedProduct;
-
-    updateProduct();
-
-}
-
-
-
-// UPDATE PRODUCT
-
-function updateProduct(){
-
-    const value =
-    productSelect.value;
-
-    const splitData =
-    value.split("|");
-
-    const name =
-    splitData[0];
-
-    const price =
-    splitData[1];
-
-    productName.innerText = name;
-
-    productPrice.innerText = `₹${price}`;
-
-    priceInput.value = `₹${price}`;
-
-}
-
-productSelect.addEventListener(
-"change",
-updateProduct
-);
-
-updateProduct();
-
-
-
-
-
-
-// FORM SUBMIT
-
-const orderForm =
-document.getElementById("orderForm");
-
-orderForm.addEventListener(
-"submit",
-async function(e){
-
-e.preventDefault();
-
-const data = {
-
-product:
-productName.innerText,
-
-price:
-priceInput.value,
-
-name:
-document.getElementById("name").value,
-
-phone:
-document.getElementById("phone").value,
-
-email:
-document.getElementById("email").value,
-
-address:
-document.getElementById("address").value,
-
-message:
-document.getElementById("message").value
-
-};
-
-try{
-
-const response =
-await fetch("/api/order",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify(data)
+    }
 
 });
 
-const result =
-await response.json();
+// =========================================
+// BUTTON RIPPLE EFFECT
+// =========================================
 
-if(result.success){
+const buttons = document.querySelectorAll(".btn");
 
-document.getElementById(
-"successMessage"
-).innerText =
-"Order Sent Successfully 💖";
+buttons.forEach((button) => {
 
-orderForm.reset();
+    button.addEventListener("click", function(e){
 
-}else{
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
 
-document.getElementById(
-"successMessage"
-).innerText =
-"Failed To Send Order";
+        let ripple = document.createElement("span");
 
-}
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
 
-}catch(error){
+        ripple.classList.add("ripple");
 
-document.getElementById(
-"successMessage"
-).innerText =
-"Server Error";
+        this.appendChild(ripple);
 
-}
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
 
-});
-const params =
-new URLSearchParams(window.location.search);
-
-const product =
-params.get("product");
-
-const price =
-params.get("price");
-
-const productSelect =
-document.getElementById("productSelect");
-
-const productName =
-document.getElementById("productName");
-
-const productPrice =
-document.getElementById("productPrice");
-
-const priceInput =
-document.getElementById("priceInput");
-
-if(product && price){
-
-productName.innerText = product;
-
-productPrice.innerText = `₹${price}`;
-
-priceInput.value = `₹${price}`;
-
-for(let i=0;i<productSelect.options.length;i++){
-
-if(productSelect.options[i].text.includes(product)){
-
-productSelect.selectedIndex = i;
-
-}
-
-}
-
-}
-
-productSelect.addEventListener(
-"change",
-function(){
-
-const selected =
-this.value.split("|");
-
-productName.innerText =
-selected[0];
-
-productPrice.innerText =
-`₹${selected[1]}`;
-
-priceInput.value =
-`₹${selected[1]}`;
-
-}
-);
-// ================= ADD TO CART =================
-
-function addToCart(
-productName,
-price,
-image
-){
-
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-) || [];
-
-cart.push({
-
-name:productName,
-
-price:price,
-
-image:image
+    });
 
 });
 
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
+// =========================================
+// CARD HOVER ANIMATION
+// =========================================
+
+const cards = document.querySelectorAll(
+    ".feature-card, .product-card, .gift-box, .card"
 );
 
-alert(productName + " Added To Cart 🛒");
+cards.forEach((card) => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transform = "translateY(-12px) scale(1.02)";
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform = "translateY(0px) scale(1)";
+
+    });
+
+});
+
+// =========================================
+// FADE IN ON SCROLL
+// =========================================
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+}, {
+    threshold: 0.15
+});
+
+const hiddenElements = document.querySelectorAll(
+    ".hero, .feature-card, .product-card, .cta-box, .card"
+);
+
+hiddenElements.forEach((el) => observer.observe(el));
+
+// =========================================
+// PRODUCT BUTTON GLOW EFFECT
+// =========================================
+
+const productButtons = document.querySelectorAll(
+    ".product-info button"
+);
+
+productButtons.forEach((btn) => {
+
+    btn.addEventListener("mouseenter", () => {
+
+        btn.style.boxShadow =
+        "0 10px 30px rgba(255,79,163,0.35)";
+
+    });
+
+    btn.addEventListener("mouseleave", () => {
+
+        btn.style.boxShadow = "none";
+
+    });
+
+});
+
+// =========================================
+// IMAGE FLOAT EFFECT
+// =========================================
+
+const heroImage = document.querySelector(".hero-image img");
+
+if(heroImage){
+
+    window.addEventListener("mousemove", (e) => {
+
+        let x = (window.innerWidth / 2 - e.pageX) / 40;
+        let y = (window.innerHeight / 2 - e.pageY) / 40;
+
+        heroImage.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+    });
 
 }
+
+// =========================================
+// SCROLL TO TOP BUTTON
+// =========================================
+
+const topBtn = document.createElement("button");
+
+topBtn.innerHTML = "💖";
+
+topBtn.classList.add("top-btn");
+
+document.body.appendChild(topBtn);
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 300){
+
+        topBtn.style.opacity = "1";
+        topBtn.style.pointerEvents = "auto";
+
+    }
+
+    else{
+
+        topBtn.style.opacity = "0";
+        topBtn.style.pointerEvents = "none";
+
+    }
+
+});
+
+topBtn.addEventListener("click", () => {
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+// =========================================
+// TYPEWRITER EFFECT
+// =========================================
+
+const heroTitle = document.querySelector(".hero-text h1");
+
+if(heroTitle){
+
+    const text = heroTitle.innerHTML;
+
+    heroTitle.innerHTML = "";
+
+    let i = 0;
+
+    function typing(){
+
+        if(i < text.length){
+
+            heroTitle.innerHTML += text.charAt(i);
+
+            i++;
+
+            setTimeout(typing, 40);
+
+        }
+
+    }
+
+    typing();
+
+}
+
+// =========================================
+// MOBILE MENU ANIMATION
+// =========================================
+
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach((link) => {
+
+    link.addEventListener("mouseenter", () => {
+
+        link.style.transform = "translateY(-3px)";
+
+    });
+
+    link.addEventListener("mouseleave", () => {
+
+        link.style.transform = "translateY(0px)";
+
+    });
+
+});
+
+// =========================================
+// LOADING ANIMATION
+// =========================================
+
+window.addEventListener("load", () => {
+
+    document.body.classList.add("loaded");
+
+});
+
+// =========================================
+// CONSOLE MESSAGE
+// =========================================
+
+console.log("Website animations loaded ✨");
