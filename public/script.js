@@ -43,18 +43,33 @@ function addToCart(productName, productPrice, productImage){
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-cart.push({
-    name: productName,
-    price: productPrice,
-    image: productImage
-});
+const existingProduct = cart.find(
+    item => item.name === productName
+);
+
+if(existingProduct){
+
+    existingProduct.quantity += 1;
+
+}
+
+else{
+
+    cart.push({
+        name: productName,
+        price: Number(productPrice),
+        image: productImage,
+        quantity:1
+    });
+
+}
 
 localStorage.setItem("cart", JSON.stringify(cart));
 
 showNotification("💖 Product Added To Cart");
 
-
 }
+
 
 // =========================================
 // DISPLAY CART
@@ -81,33 +96,37 @@ else{
 
     cart.forEach((item,index)=>{
 
-        total += Number(item.price);
+const itemTotal = item.price * item.quantity;
 
-        cartContainer.innerHTML += `
+total += itemTotal;
 
-        <div class="cart-item">
+cartContainer.innerHTML += `
 
-            <img src="${item.image}" alt="">
+<div class="cart-item">
 
-            <div class="cart-info">
+    <img src="${item.image}" alt="">
 
-                <h3>${item.name}</h3>
+    <div class="cart-info">
 
-                <p>₹${item.price}</p>
+        <h3>${item.name}</h3>
 
-                <button onclick="removeCart(${index})">
-                Remove
-                </button>
+        <p>Price: ₹${item.price}</p>
 
-            </div>
+        <p>Quantity: ${item.quantity}</p>
 
-        </div>
+        <p>Total: ₹${itemTotal}</p>
 
-        `;
+        <button onclick="removeCart(${index})">
+        Remove
+        </button>
 
-    });
+    </div>
 
-}
+</div>
+;
+
+});
+
 
 const totalBox = document.querySelector(".cart-total");
 
@@ -153,22 +172,30 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 if(cart.length > 0){
 
-    let names = cart.map(item => item.name).join(", ");
+    let productText = "";
 
     let total = 0;
 
     cart.forEach(item=>{
-        total += Number(item.price);
+
+        productText += `
+
+
+${item.name} × ${item.quantity}
+`;
+
+        total += item.price * item.quantity;
+
     });
 
-    productField.value = names;
+    productField.value = productText;
 
     priceField.value = "₹" + total;
 
 }
 
-
 }
+
 
 // =========================================
 // ORDER FORM SUBMIT
