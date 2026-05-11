@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const express = require("express");
@@ -8,281 +9,243 @@ const path = require("path");
 
 const app = express();
 
+
 // =========================
 // Middleware
 // =========================
+
 app.use(cors());
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.urlencoded({
+extended: true
+}));
+
 
 // =========================
 // Static Files
 // =========================
-app.use(express.static(path.join(__dirname, "public")));
+
+app.use(express.static(
+path.join(__dirname, "public")
+));
+
 
 // =========================
 // Brevo Setup
 // =========================
+
 const client = SibApiV3Sdk.ApiClient.instance;
 
-const apiKey = client.authentications["api-key"];
-apiKey.apiKey = process.env.BREVO_API_KEY;
+const apiKey =
+client.authentications["api-key"];
 
-const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
+apiKey.apiKey =
+process.env.BREVO_API_KEY;
+
+const tranEmailApi =
+new SibApiV3Sdk.TransactionalEmailsApi();
+
 
 // =========================
-// Send Email Route
+// ORDER ROUTE
 // =========================
-app.post("/send-email", async (req, res) => {
-  try {
-    const { name, email, phone, message } = req.body;
 
-    if (!name || !email || !message) {
-      return res.status(400).json({
-        success: false,
-        message: "Please fill all required fields",
-      });
-    }
+app.post("/api/order", async (req, res) => {
 
-    const sender = {
-      email: "mm.giftboxes04@gmail.com",
-      name: "Moments & Memories",
-    };
+try {
 
-    const receivers = [
-      {
-        email: "mm.giftboxes04@gmail.com",
-      },
-    ];
+const {
+product,
+price,
+name,
+email,
+phone,
+address,
+occasion,
+message
+} = req.body;
 
-    await tranEmailApi.sendTransacEmail({
-      sender,
-      to: receivers,
-      subject: `New Contact Form Message from ${name}`,
-      htmlContent: `
-        <div style="font-family: Arial; padding:20px; background:#fdf4f5; color:#5c2d3a; border-radius:10px;">
-          <h2 style="color:#b76e79;">New Customer Inquiry 💖</h2>
 
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone || "Not Provided"}</p>
+// VALIDATION
 
-          <div style="margin-top:20px; padding:15px; background:white; border-radius:8px;">
-            <strong>Message:</strong>
-            <p>${message}</p>
-          </div>
-        </div>
-      `,
-    });
+if (
+!product ||
+!price ||
+!name ||
+!email ||
+!phone ||
+!address
+) {
 
-    res.status(200).json({
-      success: true,
-      message: "Email sent successfully",
-    });
-  } catch (error) {
-    console.log(error);
+return res.status(400).json({
 
-    res.status(500).json({
-      success: false,
-      message: "Email failed to send",
-      error: error.message,
-    });
-  }
+success: false,
+
+message: "Please fill all required fields"
+
 });
 
+}
+
+
+// EMAIL CONTENT
+
+await tranEmailApi.sendTransacEmail({
+
+sender: {
+
+email: "mm.giftboxes04@gmail.com",
+
+name: "Moments & Memories"
+
+},
+
+to: [
+
+{
+email: "mm.giftboxes04@gmail.com"
+}
+
+],
+
+subject:
+`💖 New Order From ${name}`,
+
+htmlContent: `
+
+<div style="
+font-family:Poppins,sans-serif;
+padding:25px;
+background:#fff7f5;
+color:#4b2e2e;
+border-radius:14px;
+">
+
+<h1 style="color:#c95b84;">
+New Order Received 💖
+</h1>
+
+<hr>
+
+<p>
+<strong>Product:</strong>
+${product}
+</p>
+
+<p>
+<strong>Total Price:</strong>
+${price}
+</p>
+
+<p>
+<strong>Name:</strong>
+${name}
+</p>
+
+<p>
+<strong>Email:</strong>
+${email}
+</p>
+
+<p>
+<strong>Phone:</strong>
+${phone}
+</p>
+
+<p>
+<strong>Address:</strong>
+${address}
+</p>
+
+<p>
+<strong>Occasion:</strong>
+${occasion}
+</p>
+
+<div style="
+margin-top:20px;
+padding:15px;
+background:white;
+border-radius:10px;
+">
+
+<strong>Gift Message ❤️</strong>
+
+<p>
+${message || "No Message"}
+</p>
+
+</div>
+
+</div>
+
+`
+
+});
+
+
+// SUCCESS RESPONSE
+
+res.status(200).json({
+
+success: true,
+
+message: "Order Sent Successfully"
+
+});
+
+} catch (error) {
+
+console.log(error);
+
+res.status(500).json({
+
+success: false,
+
+message: "Email failed to send",
+
+error: error.message
+
+});
+
+}
+
+});
+
+
 // =========================
-// Home Route
+// HOME ROUTE
 // =========================
+
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+
+res.sendFile(
+
+path.join(
+__dirname,
+"public",
+"index.html"
+)
+
+);
+
 });
 
+
 // =========================
-// Start Server
+// START SERVER
 // =========================
-const PORT = process.env.PORT || 10000;
+
+const PORT =
+process.env.PORT || 10000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-app.post("/api/order", async (req,res)=>{
 
-try{
-
-const {
-product,
-price,
-name,
-email,
-phone,
-address,
-occasion,
-message
-} = req.body;
-
-
-await axios.post(
-
-"https://api.brevo.com/v3/smtp/email",
-
-{
-
-sender:{
-name:"Moments & Memories",
-email:"mm.giftboxes04@gmail.com"
-},
-
-to:[
-{
-email:"mm.giftboxes04@gmail.com"
-}
-],
-
-subject:`💖 New Order From ${name}`,
-
-htmlContent:`
-
-<div style="font-family:Poppins,sans-serif;padding:20px;">
-
-<h2 style="color:#c95b84;">
-New Order Received 💖
-</h2>
-
-<hr>
-
-<p><strong>Product:</strong> ${product}</p>
-
-<p><strong>Price:</strong> ${price}</p>
-
-<p><strong>Name:</strong> ${name}</p>
-
-<p><strong>Email:</strong> ${email}</p>
-
-<p><strong>Phone:</strong> ${phone}</p>
-
-<p><strong>Address:</strong> ${address}</p>
-
-<p><strong>Occasion:</strong> ${occasion}</p>
-
-<p><strong>Gift Message:</strong> ${message}</p>
-
-</div>
-
-`
-
-},
-
-{
-
-headers:{
-"api-key":process.env.BREVO_API_KEY,
-"Content-Type":"application/json"
-}
-
-}
-
+console.log(
+`Server running on port ${PORT}`
 );
 
-res.json({success:true});
-
-}catch(error){
-
-console.log(error.response?.data || error.message);
-
-res.status(500).json({
-success:false
 });
-
-}
-
-});
-app.post("/api/order", async (req,res)=>{
-
-try{
-
-const {
-product,
-price,
-name,
-email,
-phone,
-address,
-occasion,
-message
-} = req.body;
-
-await axios.post(
-
-"https://api.brevo.com/v3/smtp/email",
-
-{
-
-sender:{
-name:"Moments & Memories",
-email:"mm.giftboxes04@gmail.com"
-},
-
-to:[
-{
-email:"mm.giftboxes04@gmail.com"
-}
-],
-
-subject:`💖 New Order From ${name}`,
-
-htmlContent:`
-
-<div style="font-family:Poppins,sans-serif;padding:20px;">
-
-<h2 style="color:#c95b84;">
-New Order Received 💖
-</h2>
-
-<hr>
-
-<p><strong>Product:</strong> ${product}</p>
-
-<p><strong>Price:</strong> ${price}</p>
-
-<p><strong>Name:</strong> ${name}</p>
-
-<p><strong>Email:</strong> ${email}</p>
-
-<p><strong>Phone:</strong> ${phone}</p>
-
-<p><strong>Address:</strong> ${address}</p>
-
-<p><strong>Occasion:</strong> ${occasion}</p>
-
-<p><strong>Gift Message:</strong> ${message}</p>
-
-</div>
-
-`
-
-},
-
-{
-
-headers:{
-"api-key":process.env.BREVO_API_KEY,
-"Content-Type":"application/json"
-}
-
-}
-
-);
-
-res.json({success:true});
-
-}catch(error){
-
-console.log(error.response?.data || error.message);
-
-res.status(500).json({
-success:false
-});
-
-}
-
-});
+```
