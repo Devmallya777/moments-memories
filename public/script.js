@@ -199,3 +199,93 @@ alert("Server Error");
 });
 
 }
+const product = document.getElementById("product");
+const price = document.getElementById("price");
+
+if(product){
+
+product.addEventListener("change",()=>{
+
+price.value = "₹" + product.value;
+
+});
+
+}
+
+
+const orderForm = document.getElementById("orderForm");
+
+if(orderForm){
+
+orderForm.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const data = {
+
+product:
+product.options[product.selectedIndex].text,
+
+price: price.value,
+
+name:
+document.getElementById("name").value,
+
+email:
+document.getElementById("email").value,
+
+phone:
+document.getElementById("phone").value,
+
+address:
+document.getElementById("address").value,
+
+occasion:
+document.getElementById("occasion").value,
+
+message:
+document.getElementById("message").value
+
+};
+
+try{
+
+const response = await fetch("/api/order",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(data)
+
+});
+
+const result = await response.json();
+
+if(result.success){
+
+alert(
+"🎉 Order Placed Successfully 💖"
+);
+
+orderForm.reset();
+
+price.value = "";
+
+}else{
+
+alert("Failed To Place Order");
+
+}
+
+}catch(error){
+
+alert("Server Error");
+
+}
+
+});
+
+}
