@@ -1,4 +1,3 @@
-```javascript
 require("dotenv").config();
 
 const express = require("express");
@@ -9,140 +8,119 @@ const path = require("path");
 
 const app = express();
 
+// =========================
+// Middleware
+// =========================
 app.use(cors());
-
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(bodyParser.urlencoded({
-extended:true
-}));
+// =========================
+// Static Files
+// =========================
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.static(
-path.join(__dirname,"public")
-));
+// =========================
+// Brevo Setup
+// =========================
+const client = SibApiV3Sdk.ApiClient.instance;
 
+const apiKey = client.authentications["api-key"];
+apiKey.apiKey = process.env.BREVO_API_KEY;
 
-// BREVO
+const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
 
-const client =
-SibApiV3Sdk.ApiClient.instance;
+// =========================
+// Contact Form Route
+// =========================
+app.post("/send-email", async (req, res) => {
 
-const apiKey =
-client.authentications["api-key"];
+  try {
 
-apiKey.apiKey =
-process.env.BREVO_API_KEY;
+    const {
+      name,
+      email,
+      phone,
+      message
+    } = req.body;
 
-const tranEmailApi =
-new SibApiV3Sdk.TransactionalEmailsApi();
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all required fields"
+      });
+    }
 
+    await tranEmailApi.sendTransacEmail({
 
-// CONTACT FORM
+      sender: {
+        email: "mm.giftboxes04@gmail.com",
+        name: "Moments & Memories"
+      },
 
-app.post("/send-email", async(req,res)=>{
+      to: [
+        {
+          email: "mm.giftboxes04@gmail.com"
+        }
+      ],
 
-try{
+      subject: `💖 New Contact Message From ${name}`,
 
-const {
-name,
-email,
-phone,
-message
-} = req.body;
+      htmlContent: `
+      <div style="font-family:Poppins,sans-serif;padding:20px;background:#fff7f5;color:#4b2e2e;">
 
-await tranEmailApi.sendTransacEmail({
+      <h2 style="color:#c95b84;">
+      New Customer Message 💖
+      </h2>
 
-sender:{
-email:"mm.giftboxes04@gmail.com",
-name:"Moments & Memories"
-},
+      <hr>
 
-to:[
-{
-email:"mm.giftboxes04@gmail.com"
-}
-],
+      <p><strong>Name:</strong> ${name}</p>
 
-subject:`💖 New Contact From ${name}`,
+      <p><strong>Email:</strong> ${email}</p>
 
-htmlContent:`
+      <p><strong>Phone:</strong> ${phone || "Not Provided"}</p>
 
-<div style="
-font-family:Poppins;
-padding:20px;
-background:#fff7f5;
-">
+      <div style="margin-top:20px;padding:15px;background:white;border-radius:10px;">
+      <strong>Message:</strong>
+      <p>${message}</p>
+      </div>
 
-<h2 style="color:#c95b84;">
-New Contact Message 💖
-</h2>
+      </div>
+      `
 
-<hr>
+    });
 
-<p>
-<strong>Name:</strong>
-${name}
-</p>
+    res.status(200).json({
+      success: true,
+      message: "Email sent successfully"
+    });
 
-<p>
-<strong>Email:</strong>
-${email}
-</p>
+  } catch (error) {
 
-<p>
-<strong>Phone:</strong>
-${phone}
-</p>
+    console.log(error);
 
-<p>
-<strong>Message:</strong>
-${message}
-</p>
+    res.status(500).json({
+      success: false,
+      message: "Email failed to send"
+    });
 
-</div>
-
-`
-
-});
-
-res.json({
-success:true
-});
-
-}catch(error){
-
-console.log(error);
-
-res.status(500).json({
-success:false
-});
-
-}
+  }
 
 });
 
-
-// HOME
-
-app.get("/",(req,res)=>{
-
-res.sendFile(
-path.join(__dirname,"public","index.html")
-);
-
+// =========================
+// Home Route
+// =========================
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// =========================
+// Start Server
+// =========================
+const PORT = process.env.PORT || 10000;
 
-// SERVER
-
-const PORT =
-process.env.PORT || 10000;
-
-app.listen(PORT,()=>{
-
-console.log(
-`Server running on port ${PORT}`
-);
-
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-```
