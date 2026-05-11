@@ -1,75 +1,273 @@
-<!-- ========================= contact.html ========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Order | Moments & Memories</title>
 
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Now</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
-  <!-- NAV -->
-  <header class="navbar">
-    <div class="nav-container">
+<section class="order-page">
 
-      <a href="index.html" class="logo-area">
-        <img src="logo.png" alt="">
-        <div>
-          <h2>Moments & Memories</h2>
-          <p>Where Every Gift Tells A Story</p>
-        </div>
-      </a>
+    <div class="order-container">
 
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="active">Order</a>
-      </nav>
+        <h1>Place Your Order 💖</h1>
+
+        <form id="orderForm">
+
+            <!-- PRODUCT SELECT -->
+
+            <label>Select Product</label>
+
+            <select id="productSelect">
+
+                <option value="Male Basic Box|499">
+                    Male Basic Box
+                </option>
+
+                <option value="Male Premium Box|799">
+                    Male Premium Box
+                </option>
+
+                <option value="Female Basic Box|499">
+                    Female Basic Box
+                </option>
+
+                <option value="Female Premium Box|799">
+                    Female Premium Box
+                </option>
+
+            </select>
+
+
+
+
+
+            <!-- PRODUCT DETAILS -->
+
+            <div class="selected-product">
+
+                <h2 id="productName">
+                    Product Name
+                </h2>
+
+                <h3 id="productPrice">
+                    ₹0
+                </h3>
+
+            </div>
+
+            <input type="hidden" id="priceInput">
+
+
+
+
+
+            <!-- USER DETAILS -->
+
+            <input
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            required>
+
+            <input
+            type="text"
+            id="phone"
+            placeholder="Phone Number"
+            required>
+
+            <input
+            type="email"
+            id="email"
+            placeholder="Email Address"
+            required>
+
+
+
+
+
+            <!-- ADDRESS -->
+
+            <textarea
+            id="address"
+            placeholder="Your Address"></textarea>
+
+
+
+
+
+            <!-- MESSAGE -->
+
+            <textarea
+            id="message"
+            placeholder="Special Message"></textarea>
+
+
+
+
+
+            <!-- FILE -->
+
+            <label class="upload-label">
+                Upload Photos / Videos
+            </label>
+
+            <input type="file" multiple>
+
+
+
+
+
+            <!-- BUTTON -->
+
+            <button type="submit">
+
+                Send Order 💌
+
+            </button>
+
+
+
+
+
+            <!-- SUCCESS -->
+
+            <p id="successMessage"></p>
+
+        </form>
 
     </div>
-  </header>
 
-  <!-- CONTACT -->
-  <section class="contact-section">
+</section>
 
-    <div class="contact-card">
 
-      <div class="section-title">
-        <span>PLACE YOUR ORDER</span>
-        <h2>Customized Gift Booking</h2>
-      </div>
 
-      <form class="contact-form">
 
-        <div class="input-group">
-          <input type="text" placeholder="Your Name" required>
-        </div>
 
-        <div class="input-group">
-          <input type="email" placeholder="Email Address" required>
-        </div>
+<script>
 
-        <div class="input-group">
-          <input type="tel" placeholder="Phone Number" required>
-        </div>
+// ================= GET URL DATA =================
 
-        <div class="input-group">
-          <textarea placeholder="Your Message"></textarea>
-        </div>
+const params =
+new URLSearchParams(window.location.search);
 
-        <button type="submit">Place Order 💖</button>
+const product =
+params.get("product");
 
-      </form>
+const price =
+params.get("price");
 
-    </div>
 
-  </section>
+
+// ================= ELEMENTS =================
+
+const productSelect =
+document.getElementById("productSelect");
+
+const productName =
+document.getElementById("productName");
+
+const productPrice =
+document.getElementById("productPrice");
+
+const priceInput =
+document.getElementById("priceInput");
+
+
+
+// ================= AUTO SELECT PRODUCT =================
+
+if(product && price){
+
+    productName.innerText = product;
+
+    productPrice.innerText = `₹${price}`;
+
+    priceInput.value = `₹${price}`;
+
+
+
+    // AUTO SELECT DROPDOWN
+
+    for(let i = 0; i < productSelect.options.length; i++){
+
+        if(
+            productSelect.options[i].text.includes(product)
+        ){
+
+            productSelect.selectedIndex = i;
+
+        }
+
+    }
+
+}
+
+
+
+// ================= MANUAL DROPDOWN CHANGE =================
+
+productSelect.addEventListener(
+"change",
+function(){
+
+    const selected =
+    this.value;
+
+    const splitData =
+    selected.split("|");
+
+    const selectedProduct =
+    splitData[0];
+
+    const selectedPrice =
+    splitData[1];
+
+    productName.innerText =
+    selectedProduct;
+
+    productPrice.innerText =
+    `₹${selectedPrice}`;
+
+    priceInput.value =
+    `₹${selectedPrice}`;
+
+}
+);
+
+
+
+
+// ================= SEND ORDER =================
+
+const orderForm =
+document.getElementById("orderForm");
+
+orderForm.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+document.getElementById(
+"successMessage"
+).innerText =
+"Order Sent Successfully 💖";
+
+orderForm.reset();
+
+});
+</script>
 
 </body>
 </html>

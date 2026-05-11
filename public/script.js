@@ -82,3 +82,214 @@ status.innerHTML = "❌ Server Error";
 // ========================= script.js =========================
 
 console.log("Moments & Memories Loaded 💖");
+// PRODUCT AUTO SELECT
+
+const productSelect =
+document.getElementById("productSelect");
+
+const productName =
+document.getElementById("productName");
+
+const productPrice =
+document.getElementById("productPrice");
+
+const priceInput =
+document.getElementById("priceInput");
+
+
+
+// URL PRODUCT AUTO SELECT
+
+const params =
+new URLSearchParams(window.location.search);
+
+const selectedProduct =
+params.get("product");
+
+if(selectedProduct){
+
+    productSelect.value = selectedProduct;
+
+    updateProduct();
+
+}
+
+
+
+// UPDATE PRODUCT
+
+function updateProduct(){
+
+    const value =
+    productSelect.value;
+
+    const splitData =
+    value.split("|");
+
+    const name =
+    splitData[0];
+
+    const price =
+    splitData[1];
+
+    productName.innerText = name;
+
+    productPrice.innerText = `₹${price}`;
+
+    priceInput.value = `₹${price}`;
+
+}
+
+productSelect.addEventListener(
+"change",
+updateProduct
+);
+
+updateProduct();
+
+
+
+
+
+
+// FORM SUBMIT
+
+const orderForm =
+document.getElementById("orderForm");
+
+orderForm.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+const data = {
+
+product:
+productName.innerText,
+
+price:
+priceInput.value,
+
+name:
+document.getElementById("name").value,
+
+phone:
+document.getElementById("phone").value,
+
+email:
+document.getElementById("email").value,
+
+address:
+document.getElementById("address").value,
+
+message:
+document.getElementById("message").value
+
+};
+
+try{
+
+const response =
+await fetch("/api/order",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(data)
+
+});
+
+const result =
+await response.json();
+
+if(result.success){
+
+document.getElementById(
+"successMessage"
+).innerText =
+"Order Sent Successfully 💖";
+
+orderForm.reset();
+
+}else{
+
+document.getElementById(
+"successMessage"
+).innerText =
+"Failed To Send Order";
+
+}
+
+}catch(error){
+
+document.getElementById(
+"successMessage"
+).innerText =
+"Server Error";
+
+}
+
+});
+const params =
+new URLSearchParams(window.location.search);
+
+const product =
+params.get("product");
+
+const price =
+params.get("price");
+
+const productSelect =
+document.getElementById("productSelect");
+
+const productName =
+document.getElementById("productName");
+
+const productPrice =
+document.getElementById("productPrice");
+
+const priceInput =
+document.getElementById("priceInput");
+
+if(product && price){
+
+productName.innerText = product;
+
+productPrice.innerText = `₹${price}`;
+
+priceInput.value = `₹${price}`;
+
+for(let i=0;i<productSelect.options.length;i++){
+
+if(productSelect.options[i].text.includes(product)){
+
+productSelect.selectedIndex = i;
+
+}
+
+}
+
+}
+
+productSelect.addEventListener(
+"change",
+function(){
+
+const selected =
+this.value.split("|");
+
+productName.innerText =
+selected[0];
+
+productPrice.innerText =
+`₹${selected[1]}`;
+
+priceInput.value =
+`₹${selected[1]}`;
+
+}
+);
