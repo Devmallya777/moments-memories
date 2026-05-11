@@ -1,89 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Female Premium Box</title>
+<title>
+Female Premium Box | Moments & Memories
+</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo-img"
+        >
 
         <div class="logo-text">
+
             Moments & Memories 💖
+
         </div>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
+<!-- =========================
+     PRODUCT DETAILS PAGE
+========================= -->
+
 <section class="details-page">
 
-<div class="details-image">
+    <!-- IMAGE -->
 
-<img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1200&auto=format&fit=crop">
+    <div class="details-image">
 
-</div>
+        <img
+        src="https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1200&auto=format&fit=crop"
+        alt="Female Premium Box"
+        >
 
-<div class="details-content">
+    </div>
 
-<h1>Female Premium Box 🎀</h1>
+    <!-- CONTENT -->
 
-<h2>₹799</h2>
+    <div class="details-content">
 
-<h3>Includes</h3>
+        <span class="tag premium-tag">
+            Premium Collection ✨
+        </span>
 
-<ul>
-<li>Chocolate</li>
-<li>8 Printed Photos</li>
-<li>Luxury Perfume</li>
-<li>Handwritten Letter</li>
-<li>Video / Audio Message</li>
-<li>Soft Teddy</li>
-</ul>
+        <h1>
+            Female Premium Box 🎀
+        </h1>
 
-<h3>Customized Gifts</h3>
+        <h2>
+            ₹799
+        </h2>
 
-<ul>
-<li>Luxury Earrings</li>
-<li>Scrunchies</li>
-<li>Bracelet</li>
-<li>Clutcher</li>
-<li>Spotify Plaque</li>
-</ul>
+        <p class="details-text">
 
-<button
-class="cart-btn add-cart-btn"
-data-name="Premium Box"
-data-price="799"
-data-image="logo.png">
+            A luxury premium gift experience specially made
+            for unforgettable surprises, emotional moments
+            and beautiful memories 💖
 
-Add To Cart 🛒
+        </p>
 
-</button>
+        <!-- INCLUDES -->
 
-</a>
+        <h3>
+            Includes 💝
+        </h3>
 
-</div>
+        <ul>
+
+            <li>Chocolate</li>
+
+            <li>8 Printed Photos</li>
+
+            <li>Luxury Perfume</li>
+
+            <li>Handwritten Letter</li>
+
+            <li>Video / Audio Message</li>
+
+            <li>Soft Teddy</li>
+
+        </ul>
+
+        <!-- CUSTOMIZED -->
+
+        <h3>
+            Customized Gifts 🎀
+        </h3>
+
+        <ul>
+
+            <li>Luxury Earrings</li>
+
+            <li>Scrunchies</li>
+
+            <li>Bracelet</li>
+
+            <li>Clutcher</li>
+
+            <li>Spotify Plaque</li>
+
+        </ul>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+            <!-- ADD TO CART -->
+
+            <button
+
+            class="cart-btn premium-btn"
+
+            onclick="addToCart(
+            'Female Premium Box',
+            799,
+            'logo.png'
+            )"
+
+            >
+
+                Add To Cart 🛒
+
+            </button>
+
+            <!-- ORDER NOW -->
+
+            <a href="contact.html">
+
+                <button
+
+                class="order-btn"
+
+                onclick="addToCart(
+                'Female Premium Box',
+                799,
+                'logo.png'
+                )"
+
+                >
+
+                    Order Now ✨
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- =========================
+     SCRIPT
+========================= -->
+
 <script src="script.js"></script>
+
 </body>
+
 </html>

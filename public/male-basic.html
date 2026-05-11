@@ -2,10 +2,14 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Male Basic Box</title>
+<title>
+Male Basic Box | Moments & Memories
+</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,102 +17,191 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo-img"
+        >
 
         <div class="logo-text">
+
             Moments & Memories 💖
+
         </div>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
-<!-- DETAILS -->
+<!-- =========================
+     PRODUCT DETAILS PAGE
+========================= -->
 
 <section class="details-page">
 
-<div class="details-image">
+    <!-- IMAGE -->
 
-<img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=1200&auto=format&fit=crop">
+    <div class="details-image">
 
-</div>
+        <img
+        src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=1200&auto=format&fit=crop"
+        alt="Male Basic Box"
+        >
 
-<div class="details-content">
+    </div>
 
-<div class="tag">
-Basic Collection ✨
-</div>
+    <!-- CONTENT -->
 
-<h1>Male Basic Box 🖤</h1>
+    <div class="details-content">
 
-<h2>₹499</h2>
+        <span class="tag">
 
-<p class="details-text">
-Beautiful customized gift box crafted specially for him.
-Perfect for birthdays, anniversaries and unforgettable moments.
-</p>
+            Basic Collection ✨
 
-<h3>Includes</h3>
+        </span>
 
-<ul>
-<li>Chocolate</li>
-<li>4 Printed Photos</li>
-<li>Perfume</li>
-<li>Handwritten Letter</li>
-<li>Video / Audio Message</li>
-</ul>
+        <h1>
+            Male Basic Box 🖤
+        </h1>
 
-<h3>Customized Gifts</h3>
+        <h2>
+            ₹499
+        </h2>
 
-<ul>
-<li>Wallet</li>
-<li>Watch</li>
-<li>Belt</li>
-<li>Sunglasses</li>
-</ul>
+        <p class="details-text">
 
-<div class="button-group">
+            A beautiful customized gift box crafted specially
+            for him. Perfect for birthdays, anniversaries
+            and unforgettable memories 💖
 
-<button
-class="cart-btn add-cart-btn"
-data-name="Basic Box"
-data-price="499"
-data-image="logo.png">
+        </p>
 
-Add To Cart 🛒
+        <!-- INCLUDES -->
 
-</button>
+        <h3>
+            Includes 🎁
+        </h3>
 
-<a href="contact.html?product=Male Basic Box&price=499">
+        <ul>
 
-<button class="order-btn">
-Order Now 💖
-</button>
+            <li>Chocolate</li>
 
-</a>
+            <li>4 Printed Photos</li>
 
-</div>
+            <li>Perfume</li>
 
-</div>
+            <li>Handwritten Letter</li>
+
+            <li>Video / Audio Message</li>
+
+        </ul>
+
+        <!-- CUSTOMIZED -->
+
+        <h3>
+            Customized Gifts 🖤
+        </h3>
+
+        <ul>
+
+            <li>Wallet</li>
+
+            <li>Watch</li>
+
+            <li>Belt</li>
+
+            <li>Sunglasses</li>
+
+        </ul>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+            <!-- ADD TO CART -->
+
+            <button
+
+            class="cart-btn"
+
+            onclick="addToCart(
+            'Male Basic Box',
+            499,
+            'logo.png'
+            )"
+
+            >
+
+                Add To Cart 🛒
+
+            </button>
+
+            <!-- ORDER NOW -->
+
+            <a href="contact.html">
+
+                <button
+
+                class="order-btn"
+
+                onclick="addToCart(
+                'Male Basic Box',
+                499,
+                'logo.png'
+                )"
+
+                >
+
+                    Order Now 💖
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- =========================
+     SCRIPT
+========================= -->
+
 <script src="script.js"></script>
+
 </body>
 
 </html>

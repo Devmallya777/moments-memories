@@ -1,92 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Female Basic Box</title>
+<title>
+Female Basic Box | Moments & Memories
+</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo-img"
+        >
 
         <div class="logo-text">
+
             Moments & Memories 💖
+
         </div>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
+<!-- =========================
+     PRODUCT DETAILS PAGE
+========================= -->
+
 <section class="details-page">
 
-<div class="details-image">
+    <!-- IMAGE -->
 
-<img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200&auto=format&fit=crop">
+    <div class="details-image">
 
-</div>
+        <img
+        src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200&auto=format&fit=crop"
+        alt="Female Basic Box"
+        >
 
-<div class="details-content">
+    </div>
 
-<h1>Female Basic Box 🎀</h1>
+    <!-- CONTENT -->
 
-<h2>₹499</h2>
+    <div class="details-content">
 
-<h3>Includes</h3>
+        <span class="tag">
+            Bestseller 💖
+        </span>
 
-<ul>
-<li>Chocolate</li>
-<li>4 Printed Photos</li>
-<li>Perfume</li>
-<li>Handwritten Letter</li>
-<li>Video / Audio Message</li>
-</ul>
+        <h1>
+            Female Basic Box 🎀
+        </h1>
 
-<h3>Customized Gifts</h3>
+        <h2>
+            ₹499
+        </h2>
 
-<ul>
-<li>Earrings</li>
-<li>Bracelet</li>
-<li>Hair Clip</li>
-<li>Pendant</li>
-</ul>
+        <p class="details-text">
 
-<button
-class="cart-btn add-cart-btn"
-data-name="Basic Box"
-data-price="499"
-data-image="logo.png">
+            A beautiful customized gift box made specially
+            for birthdays, friendships, anniversaries and
+            unforgettable memories ✨
 
-Add To Cart 🛒
+        </p>
 
-</button>
-<a href="contact.html?product=Female Basic Box&price=499">
+        <!-- INCLUDES -->
 
-<button class="order-btn">
-Order Now 🎀
-</button>
+        <h3>
+            Includes 💝
+        </h3>
 
-</a>
+        <ul>
 
-</div>
+            <li>Chocolate</li>
+
+            <li>4 Printed Photos</li>
+
+            <li>Perfume</li>
+
+            <li>Handwritten Letter</li>
+
+            <li>Video / Audio Message</li>
+
+        </ul>
+
+        <!-- CUSTOMIZED -->
+
+        <h3>
+            Customized Gifts 🎀
+        </h3>
+
+        <ul>
+
+            <li>Earrings</li>
+
+            <li>Bracelet</li>
+
+            <li>Hair Clip</li>
+
+            <li>Pendant</li>
+
+        </ul>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+            <!-- ADD TO CART -->
+
+            <button
+
+            class="cart-btn"
+
+            onclick="addToCart(
+            'Female Basic Box',
+            499,
+            'logo.png'
+            )"
+
+            >
+
+                Add To Cart 🛒
+
+            </button>
+
+            <!-- ORDER NOW -->
+
+            <a href="contact.html">
+
+                <button
+
+                class="order-btn"
+
+                onclick="addToCart(
+                'Female Basic Box',
+                499,
+                'logo.png'
+                )"
+
+                >
+
+                    Order Now 🎀
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- =========================
+     SCRIPT
+========================= -->
+
 <script src="script.js"></script>
+
 </body>
+
 </html>

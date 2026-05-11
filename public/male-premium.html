@@ -2,10 +2,14 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Male Premium Box</title>
+<title>
+Male Premium Box | Moments & Memories
+</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,102 +17,195 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
     <div class="logo-area">
 
-        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+        <img
+        src="logo.png"
+        alt="Moments & Memories"
+        class="logo-img"
+        >
 
         <div class="logo-text">
+
             Moments & Memories 💖
+
         </div>
 
     </div>
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Order</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Order
+        </a>
+
+        <a href="cart.html">
+            Cart 🛒
+        </a>
 
     </div>
 
 </nav>
 
-<!-- DETAILS -->
+<!-- =========================
+     PRODUCT DETAILS PAGE
+========================= -->
 
 <section class="details-page">
 
-<div class="details-image">
+    <!-- IMAGE -->
 
-<img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff?q=80&w=1200&auto=format&fit=crop">
+    <div class="details-image">
 
-</div>
+        <img
+        src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0ff?q=80&w=1200&auto=format&fit=crop"
+        alt="Male Premium Box"
+        >
 
-<div class="details-content">
+    </div>
 
-<div class="tag premium-tag">
-Premium Collection 👑
-</div>
+    <!-- CONTENT -->
 
-<h1>Male Premium Box 🖤</h1>
+    <div class="details-content">
 
-<h2>₹799</h2>
+        <span class="tag premium-tag">
 
-<p class="details-text">
-Luxury customized premium gift hamper designed with elegant aesthetics and premium surprises.
-</p>
+            Premium Collection 👑
 
-<h3>Includes</h3>
+        </span>
 
-<ul>
-<li>Chocolate</li>
-<li>8 Printed Photos</li>
-<li>Luxury Perfume</li>
-<li>Handwritten Letter</li>
-<li>Video / Audio Message</li>
-<li>Soft Teddy</li>
-</ul>
+        <h1>
+            Male Premium Box 🖤
+        </h1>
 
-<h3>Customized Gifts</h3>
+        <h2>
+            ₹799
+        </h2>
 
-<ul>
-<li>Premium Wallet</li>
-<li>Luxury Watch</li>
-<li>Leather Belt</li>
-<li>Sunglasses</li>
-<li>Spotify Plaque</li>
-</ul>
+        <p class="details-text">
 
-<div class="button-group">
+            Luxury customized premium gift hamper designed
+            with elegant aesthetics, premium surprises
+            and unforgettable memories ✨
 
-<button
-class="cart-btn add-cart-btn"
-data-name="Premium Box"
-data-price="799"
-data-image="logo.png">
+        </p>
 
-Add To Cart 🛒
+        <!-- INCLUDES -->
 
-</button>
-<a href="contact.html?product=Male Premium Box&price=799">
+        <h3>
+            Includes 🎁
+        </h3>
 
-<button class="order-btn premium-btn">
-Order Premium ✨
-</button>
+        <ul>
 
-</a>
+            <li>Chocolate</li>
 
-</div>
+            <li>8 Printed Photos</li>
 
-</div>
+            <li>Luxury Perfume</li>
+
+            <li>Handwritten Letter</li>
+
+            <li>Video / Audio Message</li>
+
+            <li>Soft Teddy</li>
+
+        </ul>
+
+        <!-- CUSTOMIZED -->
+
+        <h3>
+            Customized Gifts 🖤
+        </h3>
+
+        <ul>
+
+            <li>Premium Wallet</li>
+
+            <li>Luxury Watch</li>
+
+            <li>Leather Belt</li>
+
+            <li>Sunglasses</li>
+
+            <li>Spotify Plaque</li>
+
+        </ul>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+            <!-- ADD TO CART -->
+
+            <button
+
+            class="cart-btn premium-btn"
+
+            onclick="addToCart(
+            'Male Premium Box',
+            799,
+            'logo.png'
+            )"
+
+            >
+
+                Add To Cart 🛒
+
+            </button>
+
+            <!-- ORDER NOW -->
+
+            <a href="contact.html">
+
+                <button
+
+                class="order-btn premium-btn"
+
+                onclick="addToCart(
+                'Male Premium Box',
+                799,
+                'logo.png'
+                )"
+
+                >
+
+                    Order Premium ✨
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
+
+<!-- =========================
+     SCRIPT
+========================= -->
+
 <script src="script.js"></script>
+
 </body>
 
 </html>
