@@ -1480,3 +1480,44 @@ footer p{
     }
 
 }
+/* NOTIFICATION */
+
+.notification{
+position:fixed;
+top:30px;
+right:30px;
+background:linear-gradient(135deg,#ff6ca8,#b12675);
+color:white;
+padding:18px 28px;
+border-radius:15px;
+font-weight:600;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+z-index:99999;
+transform:translateX(120%);
+transition:0.4s;
+}
+
+.notification.show{
+transform:translateX(0);
+}
+
+/* ADMIN */
+
+#ordersContainer{
+margin-top:30px;
+display:grid;
+gap:25px;
+}
+
+.message-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+line-height:1.8;
+}
+
+.message-card h3{
+color:#b12675;
+margin-bottom:10px;
+}

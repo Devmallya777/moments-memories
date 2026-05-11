@@ -1,263 +1,141 @@
-// =========================================
-// MOMENTS & MEMORIES - SCRIPT.JS
-// =========================================
-
+```js
 console.log("Moments & Memories Loaded 💖");
 
-// =========================================
-// NAVBAR SCROLL EFFECT
-// =========================================
+// ======================
+// NOTIFICATION
+// ======================
 
-const navbar = document.querySelector(".navbar");
+function showNotification(text){
 
-window.addEventListener("scroll", () => {
+    const notification = document.createElement("div");
 
-    if(window.scrollY > 30){
+    notification.className = "notification";
 
-        navbar.style.background = "rgba(255,255,255,0.96)";
-        navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,0.08)";
+    notification.innerHTML = text;
 
-    }
+    document.body.appendChild(notification);
 
-    else{
+    setTimeout(() => {
 
-        navbar.style.background = "rgba(255,255,255,0.90)";
-        navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.05)";
+        notification.classList.add("show");
 
-    }
+    },100);
 
-});
+    setTimeout(() => {
 
-// =========================================
-// BUTTON RIPPLE EFFECT
-// =========================================
+        notification.remove();
 
-const buttons = document.querySelectorAll(".btn");
+    },3000);
 
-buttons.forEach((button) => {
+}
 
-    button.addEventListener("click", function(e){
+// ======================
+// ADD TO CART
+// ======================
 
-        let x = e.clientX - e.target.offsetLeft;
-        let y = e.clientY - e.target.offsetTop;
+const cartButtons = document.querySelectorAll(".add-cart-btn");
 
-        let ripple = document.createElement("span");
+cartButtons.forEach(button => {
 
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
+    button.addEventListener("click", () => {
 
-        ripple.classList.add("ripple");
+        const product = {
 
-        this.appendChild(ripple);
+            name: button.dataset.name,
 
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
+            price: button.dataset.price
 
-    });
+        };
 
-});
+        let cart = JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
 
-// =========================================
-// CARD HOVER ANIMATION
-// =========================================
+        cart.push(product);
 
-const cards = document.querySelectorAll(
-    ".feature-card, .product-card, .gift-box, .card"
-);
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
 
-cards.forEach((card) => {
-
-    card.addEventListener("mouseenter", () => {
-
-        card.style.transform = "translateY(-12px) scale(1.02)";
-
-    });
-
-    card.addEventListener("mouseleave", () => {
-
-        card.style.transform = "translateY(0px) scale(1)";
+        showNotification("Added To Cart 🛒");
 
     });
 
 });
 
-// =========================================
-// FADE IN ON SCROLL
-// =========================================
+// ======================
+// ORDER FORM
+// ======================
 
-const observer = new IntersectionObserver((entries) => {
+const orderForm = document.querySelector("form");
 
-    entries.forEach((entry) => {
+if(orderForm){
 
-        if(entry.isIntersecting){
+    orderForm.addEventListener("submit", async(e) => {
 
-            entry.target.classList.add("show");
+        e.preventDefault();
+
+        const inputs = orderForm.querySelectorAll("input, textarea");
+
+        const data = {
+
+            product: "Gift Box",
+            price: "Custom",
+
+            name: inputs[0].value,
+
+            phone: inputs[1].value,
+
+            email: inputs[2].value,
+
+            address: inputs[3].value,
+
+            message: inputs[4].value
+
+        };
+
+        try{
+
+            const response = await fetch("/api/order",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(data)
+
+            });
+
+            const result = await response.json();
+
+            if(result.success){
+
+                showNotification("Order Confirmed 💖");
+
+                orderForm.reset();
+
+                localStorage.removeItem("cart");
+
+            }
+
+            else{
+
+                showNotification("Order Failed ❌");
+
+            }
+
+        }
+
+        catch(error){
+
+            showNotification("Server Error ❌");
 
         }
 
     });
 
-}, {
-    threshold: 0.15
-});
-
-const hiddenElements = document.querySelectorAll(
-    ".hero, .feature-card, .product-card, .cta-box, .card"
-);
-
-hiddenElements.forEach((el) => observer.observe(el));
-
-// =========================================
-// PRODUCT BUTTON GLOW EFFECT
-// =========================================
-
-const productButtons = document.querySelectorAll(
-    ".product-info button"
-);
-
-productButtons.forEach((btn) => {
-
-    btn.addEventListener("mouseenter", () => {
-
-        btn.style.boxShadow =
-        "0 10px 30px rgba(255,79,163,0.35)";
-
-    });
-
-    btn.addEventListener("mouseleave", () => {
-
-        btn.style.boxShadow = "none";
-
-    });
-
-});
-
-// =========================================
-// IMAGE FLOAT EFFECT
-// =========================================
-
-const heroImage = document.querySelector(".hero-image img");
-
-if(heroImage){
-
-    window.addEventListener("mousemove", (e) => {
-
-        let x = (window.innerWidth / 2 - e.pageX) / 40;
-        let y = (window.innerHeight / 2 - e.pageY) / 40;
-
-        heroImage.style.transform =
-        `translate(${x}px, ${y}px)`;
-
-    });
-
 }
-
-// =========================================
-// SCROLL TO TOP BUTTON
-// =========================================
-
-const topBtn = document.createElement("button");
-
-topBtn.innerHTML = "💖";
-
-topBtn.classList.add("top-btn");
-
-document.body.appendChild(topBtn);
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 300){
-
-        topBtn.style.opacity = "1";
-        topBtn.style.pointerEvents = "auto";
-
-    }
-
-    else{
-
-        topBtn.style.opacity = "0";
-        topBtn.style.pointerEvents = "none";
-
-    }
-
-});
-
-topBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-});
-
-// =========================================
-// TYPEWRITER EFFECT
-// =========================================
-
-const heroTitle = document.querySelector(".hero-text h1");
-
-if(heroTitle){
-
-    const text = heroTitle.innerHTML;
-
-    heroTitle.innerHTML = "";
-
-    let i = 0;
-
-    function typing(){
-
-        if(i < text.length){
-
-            heroTitle.innerHTML += text.charAt(i);
-
-            i++;
-
-            setTimeout(typing, 40);
-
-        }
-
-    }
-
-    typing();
-
-}
-
-// =========================================
-// MOBILE MENU ANIMATION
-// =========================================
-
-const navLinks = document.querySelectorAll(".nav-links a");
-
-navLinks.forEach((link) => {
-
-    link.addEventListener("mouseenter", () => {
-
-        link.style.transform = "translateY(-3px)";
-
-    });
-
-    link.addEventListener("mouseleave", () => {
-
-        link.style.transform = "translateY(0px)";
-
-    });
-
-});
-
-// =========================================
-// LOADING ANIMATION
-// =========================================
-
-window.addEventListener("load", () => {
-
-    document.body.classList.add("loaded");
-
-});
-
-// =========================================
-// CONSOLE MESSAGE
-// =========================================
-
-console.log("Website animations loaded ✨");
+```

@@ -1,25 +1,71 @@
-const messagesContainer = document.getElementById("messagesContainer");
+// ======================
+// LOAD DASHBOARD STATS
+// ======================
 
-fetch("/api/messages")
+fetch("/api/stats")
 
 .then(res => res.json())
 
 .then(data => {
 
-    data.forEach(message => {
+    document.getElementById("totalOrders").innerHTML =
+    data.totalOrders;
 
-        messagesContainer.innerHTML += `
+    document.getElementById("pendingOrders").innerHTML =
+    data.pendingOrders;
 
-            <div class="message-card">
+    document.getElementById("deliveredOrders").innerHTML =
+    data.deliveredOrders;
 
-                <h3>${message.name}</h3>
+    document.getElementById("totalCustomers").innerHTML =
+    data.totalCustomers;
 
-                <p>${message.email}</p>
+});
 
-                <p>${message.message}</p>
+// ======================
+// LOAD ORDERS
+// ======================
 
-            </div>
+const ordersContainer =
+document.getElementById("ordersContainer");
+
+fetch("/api/orders")
+
+.then(res => res.json())
+
+.then(data => {
+
+    data.reverse();
+
+    data.forEach(order => {
+
+        ordersContainer.innerHTML += `
+
+        <div class="message-card">
+
+            <h3>${order.name}</h3>
+
+            <p><strong>Product:</strong> ${order.product}</p>
+
+            <p><strong>Price:</strong> ${order.price}</p>
+
+            <p><strong>Email:</strong> ${order.email}</p>
+
+            <p><strong>Phone:</strong> ${order.phone}</p>
+
+            <p><strong>Address:</strong> ${order.address}</p>
+
+            <p><strong>Message:</strong> ${order.message}</p>
+
+            <p><strong>Status:</strong> ${order.status}</p>
+
+            <p><strong>Date:</strong> ${order.date}</p>
+
+        </div>
 
         `;
+
     });
+
 });
+
