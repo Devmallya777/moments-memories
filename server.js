@@ -105,3 +105,94 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+app.post("/api/order", async (req,res)=>{
+
+try{
+
+const {
+product,
+price,
+name,
+email,
+phone,
+address,
+occasion,
+message
+} = req.body;
+
+
+await axios.post(
+
+"https://api.brevo.com/v3/smtp/email",
+
+{
+
+sender:{
+name:"Moments & Memories",
+email:"mm.giftboxes04@gmail.com"
+},
+
+to:[
+{
+email:"mm.giftboxes04@gmail.com"
+}
+],
+
+subject:`💖 New Order From ${name}`,
+
+htmlContent:`
+
+<div style="font-family:Poppins,sans-serif;padding:20px;">
+
+<h2 style="color:#c95b84;">
+New Order Received 💖
+</h2>
+
+<hr>
+
+<p><strong>Product:</strong> ${product}</p>
+
+<p><strong>Price:</strong> ${price}</p>
+
+<p><strong>Name:</strong> ${name}</p>
+
+<p><strong>Email:</strong> ${email}</p>
+
+<p><strong>Phone:</strong> ${phone}</p>
+
+<p><strong>Address:</strong> ${address}</p>
+
+<p><strong>Occasion:</strong> ${occasion}</p>
+
+<p><strong>Gift Message:</strong> ${message}</p>
+
+</div>
+
+`
+
+},
+
+{
+
+headers:{
+"api-key":process.env.BREVO_API_KEY,
+"Content-Type":"application/json"
+}
+
+}
+
+);
+
+res.json({success:true});
+
+}catch(error){
+
+console.log(error.response?.data || error.message);
+
+res.status(500).json({
+success:false
+});
+
+}
+
+});
