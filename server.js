@@ -9,34 +9,23 @@ const path = require("path");
 
 const app = express();
 
-
-// ======================
-// MIDDLEWARE
-// ======================
-
 app.use(cors());
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({
-  extended: true
+extended:true
 }));
 
-
-// ======================
-// STATIC FILES
-// ======================
-
 app.use(express.static(
-  path.join(__dirname, "public")
+path.join(__dirname,"public")
 ));
 
 
-// ======================
-// BREVO SETUP
-// ======================
+// BREVO
 
-const client = SibApiV3Sdk.ApiClient.instance;
+const client =
+SibApiV3Sdk.ApiClient.instance;
 
 const apiKey =
 client.authentications["api-key"];
@@ -48,202 +37,112 @@ const tranEmailApi =
 new SibApiV3Sdk.TransactionalEmailsApi();
 
 
-// ======================
-// ORDER ROUTE
-// ======================
+// CONTACT FORM
 
-app.post("/api/order", async (req, res) => {
+app.post("/send-email", async(req,res)=>{
 
-  try {
+try{
 
-    const {
-      product,
-      price,
-      name,
-      email,
-      phone,
-      address,
-      occasion,
-      message
-    } = req.body;
+const {
+name,
+email,
+phone,
+message
+} = req.body;
 
+await tranEmailApi.sendTransacEmail({
 
-    // VALIDATION
+sender:{
+email:"mm.giftboxes04@gmail.com",
+name:"Moments & Memories"
+},
 
-    if (
-      !product ||
-      !price ||
-      !name ||
-      !email ||
-      !phone ||
-      !address
-    ) {
+to:[
+{
+email:"mm.giftboxes04@gmail.com"
+}
+],
 
-      return res.status(400).json({
+subject:`💖 New Contact From ${name}`,
 
-        success: false,
+htmlContent:`
 
-        message: "Please fill all fields"
+<div style="
+font-family:Poppins;
+padding:20px;
+background:#fff7f5;
+">
 
-      });
+<h2 style="color:#c95b84;">
+New Contact Message 💖
+</h2>
 
-    }
+<hr>
 
+<p>
+<strong>Name:</strong>
+${name}
+</p>
 
-    // SEND EMAIL
+<p>
+<strong>Email:</strong>
+${email}
+</p>
 
-    await tranEmailApi.sendTransacEmail({
+<p>
+<strong>Phone:</strong>
+${phone}
+</p>
 
-      sender: {
+<p>
+<strong>Message:</strong>
+${message}
+</p>
 
-        email: "mm.giftboxes04@gmail.com",
+</div>
 
-        name: "Moments & Memories"
+`
 
-      },
+});
 
-      to: [
+res.json({
+success:true
+});
 
-        {
-          email: "mm.giftboxes04@gmail.com"
-        }
+}catch(error){
 
-      ],
+console.log(error);
 
-      subject:
-      `💖 New Order From ${name}`,
+res.status(500).json({
+success:false
+});
 
-      htmlContent: `
-
-      <div style="
-      font-family:Poppins,sans-serif;
-      padding:25px;
-      background:#fff7f5;
-      border-radius:14px;
-      color:#4b2e2e;
-      ">
-
-      <h1 style="color:#c95b84;">
-      New Order Received 💖
-      </h1>
-
-      <hr>
-
-      <p>
-      <strong>Product:</strong>
-      ${product}
-      </p>
-
-      <p>
-      <strong>Total Price:</strong>
-      ${price}
-      </p>
-
-      <p>
-      <strong>Name:</strong>
-      ${name}
-      </p>
-
-      <p>
-      <strong>Email:</strong>
-      ${email}
-      </p>
-
-      <p>
-      <strong>Phone:</strong>
-      ${phone}
-      </p>
-
-      <p>
-      <strong>Address:</strong>
-      ${address}
-      </p>
-
-      <p>
-      <strong>Occasion:</strong>
-      ${occasion}
-      </p>
-
-      <div style="
-      margin-top:20px;
-      padding:15px;
-      background:white;
-      border-radius:10px;
-      ">
-
-      <strong>Gift Message ❤️</strong>
-
-      <p>
-      ${message || "No Message"}
-      </p>
-
-      </div>
-
-      </div>
-
-      `
-
-    });
-
-
-    // SUCCESS RESPONSE
-
-    res.status(200).json({
-
-      success: true,
-
-      message: "Order Sent Successfully"
-
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-    res.status(500).json({
-
-      success: false,
-
-      message: "Email failed to send"
-
-    });
-
-  }
+}
 
 });
 
 
-// ======================
-// HOME ROUTE
-// ======================
+// HOME
 
-app.get("/", (req, res) => {
+app.get("/",(req,res)=>{
 
-  res.sendFile(
-
-    path.join(
-      __dirname,
-      "public",
-      "index.html"
-    )
-
-  );
+res.sendFile(
+path.join(__dirname,"public","index.html")
+);
 
 });
 
 
-// ======================
-// START SERVER
-// ======================
+// SERVER
 
 const PORT =
 process.env.PORT || 10000;
 
-app.listen(PORT, () => {
+app.listen(PORT,()=>{
 
-  console.log(
-    `Server running on port ${PORT}`
-  );
+console.log(
+`Server running on port ${PORT}`
+);
 
 });
 ```
