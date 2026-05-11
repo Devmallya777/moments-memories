@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,38 @@
 <title>Male Basic Box</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo-area">
+
+        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+
+        <div class="logo-text">
+            Moments & Memories 💖
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Order</a>
+        <a href="cart.html">Cart 🛒</a>
+
+    </div>
+
+</nav>
+
+<!-- DETAILS -->
 
 <section class="details-page">
 
@@ -20,9 +51,18 @@
 
 <div class="details-content">
 
+<div class="tag">
+Basic Collection ✨
+</div>
+
 <h1>Male Basic Box 🖤</h1>
 
 <h2>₹499</h2>
+
+<p class="details-text">
+Beautiful customized gift box crafted specially for him.
+Perfect for birthdays, anniversaries and unforgettable moments.
+</p>
 
 <h3>Includes</h3>
 
@@ -43,17 +83,35 @@
 <li>Sunglasses</li>
 </ul>
 
+<div class="button-group">
+
+<button
+class="cart-btn"
+
+onclick="addToCart(
+'Male Basic Box',
+499,
+'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=1200&auto=format&fit=crop'
+)">
+
+Add To Cart 🛒
+
+</button>
+
 <a href="contact.html?product=Male Basic Box&price=499">
 
 <button class="order-btn">
-Order Now 🖤
+Order Now 💖
 </button>
 
 </a>
 
 </div>
 
+</div>
+
 </section>
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,38 @@
 <title>Male Premium Box</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo-area">
+
+        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+
+        <div class="logo-text">
+            Moments & Memories 💖
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Order</a>
+        <a href="cart.html">Cart 🛒</a>
+
+    </div>
+
+</nav>
+
+<!-- DETAILS -->
 
 <section class="details-page">
 
@@ -20,9 +51,17 @@
 
 <div class="details-content">
 
+<div class="tag premium-tag">
+Premium Collection 👑
+</div>
+
 <h1>Male Premium Box 🖤</h1>
 
 <h2>₹799</h2>
+
+<p class="details-text">
+Luxury customized premium gift hamper designed with elegant aesthetics and premium surprises.
+</p>
 
 <h3>Includes</h3>
 
@@ -45,17 +84,35 @@
 <li>Spotify Plaque</li>
 </ul>
 
+<div class="button-group">
+
+<button
+class="cart-btn"
+
+onclick="addToCart(
+'Male Premium Box',
+799,
+'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
+)">
+
+Add To Cart 🛒
+
+</button>
+
 <a href="contact.html?product=Male Premium Box&price=799">
 
-<button class="order-btn">
-Order Now 🖤
+<button class="order-btn premium-btn">
+Order Premium ✨
 </button>
 
 </a>
 
 </div>
 
+</div>
+
 </section>
 
 </body>
+
 </html>

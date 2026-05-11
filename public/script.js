@@ -293,3 +293,34 @@ priceInput.value =
 
 }
 );
+// ================= ADD TO CART =================
+
+function addToCart(
+productName,
+price,
+image
+){
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+cart.push({
+
+name:productName,
+
+price:price,
+
+image:image
+
+});
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+alert(productName + " Added To Cart 🛒");
+
+}
