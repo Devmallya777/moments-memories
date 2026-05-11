@@ -1,4 +1,4 @@
-
+```javascript
 require("dotenv").config();
 
 const express = require("express");
@@ -10,31 +10,31 @@ const path = require("path");
 const app = express();
 
 
-// =========================
-// Middleware
-// =========================
+// ======================
+// MIDDLEWARE
+// ======================
 
 app.use(cors());
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({
-extended: true
+  extended: true
 }));
 
 
-// =========================
-// Static Files
-// =========================
+// ======================
+// STATIC FILES
+// ======================
 
 app.use(express.static(
-path.join(__dirname, "public")
+  path.join(__dirname, "public")
 ));
 
 
-// =========================
-// Brevo Setup
-// =========================
+// ======================
+// BREVO SETUP
+// ======================
 
 const client = SibApiV3Sdk.ApiClient.instance;
 
@@ -48,204 +48,202 @@ const tranEmailApi =
 new SibApiV3Sdk.TransactionalEmailsApi();
 
 
-// =========================
+// ======================
 // ORDER ROUTE
-// =========================
+// ======================
 
 app.post("/api/order", async (req, res) => {
 
-try {
+  try {
 
-const {
-product,
-price,
-name,
-email,
-phone,
-address,
-occasion,
-message
-} = req.body;
-
-
-// VALIDATION
-
-if (
-!product ||
-!price ||
-!name ||
-!email ||
-!phone ||
-!address
-) {
-
-return res.status(400).json({
-
-success: false,
-
-message: "Please fill all required fields"
-
-});
-
-}
+    const {
+      product,
+      price,
+      name,
+      email,
+      phone,
+      address,
+      occasion,
+      message
+    } = req.body;
 
 
-// EMAIL CONTENT
+    // VALIDATION
 
-await tranEmailApi.sendTransacEmail({
+    if (
+      !product ||
+      !price ||
+      !name ||
+      !email ||
+      !phone ||
+      !address
+    ) {
 
-sender: {
+      return res.status(400).json({
 
-email: "mm.giftboxes04@gmail.com",
+        success: false,
 
-name: "Moments & Memories"
+        message: "Please fill all fields"
 
-},
+      });
 
-to: [
-
-{
-email: "mm.giftboxes04@gmail.com"
-}
-
-],
-
-subject:
-`💖 New Order From ${name}`,
-
-htmlContent: `
-
-<div style="
-font-family:Poppins,sans-serif;
-padding:25px;
-background:#fff7f5;
-color:#4b2e2e;
-border-radius:14px;
-">
-
-<h1 style="color:#c95b84;">
-New Order Received 💖
-</h1>
-
-<hr>
-
-<p>
-<strong>Product:</strong>
-${product}
-</p>
-
-<p>
-<strong>Total Price:</strong>
-${price}
-</p>
-
-<p>
-<strong>Name:</strong>
-${name}
-</p>
-
-<p>
-<strong>Email:</strong>
-${email}
-</p>
-
-<p>
-<strong>Phone:</strong>
-${phone}
-</p>
-
-<p>
-<strong>Address:</strong>
-${address}
-</p>
-
-<p>
-<strong>Occasion:</strong>
-${occasion}
-</p>
-
-<div style="
-margin-top:20px;
-padding:15px;
-background:white;
-border-radius:10px;
-">
-
-<strong>Gift Message ❤️</strong>
-
-<p>
-${message || "No Message"}
-</p>
-
-</div>
-
-</div>
-
-`
-
-});
+    }
 
 
-// SUCCESS RESPONSE
+    // SEND EMAIL
 
-res.status(200).json({
+    await tranEmailApi.sendTransacEmail({
 
-success: true,
+      sender: {
 
-message: "Order Sent Successfully"
+        email: "mm.giftboxes04@gmail.com",
 
-});
+        name: "Moments & Memories"
 
-} catch (error) {
+      },
 
-console.log(error);
+      to: [
 
-res.status(500).json({
+        {
+          email: "mm.giftboxes04@gmail.com"
+        }
 
-success: false,
+      ],
 
-message: "Email failed to send",
+      subject:
+      `💖 New Order From ${name}`,
 
-error: error.message
+      htmlContent: `
 
-});
+      <div style="
+      font-family:Poppins,sans-serif;
+      padding:25px;
+      background:#fff7f5;
+      border-radius:14px;
+      color:#4b2e2e;
+      ">
 
-}
+      <h1 style="color:#c95b84;">
+      New Order Received 💖
+      </h1>
+
+      <hr>
+
+      <p>
+      <strong>Product:</strong>
+      ${product}
+      </p>
+
+      <p>
+      <strong>Total Price:</strong>
+      ${price}
+      </p>
+
+      <p>
+      <strong>Name:</strong>
+      ${name}
+      </p>
+
+      <p>
+      <strong>Email:</strong>
+      ${email}
+      </p>
+
+      <p>
+      <strong>Phone:</strong>
+      ${phone}
+      </p>
+
+      <p>
+      <strong>Address:</strong>
+      ${address}
+      </p>
+
+      <p>
+      <strong>Occasion:</strong>
+      ${occasion}
+      </p>
+
+      <div style="
+      margin-top:20px;
+      padding:15px;
+      background:white;
+      border-radius:10px;
+      ">
+
+      <strong>Gift Message ❤️</strong>
+
+      <p>
+      ${message || "No Message"}
+      </p>
+
+      </div>
+
+      </div>
+
+      `
+
+    });
+
+
+    // SUCCESS RESPONSE
+
+    res.status(200).json({
+
+      success: true,
+
+      message: "Order Sent Successfully"
+
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+
+      success: false,
+
+      message: "Email failed to send"
+
+    });
+
+  }
 
 });
 
 
-// =========================
+// ======================
 // HOME ROUTE
-// =========================
+// ======================
 
 app.get("/", (req, res) => {
 
-res.sendFile(
+  res.sendFile(
 
-path.join(
-__dirname,
-"public",
-"index.html"
-)
+    path.join(
+      __dirname,
+      "public",
+      "index.html"
+    )
 
-);
+  );
 
 });
 
 
-// =========================
+// ======================
 // START SERVER
-// =========================
+// ======================
 
 const PORT =
 process.env.PORT || 10000;
 
 app.listen(PORT, () => {
 
-console.log(
-`Server running on port ${PORT}`
-);
+  console.log(
+    `Server running on port ${PORT}`
+  );
 
 });
 ```
