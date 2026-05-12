@@ -3860,3 +3860,44 @@ img{
     }
 
 }
+/* =========================================
+   MOBILE HEADING SIZE BOOST
+   PUT THIS AT VERY BOTTOM
+========================================= */
+
+@media screen and (max-width:480px){
+
+    /* GIFTS MADE WITH LOVE */
+
+    .hero-text h1{
+
+        font-size:2.7rem !important;
+
+        line-height:1.08 !important;
+
+        font-weight:800 !important;
+
+        margin-bottom:18px !important;
+
+        letter-spacing:-1px;
+
+    }
+
+    /* WHY CHOOSE US */
+
+    .section-heading h1,
+    .section-title{
+
+        font-size:2.6rem !important;
+
+        line-height:1.1 !important;
+
+        font-weight:800 !important;
+
+        margin-bottom:12px !important;
+
+        letter-spacing:-1px;
+
+    }
+
+}
