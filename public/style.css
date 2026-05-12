@@ -2652,3 +2652,41 @@ cursor:pointer;
     }
 
 }
+/* =========================================
+   MOBILE NAVBAR CENTER FIX
+========================================= */
+
+@media (max-width:768px){
+
+    .navbar{
+        padding:14px 12px !important;
+        align-items:center;
+    }
+
+    .logo-area{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 auto 14px;
+    }
+
+    .navbar nav,
+    .nav-links{
+        width:100%;
+        display:flex;
+        justify-content:center !important;
+        align-items:center;
+        gap:20px;
+        padding:0;
+        margin:0 auto;
+        overflow-x:auto;
+    }
+
+    .navbar nav a,
+    .nav-links a{
+        text-align:center;
+        flex-shrink:0;
+    }
+
+}
