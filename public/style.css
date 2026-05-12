@@ -3816,57 +3816,46 @@ img{
 
 }
 /* =========================================
-   FIX CENTER LOGO TEXT SIZE
+/* =========================================
+   HERO LOGO SIZE FIX
    PUT THIS AT VERY BOTTOM
 ========================================= */
 
+.hero-image img{
+
+    width:100% !important;
+
+    max-width:420px !important;
+
+    height:auto !important;
+
+    object-fit:contain;
+
+}
+
+/* TABLET */
+
 @media screen and (max-width:768px){
 
-    .logo-area{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:10px;
-        width:100%;
-    }
+    .hero-image img{
 
-    .logo-img{
-        width:52px !important;
-        height:52px !important;
-        object-fit:cover;
-        border-radius:50%;
-        flex-shrink:0;
-    }
+        max-width:320px !important;
 
-    .logo-text,
-    .logo-area h1{
-
-        font-size:1.9rem !important;
-
-        font-weight:800 !important;
-
-        color:#a3206f;
-
-        white-space:nowrap;
-
-        line-height:1.1;
     }
 
 }
 
-/* EXTRA SMALL MOBILE */
+/* MOBILE */
 
 @media screen and (max-width:480px){
 
-    .logo-img{
-        width:48px !important;
-        height:48px !important;
-    }
+    .hero-image img{
 
-    .logo-text,
-    .logo-area h1{
+        max-width:280px !important;
 
-        font-size:1.6rem !important;
+        width:85% !important;
+
+        margin:auto;
 
     }
 
