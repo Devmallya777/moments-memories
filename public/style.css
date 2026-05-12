@@ -2969,3 +2969,14 @@ cursor:pointer;
     }
 
 }
+/* GIFTS MADE WITH LOVE IN SINGLE LINE */
+
+@media (max-width:768px){
+
+    .hero-text h1{
+        font-size:2rem !important;
+        line-height:1.2;
+        white-space:nowrap;
+    }
+
+}
