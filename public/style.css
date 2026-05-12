@@ -2695,14 +2695,6 @@ cursor:pointer;
         font-weight:700;
     }
 
-    /* GIFTS MADE WITH LOVE 💕 */
-
-    .hero-text h1{
-        font-size:2rem !important;
-        line-height:1.15;
-        margin-bottom:14px;
-    }
-
     /* PARAGRAPH */
 
     .hero-text p{
@@ -2969,14 +2961,32 @@ cursor:pointer;
     }
 
 }
-/* GIFTS MADE WITH LOVE IN SINGLE LINE */
+/* =========================================
+   FINAL FIX FOR GIFTS MADE WITH LOVE
+========================================= */
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
 
     .hero-text h1{
-        font-size:2rem !important;
-        line-height:1.2;
-        white-space:nowrap;
+
+        font-size:1.55rem !important;
+
+        line-height:1.2 !important;
+
+        white-space:nowrap !important;
+
+        display:flex !important;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:8px;
+
+        width:100%;
+
+        text-align:center;
+
     }
 
 }
