@@ -2921,7 +2921,7 @@ cursor:pointer;
         flex-wrap:nowrap !important;
         overflow-x:auto;
         width:100%;
-        gap:12px;
+        gap:8px;
         justify-content:flex-start;
         padding-bottom:5px;
         scrollbar-width:none;
