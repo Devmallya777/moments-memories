@@ -2237,836 +2237,7 @@ cursor:pointer;
     }
 
 }
-/* =========================================
-   FINAL MOBILE NAVBAR FIX
-   KEEP THIS AT THE VERY BOTTOM
-========================================= */
 
-@media (max-width: 768px){
-
-    /* NAVBAR */
-
-    .navbar{
-
-        width:100%;
-        padding:12px 10px;
-
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-
-    }
-
-    /* LOGO AREA */
-
-    .logo-area{
-
-        width:100%;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        gap:10px;
-
-        margin-bottom:14px;
-
-    }
-
-    .logo-img{
-
-        width:55px;
-        height:55px;
-
-        object-fit:cover;
-        border-radius:50%;
-
-        flex-shrink:0;
-
-    }
-
-    /* MOMENTS & MEMORIES IN ONE LINE */
-
-    .logo-text{
-
-        font-size:26px;
-        font-weight:800;
-        color:#b02677;
-
-        white-space:nowrap;
-
-        line-height:1;
-
-    }
-
-    /* NAV LINKS IN SINGLE LINE */
-
-    .nav-links{
-
-        width:100%;
-
-        display:flex;
-        align-items:center;
-        justify-content:flex-start;
-
-        gap:18px;
-
-        flex-wrap:nowrap;
-
-        overflow-x:auto;
-
-        padding:5px 10px;
-
-        scrollbar-width:none;
-
-    }
-
-    .nav-links::-webkit-scrollbar{
-        display:none;
-    }
-
-    .nav-links a{
-
-        font-size:15px;
-        font-weight:600;
-
-        white-space:nowrap;
-
-        flex-shrink:0;
-
-    }
-
-    /* HERO SECTION */
-
-    .hero{
-
-        width:95%;
-        padding:35px 18px;
-
-        flex-direction:column;
-        text-align:center;
-
-        gap:35px;
-
-    }
-
-    .hero-image img{
-
-        max-width:280px;
-        width:100%;
-
-    }
-
-    .hero-text h1{
-
-        font-size:52px;
-        line-height:1.1;
-
-    }
-
-    .hero-text p{
-
-        font-size:15px;
-        line-height:1.7;
-
-    }
-
-    .hero-buttons{
-
-        justify-content:center;
-
-    }
-
-    .btn{
-
-        padding:14px 24px;
-        font-size:14px;
-
-    }
-
-}
-/* =========================================
-   ULTRA MOBILE OPTIMIZATION
-   KEEP THIS AT VERY BOTTOM
-========================================= */
-
-@media (max-width:768px){
-
-    /* GLOBAL */
-
-    body{
-        overflow-x:hidden;
-    }
-
-    /* NAVBAR */
-
-    .navbar{
-        padding:10px 8px;
-    }
-
-    .logo-text{
-        font-size:20px;
-    }
-
-    .nav-links{
-        gap:14px;
-        padding:4px 6px;
-    }
-
-    .nav-links a{
-        font-size:14px;
-    }
-
-    /* HERO SECTION */
-
-    .hero{
-        width:95%;
-        padding:28px 16px;
-        gap:22px;
-        border-radius:28px;
-        min-height:auto;
-        margin:30px auto;
-    }
-
-    .hero-image img{
-        max-width:220px;
-    }
-
-    /* THIS FIXES THE HUGE TEXT */
-
-    .hero-text h1{
-        font-size:2.3rem !important;
-        line-height:1.15;
-        margin-bottom:14px;
-    }
-
-    /* THIS FIXES THE LONG PARAGRAPH */
-
-    .hero-text p{
-        font-size:14px !important;
-        line-height:1.6;
-        margin-bottom:20px;
-        padding:0 4px;
-    }
-
-    .hero-badge{
-        font-size:13px;
-        padding:10px 18px;
-        margin-bottom:18px;
-    }
-
-    .hero-buttons{
-        gap:12px;
-    }
-
-    .btn{
-        padding:12px 22px;
-        font-size:14px;
-    }
-
-    /* SECTION HEADINGS */
-
-    .section-heading{
-        margin-bottom:35px;
-    }
-
-    .section-heading h1{
-        font-size:2rem !important;
-        line-height:1.2;
-    }
-
-    .section-heading p{
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    /* FEATURES */
-
-    .features-section{
-        margin:60px auto;
-    }
-
-    .features-grid{
-        gap:20px;
-    }
-
-    .feature-card{
-        padding:28px 20px;
-        border-radius:22px;
-    }
-
-    .feature-icon{
-        font-size:2.2rem;
-        margin-bottom:12px;
-    }
-
-    .feature-card h3{
-        font-size:1.2rem;
-    }
-
-    .feature-card p{
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    /* CTA SECTION */
-
-    .cta-section{
-        margin:60px auto;
-    }
-
-    .cta-box{
-        padding:45px 20px;
-        border-radius:28px;
-    }
-
-    /* FIX FOR "MAKE SOMEONE SMILE TODAY" */
-
-    .cta-box h1{
-        font-size:2.4rem !important;
-        line-height:1.2;
-        margin-bottom:18px;
-    }
-
-    /* FIX FOR "SURPRISE YOUR LOVED ONES..." */
-
-    .cta-box p{
-        font-size:15px !important;
-        line-height:1.7;
-        margin-bottom:24px;
-        padding:0 6px;
-    }
-
-    /* CARDS */
-
-    .card img{
-        height:200px;
-    }
-
-    .card-content{
-        padding:18px;
-    }
-
-    /* CATEGORY TITLE */
-
-    .section-title{
-        font-size:2.1rem !important;
-        line-height:1.2;
-        margin-bottom:12px;
-    }
-
-    .subtitle{
-        font-size:14px;
-        margin-bottom:30px;
-    }
-
-    /* PRODUCT BOXES */
-
-    .box-image{
-        height:240px;
-    }
-
-    .box-top{
-        padding:18px;
-    }
-
-    .box-top h2{
-        font-size:24px;
-    }
-
-    .box-top span{
-        font-size:18px;
-        padding:8px 16px;
-    }
-
-    .box-buttons{
-        padding:20px;
-        gap:12px;
-    }
-
-    /* FOOTER */
-
-    .main-footer{
-        padding:40px 15px;
-        margin-top:50px;
-    }
-
-    .main-footer h2{
-        font-size:1.4rem;
-    }
-
-    .footer-text{
-        font-size:13px;
-    }
-
-}
-/* =========================================
-   ONLY MOBILE TITLE SIZE FIX
-========================================= */
-
-/* =========================================
-   ONLY MOBILE TITLE SIZE FIX
-========================================= */
-
-@media (max-width:768px){
-
-    /* CHOOSE YOUR CATEGORY */
-
-    .section-title{
-        font-size:1.9rem !important;
-        line-height:1.2;
-        margin-bottom:10px;
-    }
-
-    /* GIFTS MADE WITH LOVE */
-
-    .hero-text h1{
-        font-size:2.2rem !important;
-        line-height:1.15;
-        margin-bottom:12px;
-    }
-
-    /* PERSONALIZED GIFT BOX */
-
-    .box-top h2{
-        font-size:28px !important;
-        line-height:1.2;
-    }
-
-    /* MAKE SOMEONE SMILE TODAY */
-
-    .cta-box h1{
-        font-size:2rem !important;
-        line-height:1.2;
-        margin-bottom:14px;
-    }
-
-    /* SURPRISE YOUR LOVED ONES TEXT */
-
-    .cta-box p{
-        font-size:14px !important;
-        line-height:1.6;
-        margin-bottom:20px;
-        padding:0 4px;
-    }
-
-}
-/* =========================================
-   FINAL MOBILE TEXT + NAV FIX
-========================================= */
-
-@media (max-width:768px){
-
-    /* NAVBAR FIX */
-
-    .navbar{
-        padding:12px 8px;
-    }
-
-    .nav-links{
-        width:100%;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        gap:12px;
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        padding:0 6px;
-    }
-
-    .nav-links a{
-        font-size:13px;
-        white-space:nowrap;
-        flex-shrink:0;
-    }
-
-    /* FIX FOR HOME CUTTING */
-
-    .nav-links a:first-child{
-        margin-left:18px;
-    }
-
-    /* PERSONALIZED GIFT BOX */
-
-    .hero-badge{
-        font-size:15px;
-        padding:12px 22px;
-        font-weight:700;
-    }
-
-    /* PARAGRAPH */
-
-    .hero-text p{
-        font-size:14px !important;
-        line-height:1.6;
-        padding:0 4px;
-    }
-
-    /* CHOOSE YOUR CATEGORY */
-
-    .section-title{
-        font-size:1.9rem !important;
-        line-height:1.2;
-    }
-
-    /* MAKE SOMEONE SMILE TODAY 💛 */
-
-    .cta-box h1{
-        font-size:1.9rem !important;
-        line-height:1.2;
-    }
-
-    /* SURPRISE YOUR LOVED ONES */
-
-    .cta-box p{
-        font-size:14px !important;
-        line-height:1.6;
-    }
-
-}
-/* =========================================
-   GLOBAL MOBILE NAVBAR FIX FOR ALL PAGES
-   KEEP THIS AT VERY BOTTOM OF CSS
-========================================= */
-
-@media (max-width:768px){
-
-    /* NAVBAR */
-
-    .navbar{
-        width:100%;
-        padding:12px 14px !important;
-
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-
-        overflow:hidden;
-    }
-
-    /* LOGO AREA */
-
-    .logo-area{
-        width:100%;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        gap:10px;
-
-        margin-bottom:14px;
-        padding:0 5px;
-    }
-
-    /* LOGO IMAGE */
-
-    .logo-img,
-    .logo{
-        width:52px !important;
-        height:52px !important;
-
-        border-radius:50%;
-        object-fit:cover;
-
-        flex-shrink:0;
-    }
-
-    /* LOGO TEXT */
-
-    .logo-text,
-    .logo-area h1{
-        font-size:1.9rem !important;
-        line-height:1.1;
-        text-align:center;
-        white-space:nowrap;
-
-        color:#b02677;
-        font-weight:800;
-    }
-
-    /* NAV LINKS */
-
-    .nav-links,
-    .navbar nav,
-    nav{
-
-        width:100%;
-
-        display:flex;
-        align-items:center;
-        justify-content:center !important;
-
-        gap:14px !important;
-
-        flex-wrap:nowrap;
-
-        overflow-x:auto;
-        overflow-y:hidden;
-
-        padding:6px 4px;
-
-        scrollbar-width:none;
-        -webkit-overflow-scrolling:touch;
-    }
-
-    .nav-links::-webkit-scrollbar,
-    .navbar nav::-webkit-scrollbar,
-    nav::-webkit-scrollbar{
-        display:none;
-    }
-
-    /* NAV LINK TEXT */
-
-    .nav-links a,
-    .navbar nav a,
-    nav a{
-
-        font-size:15px !important;
-        font-weight:600;
-
-        white-space:nowrap;
-
-        flex-shrink:0;
-
-        padding:2px 1px;
-    }
-
-    /* PREVENT LEFT SHIFT ISSUE */
-
-    .nav-links::after,
-    .navbar nav::after,
-    nav::after{
-        content:"";
-        padding-right:4px;
-    }
-
-}
-/* =========================================
-   FINAL MOBILE NAVBAR OVERFLOW FIX
-   KEEP THIS AT VERY BOTTOM
-========================================= */
-
-@media (max-width:768px){
-
-    /* STOP PAGE OVERFLOW */
-
-    html,
-    body{
-        width:100%;
-        overflow-x:hidden;
-    }
-
-    /* NAVBAR */
-
-    .navbar{
-        width:100%;
-        padding:12px 10px !important;
-
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-
-        overflow:hidden;
-    }
-
-    /* LOGO AREA */
-
-    .logo-area{
-        width:100%;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        gap:8px;
-
-        margin-bottom:12px;
-    }
-
-    /* LOGO */
-
-    .logo-img,
-    .logo{
-        width:46px !important;
-        height:46px !important;
-
-        flex-shrink:0;
-    }
-
-    /* WEBSITE NAME */
-
-    .logo-text,
-    .logo-area h1{
-
-        font-size:1.45rem !important;
-
-        line-height:1.1;
-
-        white-space:nowrap;
-
-        overflow:hidden;
-        text-overflow:ellipsis;
-
-        max-width:calc(100vw - 80px);
-
-        text-align:center;
-    }
-
-    /* NAVIGATION */
-
-    .nav-links,
-    .navbar nav,
-    nav{
-
-        width:100%;
-
-        display:flex;
-
-        align-items:center;
-        justify-content:center;
-
-        gap:12px !important;
-
-        flex-wrap:nowrap;
-
-        overflow-x:auto;
-        overflow-y:hidden;
-
-        padding:4px 0;
-
-        scrollbar-width:none;
-    }
-
-    .nav-links::-webkit-scrollbar,
-    .navbar nav::-webkit-scrollbar,
-    nav::-webkit-scrollbar{
-        display:none;
-    }
-
-    /* NAV LINKS */
-
-    .nav-links a,
-    .navbar nav a,
-    nav a{
-
-        font-size:14px !important;
-
-        white-space:nowrap;
-
-        flex-shrink:0;
-    }
-
-}
-
-/* =========================================
-   FOR HIM + FOR HER FINAL MOBILE FIX
-/* =========================================
-   FINAL MOBILE HERO FIX
-   KEEP THIS AT VERY BOTTOM
-========================================= */
-
-@media screen and (max-width:768px){
-
-    .hero{
-        width:94%;
-        padding:30px 18px;
-        gap:25px;
-        border-radius:25px;
-        margin:25px auto;
-    }
-
-    .hero-text{
-        width:100%;
-        text-align:center;
-    }
-
-    .hero-text h1{
-
-        font-size:2rem !important;
-
-        line-height:1.2 !important;
-
-        white-space:normal !important;
-
-        display:block !important;
-
-        width:100%;
-
-        text-align:center;
-
-        margin-bottom:14px;
-
-        word-break:break-word;
-    }
-
-    .hero-text p{
-
-        font-size:14px !important;
-
-        line-height:1.6;
-
-        padding:0 4px;
-
-        margin-bottom:20px;
-    }
-
-    .hero-image img{
-
-        width:100%;
-        max-width:230px;
-
-        height:auto;
-    }
-
-    .hero-buttons{
-
-        justify-content:center;
-
-        gap:12px;
-    }
-
-}
-/* =========================================
-   DIFFERENT HERO BACKGROUND
-========================================= */
-
-/* FOR HER */
-
-.female-hero{
-    background:linear-gradient(
-    135deg,
-    #8a215c,
-    #2e112d
-    ) !important;
-}
-
-/* FOR HIM */
-
-.male-hero{
-    background:linear-gradient(
-    135deg,
-    #8a215c,
-    #2e112d
-    ) !important;
-}
-
-/* MOBILE */
-
-    .male-hero{
-        background:linear-gradient(
-        135deg,
-        #8a215c,
-        #2e112d
-        ) !important;
-    }
-
-/* =========================================
-   DIFFERENT HERO BACKGROUND
-========================================= */
 
 /* FOR HER */
 
@@ -3233,184 +2404,7 @@ cursor:pointer;
     transform:translateY(-4px);
 
 }
-/* =========================================
-   FINAL CLEAN MOBILE OPTIMIZATION
-========================================= */
 
-@media screen and (max-width:768px){
-
-    html,
-    body{
-        overflow-x:hidden;
-    }
-
-    /* NAVBAR */
-
-    .navbar{
-        padding:12px 10px !important;
-        flex-direction:column;
-        gap:12px;
-    }
-
-    .logo-area{
-        justify-content:center;
-        gap:8px;
-        margin-bottom:8px;
-    }
-
-    .logo-img{
-        width:45px;
-        height:45px;
-    }
-
-    .logo-text{
-        font-size:1.3rem !important;
-        white-space:nowrap;
-    }
-
-    .nav-links{
-        width:100%;
-        overflow-x:auto;
-        gap:14px;
-        justify-content:flex-start;
-        padding:0 5px;
-        scrollbar-width:none;
-    }
-
-    .nav-links::-webkit-scrollbar{
-        display:none;
-    }
-
-    .nav-links a{
-        font-size:13px !important;
-        white-space:nowrap;
-        flex-shrink:0;
-    }
-
-    /* HERO */
-
-    .hero{
-        width:94%;
-        padding:30px 18px;
-        margin:25px auto;
-        border-radius:25px;
-        flex-direction:column;
-        text-align:center;
-        gap:25px;
-        min-height:auto;
-    }
-
-    .hero-image img{
-        max-width:210px;
-    }
-
-    .hero-badge{
-        font-size:12px;
-        padding:8px 16px;
-    }
-
-    .hero-text h1{
-        font-size:2rem !important;
-        line-height:1.2;
-        margin-bottom:12px;
-    }
-
-    .hero-text p{
-        font-size:14px !important;
-        line-height:1.6;
-        margin-bottom:20px;
-    }
-
-    .hero-buttons{
-        justify-content:center;
-        gap:10px;
-    }
-
-    .btn{
-        padding:12px 20px;
-        font-size:14px;
-    }
-
-    /* SECTION HEADINGS */
-
-    .section-heading h1,
-    .section-title{
-        font-size:1.8rem !important;
-        line-height:1.2;
-    }
-
-    .section-heading p,
-    .subtitle{
-        font-size:14px;
-    }
-
-    /* FEATURES */
-
-    .features-grid{
-        gap:18px;
-    }
-
-    .feature-card{
-        padding:24px 18px;
-    }
-
-    .feature-card h3{
-        font-size:1.1rem;
-    }
-
-    .feature-card p{
-        font-size:13px;
-    }
-
-    /* CTA */
-
-    .cta-box{
-        padding:40px 20px;
-        border-radius:25px;
-    }
-
-    .cta-box h1{
-        font-size:1.8rem !important;
-        line-height:1.2;
-    }
-
-    .cta-box p{
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    /* PRODUCT CARDS */
-
-    .box-image{
-        height:220px;
-    }
-
-    .box-top h2{
-        font-size:22px !important;
-    }
-
-    .box-top span{
-        font-size:18px;
-        padding:8px 14px;
-    }
-
-    /* FOOTER */
-
-    .main-footer{
-        padding:35px 15px;
-    }
-
-    .main-footer h2{
-        font-size:1.4rem;
-    }
-
-    .footer-link{
-        width:100%;
-        max-width:320px;
-        font-size:14px;
-    }
-
-}
 /* =========================================
    FINAL CLEAN MOBILE OPTIMIZATION
    KEEP THIS AT VERY BOTTOM
@@ -3609,23 +2603,301 @@ cursor:pointer;
     }
 
 }
-/* FIX GIFTS MADE WITH LOVE IN MOBILE */
+/* =========================================
+   FINAL PERFECT MOBILE FIX
+   KEEP THIS AT VERY BOTTOM
+========================================= */
 
 @media screen and (max-width:768px){
 
+    html,
+    body{
+        width:100%;
+        overflow-x:hidden;
+    }
+
+    *{
+        max-width:100%;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar{
+        width:100%;
+        padding:12px 10px !important;
+        flex-direction:column;
+        gap:10px;
+        overflow:hidden;
+    }
+
+    .logo-area{
+        width:100%;
+        justify-content:center;
+        gap:8px;
+        margin-bottom:6px;
+    }
+
+    .logo-img{
+        width:42px;
+        height:42px;
+        flex-shrink:0;
+    }
+
+    .logo-text{
+        font-size:1.25rem !important;
+        white-space:nowrap;
+    }
+
+    .nav-links{
+        width:100%;
+        overflow-x:auto;
+        justify-content:flex-start;
+        gap:14px;
+        padding:0 4px;
+        scrollbar-width:none;
+    }
+
+    .nav-links::-webkit-scrollbar{
+        display:none;
+    }
+
+    .nav-links a{
+        font-size:13px !important;
+        white-space:nowrap;
+        flex-shrink:0;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================= */
+
+    .hero{
+        width:94%;
+        margin:22px auto;
+        padding:28px 16px;
+        border-radius:24px;
+
+        flex-direction:column;
+        text-align:center;
+
+        gap:22px;
+
+        min-height:auto;
+    }
+
+    .hero-image{
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
+
+    .hero-image img{
+        width:100%;
+        max-width:220px;
+        height:auto;
+    }
+
+    /* PERSONALIZED GIFT BOX */
+
+    .hero-badge{
+
+        font-size:16px !important;
+
+        padding:12px 24px;
+
+        border-radius:50px;
+
+        font-weight:700;
+
+        margin-bottom:18px;
+
+        display:inline-block;
+    }
+
+    /* GIFTS MADE WITH LOVE */
+
     .hero-text h1{
+
         font-size:2rem !important;
+
         line-height:1.15 !important;
+
+        margin-bottom:14px;
 
         white-space:nowrap !important;
 
-        display:flex;
+        text-align:center;
+
+        display:block;
+
+        width:100%;
+    }
+
+    .hero-text p{
+
+        font-size:14px !important;
+
+        line-height:1.6;
+
+        margin-bottom:20px;
+
+        padding:0 2px;
+    }
+
+    .hero-buttons{
         justify-content:center;
-        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+    }
 
-        gap:6px;
+    .btn{
+        padding:12px 18px;
+        font-size:13px;
+    }
 
-        flex-wrap:nowrap !important;
+    /* =========================
+       SECTION TITLES
+    ========================= */
+
+    .section-title,
+    .section-heading h1{
+        font-size:1.8rem !important;
+        line-height:1.2;
+    }
+
+    .subtitle,
+    .section-heading p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .features-grid{
+        gap:18px;
+    }
+
+    .feature-card{
+        padding:22px 16px;
+        border-radius:22px;
+    }
+
+    .feature-card h3{
+        font-size:1.1rem;
+    }
+
+    .feature-card p{
+        font-size:13px;
+        line-height:1.6;
+    }
+
+    /* =========================
+       PRODUCT BOXES
+    ========================= */
+
+    .gender-products-grid,
+    .products-grid,
+    .box-wrapper{
+        grid-template-columns:1fr !important;
+        gap:20px;
+    }
+
+    .box-image{
+        height:220px;
+    }
+
+    .box-top{
+        padding:16px;
+    }
+
+    .box-top h2{
+
+        font-size:26px !important;
+
+        line-height:1.2;
+    }
+
+    .box-top span{
+        font-size:18px;
+        padding:8px 14px;
+    }
+
+    .box-buttons{
+        padding:18px;
+        gap:10px;
+    }
+
+    /* =========================
+       GIFT PAGE
+    ========================= */
+
+    .gift-header{
+        padding-top:120px;
+        margin-bottom:35px;
+    }
+
+    .gift-header h1{
+        font-size:2.2rem;
+    }
+
+    .gift-header p{
+        font-size:14px;
+    }
+
+    .gift-content{
+        flex-direction:column;
+        padding:20px;
+    }
+
+    .gift-right img{
+        height:240px;
+    }
+
+    .small-boxes{
+        grid-template-columns:1fr;
+        padding:0 20px;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta-box{
+        padding:40px 18px;
+        border-radius:24px;
+    }
+
+    .cta-box h1{
+        font-size:1.8rem !important;
+        line-height:1.2;
+    }
+
+    .cta-box p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .main-footer{
+        padding:35px 15px;
+        margin-top:50px;
+    }
+
+    .main-footer h2{
+        font-size:1.4rem;
+    }
+
+    .footer-link{
+        width:100%;
+        max-width:320px;
+        font-size:14px;
     }
 
 }
