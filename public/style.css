@@ -3544,3 +3544,73 @@ img{
     }
 
 }
+/* =========================
+   LOADER SCREEN FIX
+========================= */
+
+.loader-wrapper{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#fbe8f2;
+    z-index:99999;
+}
+
+.loader-content{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    width:100%;
+    padding:20px;
+}
+
+.loader-logo{
+    width:140px;
+    height:140px;
+    object-fit:contain;
+
+    margin:0 auto 20px auto;
+
+    display:block;
+}
+
+.loader-content h1{
+    font-size:60px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.loader-content p{
+    font-size:20px;
+    margin-bottom:30px;
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+    .loader-logo{
+        width:110px;
+        height:110px;
+    }
+
+    .loader-content h1{
+        font-size:34px;
+    }
+
+    .loader-content p{
+        font-size:16px;
+    }
+
+}
