@@ -2653,40 +2653,83 @@ cursor:pointer;
 
 }
 /* =========================================
-   MOBILE NAVBAR CENTER FIX
+   FINAL MOBILE TEXT + NAV FIX
 ========================================= */
 
 @media (max-width:768px){
 
+    /* NAVBAR FIX */
+
     .navbar{
-        padding:14px 12px !important;
-        align-items:center;
+        padding:12px 8px;
     }
 
-    .logo-area{
+    .nav-links{
         width:100%;
         display:flex;
         justify-content:center;
         align-items:center;
-        margin:0 auto 14px;
-    }
-
-    .navbar nav,
-    .nav-links{
-        width:100%;
-        display:flex;
-        justify-content:center !important;
-        align-items:center;
-        gap:20px;
-        padding:0;
-        margin:0 auto;
+        gap:12px;
+        flex-wrap:nowrap;
         overflow-x:auto;
+        padding:0 6px;
     }
 
-    .navbar nav a,
     .nav-links a{
-        text-align:center;
+        font-size:13px;
+        white-space:nowrap;
         flex-shrink:0;
+    }
+
+    /* FIX FOR HOME CUTTING */
+
+    .nav-links a:first-child{
+        margin-left:18px;
+    }
+
+    /* PERSONALIZED GIFT BOX */
+
+    .hero-badge{
+        font-size:15px;
+        padding:12px 22px;
+        font-weight:700;
+    }
+
+    /* GIFTS MADE WITH LOVE 💕 */
+
+    .hero-text h1{
+        font-size:2rem !important;
+        line-height:1.15;
+        margin-bottom:14px;
+    }
+
+    /* PARAGRAPH */
+
+    .hero-text p{
+        font-size:14px !important;
+        line-height:1.6;
+        padding:0 4px;
+    }
+
+    /* CHOOSE YOUR CATEGORY */
+
+    .section-title{
+        font-size:1.9rem !important;
+        line-height:1.2;
+    }
+
+    /* MAKE SOMEONE SMILE TODAY 💛 */
+
+    .cta-box h1{
+        font-size:1.9rem !important;
+        line-height:1.2;
+    }
+
+    /* SURPRISE YOUR LOVED ONES */
+
+    .cta-box p{
+        font-size:14px !important;
+        line-height:1.6;
     }
 
 }
