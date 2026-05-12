@@ -3894,3 +3894,88 @@ img{
 .hero::after{
     pointer-events:none;
 }
+html{
+    scroll-behavior: smooth;
+}
+/* PRODUCT CARD */
+.product-card{
+    width: 100%;
+    max-width: 340px;
+    margin: auto;
+    border-radius: 25px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* TOP SECTION */
+.product-top{
+    padding: 18px 20px;
+}
+
+/* PRODUCT TITLE */
+.product-top h2{
+    font-size: 34px;
+    line-height: 1.1;
+}
+
+/* PRICE TAG */
+.price{
+    font-size: 32px;
+    padding: 10px 22px;
+    border-radius: 20px;
+}
+
+/* PRODUCT IMAGE */
+.product-card img{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+/* PRODUCT DETAILS */
+.product-info{
+    padding: 22px 18px;
+}
+
+/* PRODUCT TEXT */
+.product-info p{
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* BUTTON */
+.product-card .btn{
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 40px;
+}
+@media(max-width:768px){
+
+    .product-card{
+        max-width: 92%;
+    }
+
+    .product-top h2{
+        font-size: 28px;
+    }
+
+    .price{
+        font-size: 26px;
+        padding: 8px 18px;
+    }
+
+    .product-card img{
+        height: 220px;
+    }
+
+    .product-info p{
+        font-size: 16px;
+    }
+
+    .product-card .btn{
+        font-size: 18px;
+        padding: 14px;
+    }
+}
