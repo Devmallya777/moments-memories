@@ -2733,3 +2733,122 @@ cursor:pointer;
     }
 
 }
+/* =========================================
+   GLOBAL MOBILE NAVBAR FIX FOR ALL PAGES
+   KEEP THIS AT VERY BOTTOM OF CSS
+========================================= */
+
+@media (max-width:768px){
+
+    /* NAVBAR */
+
+    .navbar{
+        width:100%;
+        padding:12px 14px !important;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+
+        overflow:hidden;
+    }
+
+    /* LOGO AREA */
+
+    .logo-area{
+        width:100%;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        gap:10px;
+
+        margin-bottom:14px;
+        padding:0 5px;
+    }
+
+    /* LOGO IMAGE */
+
+    .logo-img,
+    .logo{
+        width:52px !important;
+        height:52px !important;
+
+        border-radius:50%;
+        object-fit:cover;
+
+        flex-shrink:0;
+    }
+
+    /* LOGO TEXT */
+
+    .logo-text,
+    .logo-area h1{
+        font-size:1.9rem !important;
+        line-height:1.1;
+        text-align:center;
+        white-space:nowrap;
+
+        color:#b02677;
+        font-weight:800;
+    }
+
+    /* NAV LINKS */
+
+    .nav-links,
+    .navbar nav,
+    nav{
+
+        width:100%;
+
+        display:flex;
+        align-items:center;
+        justify-content:center !important;
+
+        gap:14px !important;
+
+        flex-wrap:nowrap;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        padding:6px 4px;
+
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .nav-links::-webkit-scrollbar,
+    .navbar nav::-webkit-scrollbar,
+    nav::-webkit-scrollbar{
+        display:none;
+    }
+
+    /* NAV LINK TEXT */
+
+    .nav-links a,
+    .navbar nav a,
+    nav a{
+
+        font-size:15px !important;
+        font-weight:600;
+
+        white-space:nowrap;
+
+        flex-shrink:0;
+
+        padding:2px 1px;
+    }
+
+    /* PREVENT LEFT SHIFT ISSUE */
+
+    .nav-links::after,
+    .navbar nav::after,
+    nav::after{
+        content:"";
+        padding-right:4px;
+    }
+
+}
