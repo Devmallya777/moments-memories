@@ -3286,3 +3286,49 @@ cursor:pointer;
     }
 
 }
+/* =========================
+   MOBILE NAVBAR FIX
+========================= */
+
+@media (max-width: 768px){
+
+    .navbar{
+        padding: 10px 8px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-area{
+        gap: 8px;
+    }
+
+    .logo-img,
+    .logo{
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-text,
+    .logo-area h1{
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .nav-links,
+    nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .nav-links a,
+    nav a{
+        font-size: 13px;
+        padding: 4px 2px;
+        white-space: nowrap;
+    }
+
+}
