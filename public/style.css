@@ -2601,3 +2601,38 @@ cursor:pointer;
     }
 
 }
+/* =========================================
+   ONLY MOBILE TITLE SIZE FIX
+========================================= */
+
+@media (max-width:768px){
+
+    /* CHOOSE YOUR CATEGORY */
+
+    .section-title{
+        font-size:2.4rem !important;
+        line-height:1.2;
+    }
+
+    /* GIFTS MADE WITH LOVE */
+
+    .hero-text h1{
+        font-size:2.7rem !important;
+        line-height:1.15;
+    }
+
+    /* MAKE SOMEONE SMILE TODAY */
+
+    .cta-box h1{
+        font-size:2.5rem !important;
+        line-height:1.2;
+    }
+
+    /* SURPRISE YOUR LOVED ONES TEXT */
+
+    .cta-box p{
+        font-size:15px !important;
+        line-height:1.6;
+    }
+
+}
