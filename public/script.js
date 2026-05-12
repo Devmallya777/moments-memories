@@ -1,26 +1,31 @@
-
 console.log("Moments & Memories Loaded 💖");
 
-/* ====================================
-   LOADING SCREEN
-==================================== */
+// =========================================
+// LOADER
+// =========================================
 
-window.addEventListener("load", () => {
+window.addEventListener("load",()=>{
 
-const loader =
-document.getElementById("loader");
+    const loader =
+    document.getElementById("loader");
 
-setTimeout(() => {
+    setTimeout(()=>{
 
-loader.classList.add("loader-hide");
+        loader.style.opacity = "0";
 
-},2200);
+        setTimeout(()=>{
+
+            loader.style.display = "none";
+
+        },1000);
+
+    },1500);
 
 });
 
-/* ====================================
-   NOTIFICATION
-==================================== */
+// ====================================
+// NOTIFICATION
+// ====================================
 
 function showNotification(message){
 
@@ -48,9 +53,9 @@ notification.remove();
 
 }
 
-/* ====================================
-   ADD TO CART
-==================================== */
+// ====================================
+// ADD TO CART
+// ====================================
 
 function addToCart(name, price, image){
 
@@ -76,5 +81,224 @@ quantity:1
 localStorage.setItem("cart", JSON.stringify(cart));
 
 showNotification("💖 Product Added To Cart");
+
+}
+
+// ====================================
+// DISPLAY CART
+// ====================================
+
+const cartItems = document.getElementById("cartItems");
+
+if(cartItems){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+
+if(cart.length === 0){
+
+cartItems.innerHTML = `
+<div class="empty-cart">
+Your Cart Is Empty 💔
+</div>
+`;
+
+}else{
+
+cart.forEach((item,index)=>{
+
+const itemTotal =
+item.price * item.quantity;
+
+total += itemTotal;
+
+cartItems.innerHTML += `
+
+<div class="cart-item">
+
+<img src="${item.image}" alt="">
+
+<div class="cart-info">
+
+<h3>${item.name}</h3>
+
+<p>Price: ₹${item.price}</p>
+
+<p>Quantity: ${item.quantity}</p>
+
+<p>Total: ₹${itemTotal}</p>
+
+<button onclick="removeCart(${index})">
+Remove
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+const totalBox =
+document.querySelector(".cart-total");
+
+if(totalBox){
+
+totalBox.innerHTML =
+`Total: ₹${total}`;
+
+}
+
+}
+
+}
+
+// ====================================
+// REMOVE CART
+// ====================================
+
+function removeCart(index){
+
+let cart = JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+cart.splice(index,1);
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+location.reload();
+
+}
+
+// ====================================
+// AUTO FILL ORDER PAGE
+// ====================================
+
+const productField =
+document.getElementById("productField");
+
+const priceField =
+document.getElementById("priceField");
+
+if(productField && priceField){
+
+let cart = JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+if(cart.length > 0){
+
+let products = "";
+
+let total = 0;
+
+cart.forEach(item=>{
+
+products +=
+`${item.name} × ${item.quantity}\n`;
+
+total += item.price * item.quantity;
+
+});
+
+productField.value = products;
+
+priceField.value = `₹${total}`;
+
+}
+
+}
+
+// ====================================
+// ORDER FORM
+// ====================================
+
+const orderForm =
+document.getElementById("orderForm");
+
+if(orderForm){
+
+orderForm.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+const formData = {
+
+product:
+document.getElementById("productField").value,
+
+price:
+document.getElementById("priceField").value,
+
+name:
+document.getElementById("name").value,
+
+phone:
+document.getElementById("phone").value,
+
+email:
+document.getElementById("email").value,
+
+address:
+document.getElementById("address").value,
+
+message:
+document.getElementById("message").value
+
+};
+
+try{
+
+const response = await fetch(
+"/api/order",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(formData)
+
+}
+);
+
+const data = await response.json();
+
+if(data.success){
+
+showNotification(
+"💖 Order Confirmed Successfully"
+);
+
+localStorage.removeItem("cart");
+
+setTimeout(() => {
+window.location.href = "index.html";
+},2000);
+
+}else{
+
+showNotification("❌ Order Failed");
+
+}
+
+}catch(error){
+
+console.log(error);
+
+showNotification("❌ Server Error");
+
+}
+
+});
 
 }
