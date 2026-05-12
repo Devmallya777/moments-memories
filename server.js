@@ -164,6 +164,120 @@ app.post("/api/order", async (req, res) => {
     }
 
 });
+// ======================
+// CUSTOMER CONFIRMATION EMAIL
+// ======================
+
+await tranEmailApi.sendTransacEmail({
+
+    sender: {
+
+        email: "mm.giftboxes04@gmail.com",
+        name: "Moments & Memories 💖"
+
+    },
+
+    to: [
+
+        {
+            email: email,
+            name: name
+        }
+
+    ],
+
+    subject: "💖 Your support means the world to us! Your order is confirmed and helps our small team keep doing what we love.",
+
+    htmlContent: `
+
+    <div style="
+        font-family:Poppins;
+        background:#fff4f8;
+        padding:40px;
+        border-radius:20px;
+        color:#5a1248;
+    ">
+
+        <h1 style="
+            color:#c21870;
+            text-align:center;
+        ">
+            Thank You For Your Order 💖
+        </h1>
+
+        <p style="
+            font-size:18px;
+            line-height:1.8;
+        ">
+            Hi <strong>${name}</strong>,
+            <br><br>
+
+            Your order has been received successfully ✨
+
+            We are now preparing your customized gift box with love 💕
+
+        </p>
+
+        <div style="
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            margin-top:25px;
+        ">
+
+            <h2 style="color:#b02677;">
+                Order Summary 🛒
+            </h2>
+
+            <p><strong>Products:</strong><br>${product}</p>
+
+            <p><strong>Total Price:</strong> ${price}</p>
+
+            <p><strong>Delivery Address:</strong><br>${address}</p>
+
+        </div>
+
+        <p style="
+            margin-top:30px;
+            font-size:16px;
+            line-height:1.7;
+        ">
+
+            We will contact you soon regarding delivery 💌
+
+            <br><br>
+
+            Thank you for choosing
+            <strong>Moments & Memories</strong> ✨
+
+        </p>
+
+        <div style="
+            margin-top:40px;
+            text-align:center;
+        ">
+
+            <a href="https://instagram.com/_mm.giftboxes__"
+            style="
+                display:inline-block;
+                padding:14px 30px;
+                background:#ff4fa3;
+                color:white;
+                text-decoration:none;
+                border-radius:50px;
+                font-weight:bold;
+            ">
+                Visit Instagram 💖
+            </a>
+
+        </div>
+
+    </div>
+
+    `
+
+});
+
 
 // ======================
 // GET ALL ORDERS
