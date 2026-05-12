@@ -3609,3 +3609,23 @@ cursor:pointer;
     }
 
 }
+/* FIX GIFTS MADE WITH LOVE IN MOBILE */
+
+@media screen and (max-width:768px){
+
+    .hero-text h1{
+        font-size:2rem !important;
+        line-height:1.15 !important;
+
+        white-space:nowrap !important;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        gap:6px;
+
+        flex-wrap:nowrap !important;
+    }
+
+}
