@@ -3115,3 +3115,73 @@ cursor:pointer;
     #2e112d
     ) !important;
 }
+/* =========================================
+   FOR HER / FOR HIM MOBILE TEXT SIZE FIX
+   KEEP THIS AT VERY BOTTOM
+========================================= */
+
+@media screen and (max-width:768px){
+
+    /* HERO SECTION HEIGHT SMALLER */
+
+    .page-hero{
+        padding:55px 18px !important;
+    }
+
+    /* FOR HER / FOR HIM */
+
+    .page-hero h1,
+    .hero-text h1{
+
+        font-size:3rem !important;
+
+        line-height:1.1 !important;
+
+        margin-bottom:16px !important;
+
+        font-weight:700 !important;
+    }
+
+    /* LOWER PARAGRAPH TEXT */
+
+    .page-hero p,
+    .hero-text p{
+
+        font-size:14px !important;
+
+        line-height:1.7 !important;
+
+        max-width:95% !important;
+
+        margin:auto !important;
+
+        padding:0 6px !important;
+    }
+
+}
+
+/* EXTRA SMALL DEVICES */
+
+@media screen and (max-width:480px){
+
+    .page-hero{
+        padding:45px 15px !important;
+    }
+
+    .page-hero h1,
+    .hero-text h1{
+
+        font-size:2.4rem !important;
+
+        line-height:1.1 !important;
+    }
+
+    .page-hero p,
+    .hero-text p{
+
+        font-size:13px !important;
+
+        line-height:1.6 !important;
+    }
+
+}
