@@ -3815,3 +3815,59 @@ img{
     }
 
 }
+/* =========================================
+   FIX CENTER LOGO TEXT SIZE
+   PUT THIS AT VERY BOTTOM
+========================================= */
+
+@media screen and (max-width:768px){
+
+    .logo-area{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:10px;
+        width:100%;
+    }
+
+    .logo-img{
+        width:52px !important;
+        height:52px !important;
+        object-fit:cover;
+        border-radius:50%;
+        flex-shrink:0;
+    }
+
+    .logo-text,
+    .logo-area h1{
+
+        font-size:1.9rem !important;
+
+        font-weight:800 !important;
+
+        color:#a3206f;
+
+        white-space:nowrap;
+
+        line-height:1.1;
+    }
+
+}
+
+/* EXTRA SMALL MOBILE */
+
+@media screen and (max-width:480px){
+
+    .logo-img{
+        width:48px !important;
+        height:48px !important;
+    }
+
+    .logo-text,
+    .logo-area h1{
+
+        font-size:1.6rem !important;
+
+    }
+
+}
