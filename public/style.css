@@ -2990,3 +2990,40 @@ cursor:pointer;
     }
 
 }
+/* =========================================
+   FOR HIM + FOR HER MOBILE FIX
+========================================= */
+
+@media (max-width:768px){
+
+    /* SAME BACKGROUND FOR BOTH */
+
+    .male-hero,
+    .female-hero{
+        background:linear-gradient(135deg,#8a215c,#2e112d) !important;
+    }
+
+    /* SMALLER TITLE */
+
+    .page-hero h1{
+        font-size:3rem !important;
+        line-height:1.1;
+        margin-bottom:20px;
+    }
+
+    /* SMALLER TEXT */
+
+    .page-hero p{
+        font-size:14px !important;
+        line-height:1.8;
+        max-width:300px;
+        margin:auto;
+    }
+
+    /* REDUCE HEIGHT TO REMOVE EXTRA SCROLL */
+
+    .page-hero{
+        padding:60px 20px !important;
+    }
+
+}
