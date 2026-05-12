@@ -2961,35 +2961,7 @@ cursor:pointer;
     }
 
 }
-/* =========================================
-   FINAL FIX FOR GIFTS MADE WITH LOVE
-========================================= */
 
-@media screen and (max-width:768px){
-
-    .hero-text h1{
-
-        font-size:1.55rem !important;
-
-        line-height:1.2 !important;
-
-        white-space:nowrap !important;
-
-        display:flex !important;
-
-        justify-content:center;
-
-        align-items:center;
-
-        gap:8px;
-
-        width:100%;
-
-        text-align:center;
-
-    }
-
-}
 /* =========================================
    FOR HIM + FOR HER FINAL MOBILE FIX
 /* =========================================
@@ -3259,5 +3231,183 @@ cursor:pointer;
 .pay-btn:hover{
 
     transform:translateY(-4px);
+
+}
+/* =========================================
+   FINAL CLEAN MOBILE OPTIMIZATION
+========================================= */
+
+@media screen and (max-width:768px){
+
+    html,
+    body{
+        overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+        padding:12px 10px !important;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .logo-area{
+        justify-content:center;
+        gap:8px;
+        margin-bottom:8px;
+    }
+
+    .logo-img{
+        width:45px;
+        height:45px;
+    }
+
+    .logo-text{
+        font-size:1.3rem !important;
+        white-space:nowrap;
+    }
+
+    .nav-links{
+        width:100%;
+        overflow-x:auto;
+        gap:14px;
+        justify-content:flex-start;
+        padding:0 5px;
+        scrollbar-width:none;
+    }
+
+    .nav-links::-webkit-scrollbar{
+        display:none;
+    }
+
+    .nav-links a{
+        font-size:13px !important;
+        white-space:nowrap;
+        flex-shrink:0;
+    }
+
+    /* HERO */
+
+    .hero{
+        width:94%;
+        padding:30px 18px;
+        margin:25px auto;
+        border-radius:25px;
+        flex-direction:column;
+        text-align:center;
+        gap:25px;
+        min-height:auto;
+    }
+
+    .hero-image img{
+        max-width:210px;
+    }
+
+    .hero-badge{
+        font-size:12px;
+        padding:8px 16px;
+    }
+
+    .hero-text h1{
+        font-size:2rem !important;
+        line-height:1.2;
+        margin-bottom:12px;
+    }
+
+    .hero-text p{
+        font-size:14px !important;
+        line-height:1.6;
+        margin-bottom:20px;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+        gap:10px;
+    }
+
+    .btn{
+        padding:12px 20px;
+        font-size:14px;
+    }
+
+    /* SECTION HEADINGS */
+
+    .section-heading h1,
+    .section-title{
+        font-size:1.8rem !important;
+        line-height:1.2;
+    }
+
+    .section-heading p,
+    .subtitle{
+        font-size:14px;
+    }
+
+    /* FEATURES */
+
+    .features-grid{
+        gap:18px;
+    }
+
+    .feature-card{
+        padding:24px 18px;
+    }
+
+    .feature-card h3{
+        font-size:1.1rem;
+    }
+
+    .feature-card p{
+        font-size:13px;
+    }
+
+    /* CTA */
+
+    .cta-box{
+        padding:40px 20px;
+        border-radius:25px;
+    }
+
+    .cta-box h1{
+        font-size:1.8rem !important;
+        line-height:1.2;
+    }
+
+    .cta-box p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    /* PRODUCT CARDS */
+
+    .box-image{
+        height:220px;
+    }
+
+    .box-top h2{
+        font-size:22px !important;
+    }
+
+    .box-top span{
+        font-size:18px;
+        padding:8px 14px;
+    }
+
+    /* FOOTER */
+
+    .main-footer{
+        padding:35px 15px;
+    }
+
+    .main-footer h2{
+        font-size:1.4rem;
+    }
+
+    .footer-link{
+        width:100%;
+        max-width:320px;
+        font-size:14px;
+    }
 
 }

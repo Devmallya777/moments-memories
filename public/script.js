@@ -251,7 +251,9 @@ address:
 document.getElementById("address").value,
 
 message:
-document.getElementById("message").value
+document.getElementById("message").value,
+
+paymentStatus:"Not Paid"
 
 };
 
