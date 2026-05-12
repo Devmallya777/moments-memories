@@ -2386,3 +2386,218 @@ cursor:pointer;
     }
 
 }
+/* =========================================
+   ULTRA MOBILE OPTIMIZATION
+   KEEP THIS AT VERY BOTTOM
+========================================= */
+
+@media (max-width:768px){
+
+    /* GLOBAL */
+
+    body{
+        overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+        padding:10px 8px;
+    }
+
+    .logo-text{
+        font-size:20px;
+    }
+
+    .nav-links{
+        gap:14px;
+        padding:4px 6px;
+    }
+
+    .nav-links a{
+        font-size:14px;
+    }
+
+    /* HERO SECTION */
+
+    .hero{
+        width:95%;
+        padding:28px 16px;
+        gap:22px;
+        border-radius:28px;
+        min-height:auto;
+        margin:30px auto;
+    }
+
+    .hero-image img{
+        max-width:220px;
+    }
+
+    /* THIS FIXES THE HUGE TEXT */
+
+    .hero-text h1{
+        font-size:2.3rem !important;
+        line-height:1.15;
+        margin-bottom:14px;
+    }
+
+    /* THIS FIXES THE LONG PARAGRAPH */
+
+    .hero-text p{
+        font-size:14px !important;
+        line-height:1.6;
+        margin-bottom:20px;
+        padding:0 4px;
+    }
+
+    .hero-badge{
+        font-size:13px;
+        padding:10px 18px;
+        margin-bottom:18px;
+    }
+
+    .hero-buttons{
+        gap:12px;
+    }
+
+    .btn{
+        padding:12px 22px;
+        font-size:14px;
+    }
+
+    /* SECTION HEADINGS */
+
+    .section-heading{
+        margin-bottom:35px;
+    }
+
+    .section-heading h1{
+        font-size:2rem !important;
+        line-height:1.2;
+    }
+
+    .section-heading p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    /* FEATURES */
+
+    .features-section{
+        margin:60px auto;
+    }
+
+    .features-grid{
+        gap:20px;
+    }
+
+    .feature-card{
+        padding:28px 20px;
+        border-radius:22px;
+    }
+
+    .feature-icon{
+        font-size:2.2rem;
+        margin-bottom:12px;
+    }
+
+    .feature-card h3{
+        font-size:1.2rem;
+    }
+
+    .feature-card p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    /* CTA SECTION */
+
+    .cta-section{
+        margin:60px auto;
+    }
+
+    .cta-box{
+        padding:45px 20px;
+        border-radius:28px;
+    }
+
+    /* FIX FOR "MAKE SOMEONE SMILE TODAY" */
+
+    .cta-box h1{
+        font-size:2.4rem !important;
+        line-height:1.2;
+        margin-bottom:18px;
+    }
+
+    /* FIX FOR "SURPRISE YOUR LOVED ONES..." */
+
+    .cta-box p{
+        font-size:15px !important;
+        line-height:1.7;
+        margin-bottom:24px;
+        padding:0 6px;
+    }
+
+    /* CARDS */
+
+    .card img{
+        height:200px;
+    }
+
+    .card-content{
+        padding:18px;
+    }
+
+    /* CATEGORY TITLE */
+
+    .section-title{
+        font-size:2.1rem !important;
+        line-height:1.2;
+        margin-bottom:12px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        margin-bottom:30px;
+    }
+
+    /* PRODUCT BOXES */
+
+    .box-image{
+        height:240px;
+    }
+
+    .box-top{
+        padding:18px;
+    }
+
+    .box-top h2{
+        font-size:24px;
+    }
+
+    .box-top span{
+        font-size:18px;
+        padding:8px 16px;
+    }
+
+    .box-buttons{
+        padding:20px;
+        gap:12px;
+    }
+
+    /* FOOTER */
+
+    .main-footer{
+        padding:40px 15px;
+        margin-top:50px;
+    }
+
+    .main-footer h2{
+        font-size:1.4rem;
+    }
+
+    .footer-text{
+        font-size:13px;
+    }
+
+}
