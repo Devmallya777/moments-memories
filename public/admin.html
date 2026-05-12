@@ -13,45 +13,74 @@
 
 <link rel="stylesheet" href="style.css">
 
-
 <script>
 
-const password = prompt("Enter Admin Password");
+const adminPassword = "eshna@1429";
 
-if(password !== "eshna@1429"){
+const enteredPassword = prompt("🔐 Enter Admin Password");
 
-alert("Wrong Password");
+if(
+    enteredPassword === null ||
+    enteredPassword !== adminPassword
+){
 
-window.location.href = "index.html";
+    alert("❌ Wrong Password");
+
+    window.location.href = "index.html";
+
+}else{
+
+    sessionStorage.setItem("adminAccess","granted");
 
 }
 
 </script>
+<script>
+
+if(sessionStorage.getItem("adminAccess") !== "granted"){
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
 
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">Moments & Memories</div>
+  <nav class="navbar">
 
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="order.html">Order Us</a></li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div class="logo-area">
+
+        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+
+        <div class="logo-text">
+            Moments & Memories
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Order</a>
+        <a href="cart.html">Cart 🛒</a>
+        <a href="admin.html">Admin</a>
+
+    </div>
+
+  </nav>
 
 
 <div class="admin-container">
 
 <h1>
-Admin Dashboard 💖
+Admin Dashboard
 </h1>
 
 
