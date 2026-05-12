@@ -2991,39 +2991,127 @@ cursor:pointer;
 
 }
 /* =========================================
-   FOR HIM + FOR HER MOBILE FIX
+   FOR HIM + FOR HER FINAL MOBILE FIX
+/* =========================================
+   FINAL MOBILE HERO FIX
+   KEEP THIS AT VERY BOTTOM
 ========================================= */
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
 
-    /* SAME BACKGROUND FOR BOTH */
-
-    .male-hero,
-    .female-hero{
-        background:linear-gradient(135deg,#8a215c,#2e112d) !important;
+    .hero{
+        width:94%;
+        padding:30px 18px;
+        gap:25px;
+        border-radius:25px;
+        margin:25px auto;
     }
 
-    /* SMALLER TITLE */
+    .hero-text{
+        width:100%;
+        text-align:center;
+    }
 
-    .page-hero h1{
-        font-size:3rem !important;
-        line-height:1.1;
+    .hero-text h1{
+
+        font-size:2rem !important;
+
+        line-height:1.2 !important;
+
+        white-space:normal !important;
+
+        display:block !important;
+
+        width:100%;
+
+        text-align:center;
+
+        margin-bottom:14px;
+
+        word-break:break-word;
+    }
+
+    .hero-text p{
+
+        font-size:14px !important;
+
+        line-height:1.6;
+
+        padding:0 4px;
+
         margin-bottom:20px;
     }
 
-    /* SMALLER TEXT */
+    .hero-image img{
 
-    .page-hero p{
-        font-size:14px !important;
-        line-height:1.8;
-        max-width:300px;
-        margin:auto;
+        width:100%;
+        max-width:230px;
+
+        height:auto;
     }
 
-    /* REDUCE HEIGHT TO REMOVE EXTRA SCROLL */
+    .hero-buttons{
 
-    .page-hero{
-        padding:60px 20px !important;
+        justify-content:center;
+
+        gap:12px;
     }
 
+}
+/* =========================================
+   DIFFERENT HERO BACKGROUND
+========================================= */
+
+/* FOR HER */
+
+.female-hero{
+    background:linear-gradient(
+    135deg,
+    #8a215c,
+    #2e112d
+    ) !important;
+}
+
+/* FOR HIM */
+
+.male-hero{
+    background:linear-gradient(
+    135deg,
+    #8a215c,
+    #2e112d
+    ) !important;
+}
+
+/* MOBILE */
+
+    .male-hero{
+        background:linear-gradient(
+        135deg,
+        #8a215c,
+        #2e112d
+        ) !important;
+    }
+
+/* =========================================
+   DIFFERENT HERO BACKGROUND
+========================================= */
+
+/* FOR HER */
+
+.female-hero{
+    background:linear-gradient(
+    135deg,
+    #8a215c,
+    #2e112d
+    ) !important;
+}
+
+/* FOR HIM */
+
+.male-hero{
+    background:linear-gradient(
+    135deg,
+    #8a215c,
+    #2e112d
+    ) !important;
 }
