@@ -2049,3 +2049,191 @@ cursor:pointer;
     }
 
 }
+
+/* =========================================
+   ANIMATED LOADING SCREEN
+========================================= */
+
+.loader-wrapper{
+
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100vh;
+
+    background:
+    linear-gradient(
+    135deg,
+    #fff0f7,
+    #ffd8ea
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999;
+
+    transition:1s ease;
+}
+
+.loader-content{
+
+    text-align:center;
+
+    animation:loaderFade 1.5s ease infinite alternate;
+}
+
+.loader-logo{
+
+    width:140px;
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin-bottom:25px;
+
+    animation:floatLoader 3s ease-in-out infinite;
+
+    box-shadow:
+    0 15px 40px rgba(176,38,119,0.25);
+}
+
+.loader-content h1{
+
+    font-size:3rem;
+
+    color:#a3206f;
+
+    margin-bottom:10px;
+
+    font-weight:800;
+}
+
+.loader-content p{
+
+    color:#7a2356;
+
+    margin-bottom:35px;
+
+    font-size:1.1rem;
+
+    letter-spacing:1px;
+}
+
+/* LOADING BAR */
+
+.loader-bar{
+
+    width:280px;
+    height:10px;
+
+    background:#ffd5e8;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    margin:auto;
+
+    position:relative;
+}
+
+.loader-bar span{
+
+    position:absolute;
+
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    90deg,
+    #ff4fa3,
+    #a3206f
+    );
+
+    border-radius:50px;
+
+    animation:loadingBar 2s linear infinite;
+}
+
+/* HIDE LOADER */
+
+.loader-hide{
+
+    opacity:0;
+    visibility:hidden;
+}
+
+/* ANIMATIONS */
+
+@keyframes loadingBar{
+
+    0%{
+        left:-100%;
+    }
+
+    100%{
+        left:100%;
+    }
+
+}
+
+@keyframes floatLoader{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+@keyframes loaderFade{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.03);
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .loader-logo{
+
+        width:110px;
+        height:110px;
+
+    }
+
+    .loader-content h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .loader-bar{
+
+        width:220px;
+
+    }
+
+}
