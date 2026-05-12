@@ -3860,3 +3860,37 @@ img{
     }
 
 }
+/* =========================================
+   MOBILE BUTTON CLICK FIX
+========================================= */
+
+.hero,
+.hero-text,
+.hero-buttons{
+    position:relative;
+    z-index:10;
+}
+
+.hero-buttons a,
+.hero-buttons .btn{
+
+    position:relative;
+
+    z-index:99999 !important;
+
+    pointer-events:auto !important;
+
+    touch-action:manipulation;
+
+}
+
+/* REMOVE BLOCKING LAYERS */
+
+.hero-shape{
+    pointer-events:none;
+}
+
+.hero::before,
+.hero::after{
+    pointer-events:none;
+}
