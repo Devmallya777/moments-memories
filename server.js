@@ -8,7 +8,9 @@ const SibApiV3Sdk = require("sib-api-v3-sdk");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
-
+if (!fs.existsSync("uploads")) {
+    fs.mkdirSync("uploads");
+}
 const app = express();
 
 // ======================
@@ -148,14 +150,15 @@ async (req, res) => {
             subject: `💖 New Order From ${name}`,
 
             attachment:
-            req.files.map(file => ({
+            req.files?.map(file => ({
 
-                content:
-                fs.readFileSync(file.path).toString("base64"),
+            content:
+            fs.readFileSync(path.join(__dirname, file.path))
+            .toString("base64"),
 
-                name: file.originalname
+             name: file.originalname
 
-            })),
+            })) || [],
 
             htmlContent: `
 
@@ -315,6 +318,7 @@ app.get("/api/stats", (req, res) => {
 // ======================
 // SERVER
 // ======================
+app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 10000;
 
@@ -323,4 +327,3 @@ app.listen(PORT, () => {
     console.log(`Server Running On Port ${PORT}`);
 
 });
-app.use("/uploads", express.static("uploads"));
