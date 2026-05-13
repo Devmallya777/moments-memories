@@ -778,8 +778,9 @@ footer{
 
 .box-image{
     width:100%;
-    height:420px;
+    height:320px;
     overflow:hidden;
+    background:#fff;
 }
 
 .box-image img{
@@ -4185,60 +4186,298 @@ html{
 
 }
 /* =========================================
-   PRODUCT IMAGE FULL BOX FIX
+   ULTRA MOBILE OPTIMIZATION
+   KEEP THIS AT VERY BOTTOM
 ========================================= */
-
-/* IMAGE CONTAINER */
-
-.box-image{
-
-    width:100%;
-    height:340px;
-
-    overflow:hidden;
-
-    background:white;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:0 !important;
-}
-
-/* IMAGE */
-
-.box-image img{
-
-    width:100% !important;
-    height:100% !important;
-
-    object-fit:cover !important;
-
-    display:block;
-}
-
-/* REMOVE EXTRA SPACE */
-
-.product-info{
-    padding-top:20px !important;
-}
-
-/* MOBILE */
 
 @media screen and (max-width:768px){
 
-    .box-image{
+    /* GLOBAL */
 
-        height:300px !important;
+    section{
+        margin:40px auto !important;
     }
 
-    .box-image img{
+    .section-title,
+    .page-title,
+    .section-heading h1{
+        font-size:2rem !important;
+        margin-bottom:10px !important;
+    }
 
-        width:100% !important;
-        height:100% !important;
+    .subtitle,
+    .section-heading p{
+        font-size:14px !important;
+        line-height:1.6 !important;
+        margin-bottom:25px !important;
+        padding:0 10px;
+    }
 
+    /* HERO */
+
+    .hero{
+        padding:25px 15px !important;
+        gap:20px !important;
+        border-radius:22px !important;
+    }
+
+    .hero-text h1{
+        font-size:2rem !important;
+    }
+
+    .hero-text p{
+        font-size:14px !important;
+        margin-bottom:18px !important;
+    }
+
+    .hero-image img{
+        max-width:190px !important;
+    }
+
+    /* BUTTONS */
+
+    .btn,
+    .details-btn,
+    .order-btn,
+    .cart-btn{
+        padding:12px 24px !important;
+        font-size:14px !important;
+    }
+
+    /* FEATURE SECTION */
+
+    .features-section{
+        margin:50px auto !important;
+    }
+
+    .features-grid{
+        gap:18px !important;
+    }
+
+    .feature-card{
+        padding:25px 18px !important;
+        border-radius:20px !important;
+    }
+
+    .feature-icon{
+        font-size:2rem !important;
+        margin-bottom:10px !important;
+    }
+
+    .feature-card h3{
+        font-size:1.1rem !important;
+        margin-bottom:8px !important;
+    }
+
+    .feature-card p{
+        font-size:13px !important;
+        line-height:1.6 !important;
+    }
+
+    /* CATEGORY / PRODUCT CARDS */
+
+    .gender-products-grid,
+    .products-grid,
+    .grid,
+    .box-wrapper{
+        gap:20px !important;
+        grid-template-columns:1fr !important;
+    }
+
+    .gender-box-card,
+    .product-card,
+    .gift-box,
+    .card{
+        border-radius:22px !important;
+    }
+
+    .box-top,
+    .product-top,
+    .top-bar{
+        padding:16px 18px !important;
+    }
+
+    .box-top h2,
+    .product-top h2,
+    .top-bar h2{
+        font-size:22px !important;
+    }
+
+    .box-top span,
+    .product-top span,
+    .top-bar span{
+        font-size:18px !important;
+        padding:8px 14px !important;
+    }
+
+    /* IMAGES SMALLER */
+
+    .box-image{
+        height:200px !important;
+    }
+
+    .product-card img,
+    .gift-right img,
+    .details-image img{
+        height:220px !important;
         object-fit:cover !important;
+    }
+
+    /* CARD CONTENT */
+
+    .product-info,
+    .card-content,
+    .gift-content,
+    .details-content{
+        padding:18px !important;
+    }
+
+    .product-card h2{
+        font-size:22px !important;
+        margin-top:15px !important;
+    }
+
+    .product-card p{
+        font-size:20px !important;
+        margin:10px 0 15px !important;
+    }
+
+    /* DETAILS PAGE */
+
+    .details-page{
+        gap:20px !important;
+        margin-top:110px !important;
+    }
+
+    .details-content h1{
+        font-size:28px !important;
+    }
+
+    .details-content h2{
+        font-size:24px !important;
+    }
+
+    .details-text{
+        font-size:14px !important;
+        line-height:1.7 !important;
+    }
+
+    .details-content ul li{
+        font-size:14px !important;
+        margin-bottom:10px !important;
+    }
+
+    /* SMALL BOXES */
+
+    .small-boxes{
+        gap:12px !important;
+        padding:0 18px 18px !important;
+    }
+
+    .small-card{
+        padding:16px !important;
+    }
+
+    .small-card h4{
+        font-size:16px !important;
+    }
+
+    .small-card p{
+        font-size:13px !important;
+    }
+
+    /* CART */
+
+    .cart-container{
+        padding:25px 15px !important;
+    }
+
+    .cart-item{
+        padding:15px !important;
+        gap:12px !important;
+    }
+
+    .cart-item img{
+        width:85px !important;
+        height:85px !important;
+    }
+
+    /* FORM */
+
+    .form-box{
+        padding:25px 18px !important;
+    }
+
+    .form-box h1{
+        font-size:24px !important;
+        margin-bottom:20px !important;
+    }
+
+    .input-group input,
+    .input-group textarea{
+        padding:14px !important;
+        font-size:14px !important;
+    }
+
+    /* CTA */
+
+    .cta-box{
+        padding:45px 20px !important;
+        border-radius:25px !important;
+    }
+
+    .cta-box h1{
+        font-size:2rem !important;
+    }
+
+    .cta-box p{
+        font-size:14px !important;
+    }
+
+    /* FOOTER */
+
+    .main-footer{
+        padding:40px 15px !important;
+        margin-top:50px !important;
+    }
+
+    .main-footer h2{
+        font-size:1.5rem !important;
+    }
+
+    .footer-link{
+        padding:14px 18px !important;
+        font-size:14px !important;
+    }
+
+}
+
+/* EXTRA SMALL DEVICES */
+
+@media screen and (max-width:480px){
+
+    .hero-text h1{
+        font-size:1.7rem !important;
+    }
+
+    .section-title,
+    .page-title{
+        font-size:1.7rem !important;
+    }
+
+    .product-card img,
+    .gift-right img,
+    .details-image img{
+        height:180px !important;
+    }
+
+    .box-image{
+        height:180px !important;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
     }
 
 }
