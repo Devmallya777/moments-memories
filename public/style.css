@@ -4121,3 +4121,66 @@ html{
     }
 
 }
+/* =========================================
+   SMALLER PRODUCT IMAGE SIZE
+========================================= */
+
+.box-image{
+
+    height:260px !important;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:white;
+}
+
+.box-image img{
+
+    width:85% !important;
+
+    height:85% !important;
+
+    object-fit:contain !important;
+
+}
+
+/* PRODUCT CARD IMAGES */
+
+.product-card img{
+
+    width:80% !important;
+
+    height:260px !important;
+
+    object-fit:contain !important;
+
+    margin:auto;
+
+    display:block;
+}
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    .box-image{
+        height:200px !important;
+    }
+
+    .box-image img{
+
+        width:78% !important;
+        height:78% !important;
+    }
+
+    .product-card img{
+
+        width:75% !important;
+        height:190px !important;
+    }
+
+}
