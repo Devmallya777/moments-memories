@@ -230,32 +230,71 @@ async function(e){
 
 e.preventDefault();
 
-const formData = {
+// ====================================
+// ORDER FORM
+// ====================================
 
-product:
-document.getElementById("productField").value,
+const orderForm =
+document.getElementById("orderForm");
 
-price:
-document.getElementById("priceField").value,
+if(orderForm){
 
-name:
-document.getElementById("name").value,
+orderForm.addEventListener(
+"submit",
+async function(e){
 
-phone:
-document.getElementById("phone").value,
+e.preventDefault();
 
-email:
-document.getElementById("email").value,
+const formData = new FormData();
 
-address:
-document.getElementById("address").value,
+formData.append(
+"product",
+document.getElementById("productField").value
+);
 
-message:
-document.getElementById("message").value,
+formData.append(
+"price",
+document.getElementById("priceField").value
+);
 
-paymentStatus:"Not Paid"
+formData.append(
+"name",
+document.getElementById("name").value
+);
 
-};
+formData.append(
+"phone",
+document.getElementById("phone").value
+);
+
+formData.append(
+"email",
+document.getElementById("email").value
+);
+
+formData.append(
+"address",
+document.getElementById("address").value
+);
+
+formData.append(
+"message",
+document.getElementById("message").value
+);
+
+// IMAGE FILES
+
+const images =
+document.getElementById("images").files;
+
+for(let i = 0; i < images.length; i++){
+
+formData.append(
+"images",
+images[i]
+);
+
+}
 
 try{
 
@@ -263,13 +302,7 @@ const response = await fetch(
 "/api/order",
 {
 method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify(formData)
-
+body: formData
 }
 );
 
@@ -284,7 +317,9 @@ showNotification(
 localStorage.removeItem("cart");
 
 setTimeout(() => {
+
 window.location.href = "index.html";
+
 },2000);
 
 }else{
@@ -304,4 +339,3 @@ showNotification("❌ Server Error");
 });
 
 }
-app.use("/uploads", express.static("uploads"));

@@ -6,6 +6,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const SibApiV3Sdk = require("sib-api-v3-sdk");
 const path = require("path");
+const multer = require("multer");
+const fs = require("fs");
 
 const app = express();
 
@@ -38,6 +40,27 @@ const apiKey = client.authentications["api-key"];
 apiKey.apiKey = process.env.BREVO_API_KEY;
 
 const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
+// ======================
+// MULTER STORAGE
+// ======================
+
+const storage = multer.diskStorage({
+
+    destination: function(req, file, cb){
+
+        cb(null, "uploads/");
+
+    },
+
+    filename: function(req, file, cb){
+
+        cb(null, Date.now() + "-" + file.originalname);
+
+    }
+
+});
+
+const upload = multer({ storage });
 
 // ======================
 // HOME PAGE
@@ -53,7 +76,15 @@ app.get("/", (req, res) => {
 // PLACE ORDER
 // ======================
 
-app.post("/api/order", async (req, res) => {
+// ======================
+// PLACE ORDER
+// ======================
+
+app.post(
+"/api/order",
+upload.array("images", 10),
+
+async (req, res) => {
 
     try {
 
@@ -115,6 +146,16 @@ app.post("/api/order", async (req, res) => {
             ],
 
             subject: `💖 New Order From ${name}`,
+
+            attachment:
+            req.files.map(file => ({
+
+                content:
+                fs.readFileSync(file.path).toString("base64"),
+
+                name: file.originalname
+
+            })),
 
             htmlContent: `
 
@@ -200,60 +241,6 @@ app.post("/api/order", async (req, res) => {
 
                 </p>
 
-                <div style="
-                    background:white;
-                    padding:25px;
-                    border-radius:15px;
-                    margin-top:25px;
-                ">
-
-                    <h2 style="color:#b02677;">
-                        Order Summary 🛒
-                    </h2>
-
-                    <p><strong>Products:</strong><br>${product}</p>
-
-                    <p><strong>Total Price:</strong> ${price}</p>
-
-                    <p><strong>Delivery Address:</strong><br>${address}</p>
-
-                </div>
-
-                <p style="
-                    margin-top:30px;
-                    font-size:16px;
-                    line-height:1.7;
-                ">
-
-                    We will contact you soon regarding delivery 💌
-
-                    <br><br>
-
-                    Thank you for choosing
-                    <strong>Moments & Memories</strong> ✨
-
-                </p>
-
-                <div style="
-                    margin-top:40px;
-                    text-align:center;
-                ">
-
-                    <a href="https://instagram.com/_mm.giftboxes__"
-                    style="
-                        display:inline-block;
-                        padding:14px 30px;
-                        background:#ff4fa3;
-                        color:white;
-                        text-decoration:none;
-                        border-radius:50px;
-                        font-weight:bold;
-                    ">
-                        Visit Instagram 💖
-                    </a>
-
-                </div>
-
             </div>
 
             `
@@ -336,3 +323,4 @@ app.listen(PORT, () => {
     console.log(`Server Running On Port ${PORT}`);
 
 });
+app.use("/uploads", express.static("uploads"));
