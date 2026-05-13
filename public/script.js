@@ -230,21 +230,6 @@ async function(e){
 
 e.preventDefault();
 
-// ====================================
-// ORDER FORM
-// ====================================
-
-const orderForm =
-document.getElementById("orderForm");
-
-if(orderForm){
-
-orderForm.addEventListener(
-"submit",
-async function(e){
-
-e.preventDefault();
-
 const formData = new FormData();
 
 formData.append(
@@ -282,8 +267,6 @@ formData.append(
 document.getElementById("message").value
 );
 
-// IMAGE FILES
-
 const images =
 document.getElementById("images").files;
 
@@ -317,9 +300,7 @@ showNotification(
 localStorage.removeItem("cart");
 
 setTimeout(() => {
-
 window.location.href = "index.html";
-
 },2000);
 
 }else{
