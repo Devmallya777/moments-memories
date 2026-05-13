@@ -304,3 +304,4 @@ showNotification("❌ Server Error");
 });
 
 }
+app.use("/uploads", express.static("uploads"));

@@ -1,60 +1,92 @@
-const contactForm = document.getElementById("contactForm");
+const express = require("express");
+const router = express.Router();
+const nodemailer = require("nodemailer");
+const multer = require("multer");
+const path = require("path");
 
-if (contactForm) {
+/* STORAGE */
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, "uploads/");
+    },
 
-    contactForm.addEventListener("submit", async (e) => {
+    filename: function(req, file, cb){
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
 
-        e.preventDefault();
+const upload = multer({ storage });
 
-        const btn = document.querySelector(".contact-btn");
+/* MULTIPLE FILES */
+const cpUpload = upload.fields([
+    { name: "images", maxCount: 10 },
+    { name: "video", maxCount: 1 }
+]);
 
-        btn.innerText = "Sending...";
-        btn.disabled = true;
+router.post("/", cpUpload, async(req,res)=>{
 
-        const name = document.getElementById("name").value;
+    try{
 
-        const email = document.getElementById("email").value;
+        const { name, email, phone, message } = req.body;
 
-        const message = document.getElementById("message").value;
+        /* EMAIL TRANSPORT */
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
 
-        try {
-
-            const response = await fetch("/api/contact", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    name,
-                    email,
-                    message
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-
-                alert("Message Sent Successfully ❤️");
-
-                contactForm.reset();
-
-            } else {
-
-                alert("Failed To Send Message");
+            auth:{
+                user:"YOUR_EMAIL@gmail.com",
+                pass:"YOUR_APP_PASSWORD"
             }
+        });
 
-        } catch (error) {
+        /* ATTACHMENTS */
+        let attachments = [];
 
-            alert("Server Error");
-
-            console.log(error);
+        if(req.files.images){
+            req.files.images.forEach(file=>{
+                attachments.push({
+                    filename:file.originalname,
+                    path:file.path
+                });
+            });
         }
 
-        btn.innerText = "Send Message";
-        btn.disabled = false;
-    });
-}
+        if(req.files.video){
+            attachments.push({
+                filename:req.files.video[0].originalname,
+                path:req.files.video[0].path
+            });
+        }
+
+        /* SEND EMAIL */
+        await transporter.sendMail({
+
+            from: email,
+
+            to: "YOUR_EMAIL@gmail.com",
+
+            subject: "New Gift Order",
+
+            html: `
+                <h2>New Order Received</h2>
+
+                <p><b>Name:</b> ${name}</p>
+                <p><b>Email:</b> ${email}</p>
+                <p><b>Phone:</b> ${phone}</p>
+                <p><b>Message:</b> ${message}</p>
+            `,
+
+            attachments: attachments
+        });
+
+        res.send("Order Sent Successfully ✨");
+
+    }
+
+    catch(err){
+        console.log(err);
+        res.send("Something went wrong");
+    }
+});
+
+module.exports = router;
