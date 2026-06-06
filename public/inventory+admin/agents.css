@@ -5,9 +5,10 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
-body{
-display:flex;
-background:#f5f7fb;
+body {
+  display: flex;
+  background: #f5f7fb;
+  min-height: 100vh;
 }
 
 .sidebar {
@@ -61,10 +62,10 @@ background:#f5f7fb;
   background: #7f1d1d30;
   color: #fca5a5;
 }
-.main{
-margin-left:250px;
-padding:30px;
-width:100%;
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-x: auto;
 }
 
 .topbar{
