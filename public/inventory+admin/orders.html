@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Orders</title>
+
+<link rel="stylesheet" href="orders.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🎁 M&M Admin</h2>
+
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="inventory.html">📦 Inventory</a>
+<a href="orders.html" class="active">🛒 Orders</a>
+<a href="agents.html">🚚 Delivery Agents</a>
+<a href="finance.html">💰 Finance</a>
+<a href="members.html">👥 Team Members</a>
+<a href="settings.html">⚙️ Settings</a>
+<a href="login.html" id="logout-btn">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>🛒 Orders</h1>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Customer</th>
+<th>Product</th>
+<th>Total</th>
+<th>Status</th>
+<th>Assigned</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+<tr>
+<td colspan="6">Loading...</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="orders.js"></script>
+
+</body>
+</html>
