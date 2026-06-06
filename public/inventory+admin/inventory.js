@@ -41,7 +41,7 @@ function renderTable() {
     if (stock <= 5) lowStock++;
     if (stock === 0) outStock++;
 
-    totalValue += stock * cost;
+    totalValue += Number(stock) * Number(cost);
 
     table.innerHTML += `
       <tr>
@@ -50,15 +50,19 @@ function renderTable() {
         <td>₹${cost}</td>
         <td>${new Date(item.updatedAt).toLocaleDateString()}</td>
 
-        <td>
-          <button onclick="editItem('${item._id}', '${item.itemName}', ${stock}, ${cost})">
-            Edit
-          </button>
+        <td class="action-cell">
 
-          <button onclick="deleteItem('${item._id}')">
-            Delete
-          </button>
-        </td>
+  <button class="action-btn edit-btn"
+    onclick="editItem('${item._id}', '${item.itemName}', ${stock}, ${cost})">
+    Edit
+  </button>
+
+  <button class="action-btn delete-btn"
+    onclick="deleteItem('${item._id}')">
+    Delete
+  </button>
+
+</td>
       </tr>
     `;
   });
