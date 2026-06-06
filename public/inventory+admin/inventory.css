@@ -111,17 +111,20 @@ border-radius:10px;
 cursor:pointer;
 }
 
-table{
-width:100%;
-background:white;
-border-collapse:collapse;
-border-radius:15px;
-overflow:hidden;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-th,td{
-padding:15px;
-border-bottom:1px solid #eee;
+th, td {
+  padding: 12px;
+  text-align: center;   /* keeps everything aligned under headings */
+  vertical-align: middle;
+}
+
+/* specifically fix first column (Item Name) */
+td:first-child, th:first-child {
+  text-align: center; /* or left if you prefer clean catalog look */
 }
 
 .delete-btn{
