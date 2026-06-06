@@ -56,33 +56,7 @@ ${order.products}
 
 <td>
 
-<select
-onchange="updateStatus(
-'${order._id}',
-this.value
-)">
-
-<option value="Pending"
-${order.status==="Pending"?"selected":""}>
-Pending
-</option>
-
-<option value="Assigned"
-${order.status==="Assigned"?"selected":""}>
-Assigned
-</option>
-
-<option value="Out For Delivery"
-${order.status==="Out For Delivery"?"selected":""}>
-Out For Delivery
-</option>
-
-<option value="Delivered"
-${order.status==="Delivered"?"selected":""}>
-Delivered
-</option>
-
-</select>
+<span>${order.status}</span>
 
 </td>
 
