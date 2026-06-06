@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Moments & Memories</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- PASSWORD PROTECTION -->
+
+<script>
+
+const pass = prompt("Enter Admin Password");
+
+if(pass !== "moments2026"){
+
+  alert("Wrong Password");
+  window.location.href = "index.html";
+
+}
+
+</script>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+  <div class="logo">
+    Moments <span>& Memories</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="admin.html">Admin</a>
+    <a href="cart.html">Cart</a>
+  </div>
+
+</nav>
+
+<!-- DASHBOARD -->
+
+<section class="section">
+
+  <h1 class="section-title">Admin Dashboard</h1>
+
+  <div class="dashboard">
+
+    <div class="card">
+      <h2 id="productsCount">0</h2>
+      <p>Total Products</p>
+    </div>
+
+    <div class="card">
+      <h2 id="ordersCount">0</h2>
+      <p>Total Orders</p>
+    </div>
+
+    <div class="card">
+      <h2 id="contactsCount">0</h2>
+      <p>Total Contacts</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <p>
+    © 2026 Moments & Memories | Admin Panel
+  </p>
+
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+
+async function loadDashboard(){
+
+  try{
+
+    // PRODUCTS
+    const productsRes = await fetch("/api/products");
+    const products = await productsRes.json();
+
+    // CONTACTS
+    const contactsRes = await fetch("/api/contact");
+    const contacts = await contactsRes.json();
+
+    // ORDERS
+    const ordersRes = await fetch("/api/orders");
+    const orders = await ordersRes.json();
+
+    document.getElementById("productsCount").innerText = products.length;
+
+    document.getElementById("contactsCount").innerText = contacts.length;
+
+    document.getElementById("ordersCount").innerText = orders.length;
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+loadDashboard();
+
+</script>
+<script src="script.js"></script>
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="main-footer">
+
+    <h2>
+        Make Every Moment Memorable 💖
+    </h2>
+
+    <div class="footer-contact">
+
+        <!-- INSTAGRAM -->
+
+        <a
+        href="https://instagram.com/_mm.giftboxes__"
+        target="_blank"
+        class="footer-link"
+        >
+
+            📸 Instagram:
+            @_mm.giftboxes__
+
+        </a>
+
+        <!-- EMAIL -->
+
+        <a
+        href="mailto:mm.giftboxes04@gmail.com"
+        class="footer-link"
+        >
+
+            📧 Email:
+            mm.giftboxes04@gmail.com
+
+        </a>
+
+        <!-- PHONE -->
+
+        <a
+        href="tel:+919083791493"
+        class="footer-link"
+        >
+
+            📞 Call:
+            90837 91493
+
+        </a>
+
+    </div>
+
+    <p class="footer-text">
+
+        Because some stories deserve
+        the perfect gift 💕
+
+    </p>
+
+</footer>
+</body>
+</html>

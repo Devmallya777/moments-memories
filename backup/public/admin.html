@@ -1,0 +1,188 @@
+<!-- admin.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script>
+
+const adminPassword = "eshna@1429";
+
+const enteredPassword = prompt("🔐 Enter Admin Password");
+
+if(
+    enteredPassword === null ||
+    enteredPassword !== adminPassword
+){
+
+    alert("❌ Wrong Password");
+
+    window.location.href = "index.html";
+
+}else{
+
+    sessionStorage.setItem("adminAccess","granted");
+
+}
+
+</script>
+<script>
+
+if(sessionStorage.getItem("adminAccess") !== "granted"){
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo-area">
+
+        <img src="logo.png" alt="Moments & Memories" class="logo-img">
+
+        <div class="logo-text">
+            Moments & Memories
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Order</a>
+        <a href="cart.html">Cart</a>
+        <a href="admin.html">Admin</a>
+
+    </div>
+
+  </nav>
+
+
+<div class="admin-container">
+
+<h1>
+Admin Dashboard
+</h1>
+
+
+<div class="admin-grid">
+
+
+<div class="admin-grid">
+
+<div class="admin-box">
+<h2>Total Orders</h2>
+<p id="totalOrders">0</p>
+</div>
+
+<div class="admin-box">
+<h2>Pending Orders</h2>
+<p id="pendingOrders">0</p>
+</div>
+
+<div class="admin-box">
+<h2>Delivered Orders</h2>
+<p id="deliveredOrders">0</p>
+</div>
+
+<div class="admin-box">
+<h2>Total Customers</h2>
+<p id="totalCustomers">0</p>
+</div>
+
+</div>
+
+<h2 style="margin-top:50px;">Recent Orders 💖</h2>
+
+<div id="ordersContainer"></div>
+
+<script src="admin.js"></script>
+
+
+</div>
+
+</div>
+<script src="script.js"></script>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="main-footer">
+
+    <h2>
+        Make Every Moment Memorable 💖
+    </h2>
+
+    <div class="footer-contact">
+
+        <!-- INSTAGRAM -->
+
+        <a
+        href="https://instagram.com/_mm.giftboxes__"
+        target="_blank"
+        class="footer-link"
+        >
+
+            📸 Instagram:
+            @_mm.giftboxes__
+
+        </a>
+
+        <!-- EMAIL -->
+
+        <a
+        href="mailto:mm.giftboxes04@gmail.com"
+        class="footer-link"
+        >
+
+            📧 Email:
+            mm.giftboxes04@gmail.com
+
+        </a>
+
+        <!-- PHONE -->
+
+        <a
+        href="tel:+919083791493"
+        class="footer-link"
+        >
+
+            📞 Call:
+            90837 91493
+
+        </a>
+
+    </div>
+
+    <p class="footer-text">
+
+        Because some stories deserve
+        the perfect gift 💕
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>

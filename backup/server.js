@@ -13,15 +13,6 @@ if (!fs.existsSync("uploads")) {
 }
 const app = express();
 
-const mongoose = require("mongoose");
-
-const Inventory =
-require("./models/inventory");
-
-const Order =
-require("./models/order");
-
-
 // ======================
 // MIDDLEWARE
 // ======================
@@ -34,22 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-
-    console.log("MongoDB Connected ✅");
-
-})
-.catch((err) => {
-
-    console.log(err);
-
-});
 // ======================
 // TEMP DATABASE
 // ======================
 
-// MongoDB will store orders
+let orders = [];
 
 // ======================
 // BREVO CONFIG
@@ -144,33 +124,7 @@ async (req, res) => {
 
         };
 
-        await Order.create({
-
-    customerName: name,
-
-    email: email,
-
-    phone: phone,
-
-    address: address,
-
-    products: product,
-
-    total: Number(
-        price.replace(/[^\d]/g,"")
-    ),
-
-    status: "Pending",
-
-    assignedTo: "",
-
-    paymentMethod: "",
-
-    paymentStatus: "Pending",
-
-    createdAt: new Date()
-
-});
+        orders.push(newOrder);
 
         // ======================
         // ADMIN EMAIL
@@ -324,13 +278,7 @@ async (req, res) => {
 // GET ALL ORDERS
 // ======================
 
-app.get(
-"/api/orders",
-async(req,res)=>{
-
-    const orders =
-    await Order.find()
-    .sort({createdAt:-1});
+app.get("/api/orders", (req, res) => {
 
     res.json(orders);
 
@@ -340,29 +288,20 @@ async(req,res)=>{
 // DASHBOARD STATS
 // ======================
 
-app.get(
-"/api/stats",
-async(req,res)=>{
+app.get("/api/stats", (req, res) => {
 
-    const orders =
-    await Order.find();
+    const totalOrders = orders.length;
 
-    const totalOrders =
-    orders.length;
-
-    const pendingOrders =
-    orders.filter(
-        o=>o.status==="Pending"
+    const pendingOrders = orders.filter(
+        order => order.status === "Pending"
     ).length;
 
-    const deliveredOrders =
-    orders.filter(
-        o=>o.status==="Delivered"
+    const deliveredOrders = orders.filter(
+        order => order.status === "Delivered"
     ).length;
 
-    const totalCustomers =
-    new Set(
-        orders.map(o=>o.email)
+    const totalCustomers = new Set(
+        orders.map(order => order.email)
     ).size;
 
     res.json({
@@ -373,94 +312,6 @@ async(req,res)=>{
         totalCustomers
 
     });
-
-});
-
-app.get(
-"/api/inventory",
-async(req,res)=>{
-
-    const items =
-    await Inventory.find();
-
-    res.json(items);
-
-});
-
-app.post(
-"/api/inventory",
-async(req,res)=>{
-
-    const {
-
-        itemName,
-        stock,
-        unitCost,
-        lowStockAlert
-
-    } = req.body;
-
-    const item =
-    await Inventory.create({
-
-        itemName,
-        stock,
-        unitCost,
-        lowStockAlert
-
-    });
-
-    res.json(item);
-
-});
-app.put(
-"/api/inventory/:id",
-async(req,res)=>{
-
-    const item =
-    await Inventory.findByIdAndUpdate(
-
-        req.params.id,
-
-        req.body,
-
-        {new:true}
-
-    );
-
-    res.json(item);
-
-});
-app.delete(
-"/api/inventory/:id",
-async(req,res)=>{
-
-    await Inventory.findByIdAndDelete(
-        req.params.id
-    );
-
-    res.json({
-        success:true
-    });
-
-});
-
-app.put(
-"/api/order/:id",
-async(req,res)=>{
-
-    const order =
-    await Order.findByIdAndUpdate(
-
-        req.params.id,
-
-        req.body,
-
-        {new:true}
-
-    );
-
-    res.json(order);
 
 });
 
