@@ -1,12 +1,19 @@
+const currentPage =
+window.location.pathname;
+
+if(
+!currentPage.includes("login.html")
+){
+
 const agentName =
-localStorage.getItem(
-"agentName"
-);
+localStorage.getItem("agentName");
 
 if(!agentName){
 
 window.location.href =
 "login.html";
+
+}
 
 }
 
@@ -34,7 +41,7 @@ name
 );
 
 window.location.href =
-"agents.html";
+"dashboard.html";
 
 }
 
