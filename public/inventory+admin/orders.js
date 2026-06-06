@@ -1,5 +1,12 @@
 const API = "";
 
+const AGENTS = [
+"Eshna",
+"Sumit",
+"Souvik",
+"Lisa"
+];
+
 async function loadOrders(){
 
 try{
@@ -18,6 +25,7 @@ document.getElementById(
 if(!orders.length){
 
 table.innerHTML = `
+
 <tr>
 <td colspan="6">
 No Orders Found
@@ -54,17 +62,22 @@ onchange="updateStatus(
 this.value
 )">
 
-<option
+<option value="Pending"
 ${order.status==="Pending"?"selected":""}>
 Pending
 </option>
 
-<option
+<option value="Assigned"
 ${order.status==="Assigned"?"selected":""}>
 Assigned
 </option>
 
-<option
+<option value="Out For Delivery"
+${order.status==="Out For Delivery"?"selected":""}>
+Out For Delivery
+</option>
+
+<option value="Delivered"
 ${order.status==="Delivered"?"selected":""}>
 Delivered
 </option>
@@ -74,7 +87,28 @@ Delivered
 </td>
 
 <td>
+
 ${order.assignedTo || "-"}
+
+<br><br>
+
+<select id="agent-${order._id}">
+
+<option value="">
+Select Agent
+</option>
+
+${AGENTS.map(agent=>`
+
+<option
+value="${agent}">
+${agent}
+</option>
+
+`).join("")}
+
+</select>
+
 </td>
 
 <td>
@@ -83,8 +117,7 @@ ${order.assignedTo || "-"}
 onclick="assignOrder(
 '${order._id}'
 )">
-Assign
-</button>
+Assign </button>
 
 </td>
 
@@ -128,11 +161,19 @@ loadOrders();
 async function assignOrder(id){
 
 const agent =
-prompt(
-"Enter Agent Name"
+document.getElementById(
+`agent-${id}`
+).value;
+
+if(!agent){
+
+alert(
+"Select Agent First"
 );
 
-if(!agent) return;
+return;
+
+}
 
 await fetch(
 `${API}/api/order/${id}`,
@@ -145,10 +186,15 @@ headers:{
 body:JSON.stringify({
 
 assignedTo:agent,
+
 status:"Assigned"
 
 })
 }
+);
+
+alert(
+`Order Assigned To ${agent}`
 );
 
 loadOrders();

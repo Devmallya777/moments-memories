@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agent Dashboard</title>
+
+<link rel="stylesheet" href="dashboard.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>🚚 Agent Portal</h2>
+
+<a href="dashboard.html">🏠 Dashboard</a>
+
+<a href="orders.html">📦 My Orders</a>
+
+<a href="payments.html">💰 Payments</a>
+
+<a href="#" onclick="logoutAgent()">🚪 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- WELCOME -->
+
+<div class="welcome-card">
+
+<h1 id="greeting">Good Morning ☀️</h1>
+
+<h3 id="agentName">Agent Name</h3>
+
+<p>
+Ready to deliver happiness today? 🚚
+</p>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="card">
+
+<h3 id="assignedCount">0</h3>
+
+<p>Assigned Orders</p>
+
+</div>
+
+<div class="card">
+
+<h3 id="deliveredCount">0</h3>
+
+<p>Delivered Orders</p>
+
+</div>
+
+<div class="card">
+
+<h3 id="cashCollected">₹0</h3>
+
+<p>Cash Collected</p>
+
+</div>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+
+<div class="welcome-card">
+
+<h2>⚡ Quick Actions</h2>
+
+<br>
+
+<a href="orders.html">
+
+<button class="action-btn">
+📦 View Assigned Orders
+</button>
+
+</a>
+
+<a href="payments.html">
+
+<button class="action-btn">
+💰 View Payments
+</button>
+
+</a>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="welcome-card">
+
+<h2>📊 Today's Summary</h2>
+
+<br>
+
+<p>
+Total Assigned Orders:
+<strong id="summaryAssigned">0</strong>
+</p>
+
+<br>
+
+<p>
+Successfully Delivered:
+<strong id="summaryDelivered">0</strong>
+</p>
+
+<br>
+
+<p>
+Cash Collected:
+<strong id="summaryCash">₹0</strong>
+</p>
+
+</div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>

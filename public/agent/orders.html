@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Orders</title>
+
+<link rel="stylesheet" href="orders.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🚚 Agent MVP</h2>
+
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="orders.html">📦 My Orders</a>
+<a href="payments.html">💰 Payments</a>
+<a href="#" onclick="logoutAgent()">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>📦 Assigned Orders</h1>
+
+<table>
+
+<thead>
+<tr>
+<th>Customer</th>
+<th>Product</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="ordersTable">
+<tr>
+<td colspan="6">Loading...</td>
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+<script src="orders.js"></script>
+
+</body>
+</html>

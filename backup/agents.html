@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Delivery Agent Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="agents.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>🚚 Agent MVP</h2>
+
+    <a href="#">🏠 Dashboard</a>
+
+    <a href="#">📦 Assigned Orders</a>
+
+    <a href="#">💰 Payments</a>
+
+    <a href="#">⚙ Settings</a>
+
+    <a href="login.html">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div>
+
+            <h1>Good Morning ☀️</h1>
+
+            <p>Ready to deliver happiness today?</p>
+
+        </div>
+
+        <div class="agent-box">
+
+            <span class="avatar">A</span>
+
+            <span>Agent</span>
+
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="card">
+            <h3 id="assignedCount">0</h3>
+            <p>Assigned Orders</p>
+        </div>
+
+        <div class="card">
+            <h3 id="deliveryCount">0</h3>
+            <p>Delivered Today</p>
+        </div>
+
+        <div class="card">
+            <h3 id="cashCollected">₹0</h3>
+            <p>Cash Collected</p>
+        </div>
+
+    </div>
+
+    <!-- ORDERS -->
+
+    <div class="orders-box">
+
+        <h2>📦 My Orders</h2>
+
+        <div id="ordersContainer">
+
+            <div class="order-card">
+
+                <h3>Gift Box Premium</h3>
+
+                <p><strong>Customer:</strong> Dev</p>
+
+                <p><strong>Phone:</strong> 9876543210</p>
+
+                <p><strong>Address:</strong> Kolkata</p>
+
+                <p><strong>Amount:</strong> ₹799</p>
+
+                <p><strong>Payment:</strong> Cash</p>
+
+                <p><strong>Status:</strong> Assigned</p>
+
+                <div class="btns">
+
+                    <button class="ofd-btn">
+                        🚚 Out For Delivery
+                    </button>
+
+                    <button class="arrived-btn">
+                        📍 Arrived
+                    </button>
+
+                    <button class="otp-btn">
+                        🔐 Verify OTP
+                    </button>
+
+                    <button class="delivered-btn">
+                        ✅ Delivered
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="agent.js"></script>
+
+</body>
+
+</html>

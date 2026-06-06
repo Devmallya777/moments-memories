@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Delivery Agents</title>
+
+<link rel="stylesheet" href="agents.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🎁 M&M Admin</h2>
+
+<a href="dashboard.html">📊 Dashboard</a>
+
+<a href="inventory.html">📦 Inventory</a>
+
+<a href="orders.html">🛒 Orders</a>
+
+<a href="agents.html" class="active">🚚 Delivery Agents</a>
+
+<a href="finance.html">💰 Finance</a>
+
+<a href="members.html">👥 Team Members</a>
+
+<a href="settings.html">⚙ Settings</a>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>🚚 Delivery Agents</h1>
+
+<p>Manage agents and track deliveries</p>
+
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h3 id="totalAgents">4</h3>
+<p>Total Agents</p>
+</div>
+
+<div class="card">
+<h3 id="assignedOrders">0</h3>
+<p>Assigned Orders</p>
+</div>
+
+<div class="card">
+<h3 id="deliveredOrders">0</h3>
+<p>Delivered Orders</p>
+</div>
+
+<div class="card">
+<h3 id="totalCollection">₹0</h3>
+<p>Total Collection</p>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍✈️ Agent Performance</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Agent</th>
+<th>Assigned</th>
+<th>Delivered</th>
+<th>Revenue</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="agentsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="agents.js"></script>
+
+</body>
+</html>
