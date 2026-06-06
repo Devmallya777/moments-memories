@@ -85,8 +85,6 @@ ${agent}
 
 </td>
 
-<td>
-
 <button
 onclick="assignOrder(
 '${order._id}'
