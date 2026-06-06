@@ -19,7 +19,7 @@ const Inventory =
 require("./models/inventory");
 
 const Order =
-require("./models/order");
+require("./models/Order");
 
 
 // ======================
@@ -34,6 +34,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+console.log("MONGO_URI =", process.env.MONGO_URI);
+
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
 
@@ -42,7 +44,9 @@ mongoose.connect(process.env.MONGO_URI)
 })
 .catch((err) => {
 
-    console.log(err);
+    console.error("Mongo Error:");
+    console.error(err.message);
+    console.error(err);
 
 });
 // ======================
@@ -103,7 +107,7 @@ app.get("/", (req, res) => {
 // ======================
 
 app.post(
-"/api/order",
+"/api/Order",
 upload.array("images", 10),
 
 async (req, res) => {
@@ -126,24 +130,6 @@ async (req, res) => {
         // SAVE ORDER
         // ======================
 
-        const newOrder = {
-
-            id: Date.now(),
-
-            product,
-            price,
-            name,
-            email,
-            phone,
-            address,
-            message,
-
-            status: "Pending",
-
-            date: new Date().toLocaleString()
-
-        };
-
         await Order.create({
 
     customerName: name,
@@ -156,10 +142,9 @@ async (req, res) => {
 
     products: product,
 
-    total: Number(
-        price.replace(/[^\d]/g,"")
-    ),
-
+total: parseInt(
+    String(price).replace(/[^\d]/g,"")
+) || 0,
     status: "Pending",
 
     assignedTo: "",
@@ -328,65 +313,102 @@ app.get(
 "/api/orders",
 async(req,res)=>{
 
-    const orders =
-    await Order.find()
-    .sort({createdAt:-1});
+    try{
 
-    res.json(orders);
+        const orders =
+        await Order.find()
+        .sort({createdAt:-1});
+
+        res.json(orders);
+
+    }
+
+    catch(err){
+
+        res.status(500).json({
+            success:false,
+            message:err.message
+        });
+
+    }
 
 });
-
 // ======================
 // DASHBOARD STATS
 // ======================
-
 app.get(
 "/api/stats",
 async(req,res)=>{
 
-    const orders =
-    await Order.find();
+    try{
 
-    const totalOrders =
-    orders.length;
+        const orders =
+        await Order.find();
 
-    const pendingOrders =
-    orders.filter(
-        o=>o.status==="Pending"
-    ).length;
+        const totalOrders =
+        orders.length;
 
-    const deliveredOrders =
-    orders.filter(
-        o=>o.status==="Delivered"
-    ).length;
+        const pendingOrders =
+        orders.filter(
+            o => o.status === "Pending"
+        ).length;
 
-    const totalCustomers =
-    new Set(
-        orders.map(o=>o.email)
-    ).size;
+        const deliveredOrders =
+        orders.filter(
+            o => o.status === "Delivered"
+        ).length;
 
-    res.json({
+        const totalCustomers =
+        new Set(
+            orders.map(o => o.email)
+        ).size;
 
-        totalOrders,
-        pendingOrders,
-        deliveredOrders,
-        totalCustomers
+        res.json({
 
-    });
+            totalOrders,
+            pendingOrders,
+            deliveredOrders,
+            totalCustomers
+
+        });
+
+    }
+
+    catch(err){
+
+        res.status(500).json({
+            success:false,
+            message:err.message
+        });
+
+    }
 
 });
+
 
 app.get(
 "/api/inventory",
 async(req,res)=>{
 
-    const items =
-    await Inventory.find();
+    try{
 
-    res.json(items);
+        const items =
+        await Inventory.find();
+
+        res.json(items);
+
+    }
+
+    catch(err){
+
+        res.status(500).json({
+            success:false,
+            message:err.message
+        });
+
+    }
 
 });
-
 app.post(
 "/api/inventory",
 async(req,res)=>{
@@ -442,25 +464,6 @@ async(req,res)=>{
     res.json({
         success:true
     });
-
-});
-
-app.put(
-"/api/order/:id",
-async(req,res)=>{
-
-    const order =
-    await Order.findByIdAndUpdate(
-
-        req.params.id,
-
-        req.body,
-
-        {new:true}
-
-    );
-
-    res.json(order);
 
 });
 
