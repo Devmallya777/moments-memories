@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moments & Memories | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>🎁 M&M Admin</h2>
+    <a href="dashboard.html" class="active">📊 Dashboard</a>
+    <a href="inventory.html">📦 Inventory</a>
+    <a href="orders.html">🛒 Orders</a>
+    <a href="agents.html">🚚 Delivery Agents</a>
+    <a href="finance.html">💰 Finance</a>
+    <a href="members.html">👥 Team Members</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html" id="logout-btn">🚪 Logout</a>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Dashboard</h1>
+        <p id="current-date">Loading...</p>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <span class="avatar">A</span>
+          <span>Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats">
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#e8f4fd;">📦</div>
+        <div>
+          <p class="stat-label">Total Orders</p>
+          <h3 id="total-orders">0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#fff8e1;">⏳</div>
+        <div>
+          <p class="stat-label">Pending Orders</p>
+          <h3 id="pending-orders">0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#e8f5e9;">✅</div>
+        <div>
+          <p class="stat-label">Delivered Orders</p>
+          <h3 id="delivered-orders">0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#fce4ec;">💰</div>
+        <div>
+          <p class="stat-label">Today's Revenue</p>
+          <h3 id="today-revenue">₹0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#f3e5f5;">📈</div>
+        <div>
+          <p class="stat-label">Total Revenue</p>
+          <h3 id="total-revenue">₹0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#e3f2fd;">👥</div>
+        <div>
+          <p class="stat-label">Total Customers</p>
+          <h3 id="total-customers">0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#fff3e0;">🚚</div>
+        <div>
+          <p class="stat-label">Assigned Orders</p>
+          <h3 id="assigned-orders">0</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background:#ffebee;">⚠️</div>
+        <div>
+          <p class="stat-label">Low Stock Items</p>
+          <h3 id="low-stock-count">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM SECTION: TWO COLUMNS -->
+    <div class="bottom-grid">
+
+      <!-- RECENT ORDERS TABLE -->
+      <div class="card table-card">
+        <div class="section-header">
+          <h2>🛒 Recent Orders</h2>
+          <a href="orders.html" class="view-all-btn">View All</a>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="recent-orders-body">
+              <tr><td colspan="6" style="text-align:center;color:#aaa;padding:30px;">No orders yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- TEAM MEMBERS WIDGET -->
+        <div class="card">
+          <div class="section-header">
+            <h2>👥 Team</h2>
+            <a href="members.html" class="view-all-btn">View All</a>
+          </div>
+          <div class="team-list" id="team-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- LOW STOCK WIDGET -->
+        <div class="card">
+          <div class="section-header">
+            <h2>⚠️ Low Stock</h2>
+            <a href="inventory.html" class="view-all-btn">Manage</a>
+          </div>
+          <div id="low-stock-list">
+            <p style="color:#aaa;font-size:14px;">No low stock items</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
