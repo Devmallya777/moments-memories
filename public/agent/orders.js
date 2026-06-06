@@ -51,17 +51,14 @@ myOrders.map(order=>`
 <td>${order.status}</td>
 
 <td>
-if(order.status === "Delivered") {
-  return res.status(400).json({ message: "Order already delivered" });
-}
   ${
     order.status === "Delivered"
-    ? `<span style="background:#d4edda;padding:5px 10px;border-radius:8px;">Delivered ✔</span>`
+    ? `<span style="color:green;font-weight:600;">✔ Delivered</span>`
     : `
-      <button>🚚 OFD</button>
-      <button>📍 Arrived</button>
-      <button>🔐 OTP</button>
-      <button>✅ Delivered</button>
+      <button onclick="outForDelivery('${order._id}')">🚚 OFD</button>
+      <button onclick="arrived('${order._id}')">📍 Arrived</button>
+      <button onclick="verifyOtp('${order._id}')">🔐 OTP</button>
+      <button onclick="markDelivered('${order._id}')">✅ Delivered</button>
     `
   }
 </td>
