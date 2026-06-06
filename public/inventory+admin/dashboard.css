@@ -40,23 +40,27 @@ body {
   display: block;
   color: #9ca3af;
   text-decoration: none;
-  margin: 2px 0;
   padding: 11px 15px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.sidebar a:hover {
+/* ACTIVE STATE */
+.sidebar a.active {
   background: #1f2937;
   color: white;
+  border-left: 4px solid #ffffff;
+  padding-left: 18px;
 }
 
-.sidebar a.active {
-  background: #ffffff15;
+/* HOVER STATE */
+.sidebar a:hover {
+  background: #374151;
   color: white;
-  border-left: 3px solid white;
+  transform: translateX(5px);
 }
 
 #logout-btn {
