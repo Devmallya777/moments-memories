@@ -76,12 +76,6 @@ ${AGENTS.map(agent => `
 
 </td>
 
-<button
-onclick="assignOrder(
-'${order._id}'
-)">
-Assign </button>
-
 </td>
 
 </tr>
