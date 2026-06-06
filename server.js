@@ -208,6 +208,29 @@ app.delete("/api/inventory/:id", async (req, res) => {
     res.json({ success: true });
 });
 
+app.put("/api/order/:id", async (req, res) => {
+
+    try {
+
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+
+        res.json(order);
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+
+});
+
 // ======================
 // SERVER
 // ======================
@@ -215,5 +238,7 @@ app.delete("/api/inventory/:id", async (req, res) => {
 app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => { console.log(`Server Running On Port ${PORT}`); });
 
+app.listen(PORT, () => {
+    console.log(`Server Running On Port ${PORT}`);
+});
