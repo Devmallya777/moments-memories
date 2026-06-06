@@ -62,23 +62,14 @@ ${order.products}
 
 <td>
 
-${order.assignedTo || "-"}
+<select id="agent-${order._id}" onchange="assignOrder('${order._id}')">
 
-<br><br>
+<option value="">Select Agent</option>
 
-<select id="agent-${order._id}">
-
-<option value="">
-Select Agent
-</option>
-
-${AGENTS.map(agent=>`
-
-<option
-value="${agent}">
-${agent}
-</option>
-
+${AGENTS.map(agent => `
+  <option value="${agent}" ${order.assignedTo === agent ? "selected" : ""}>
+    ${agent}
+  </option>
 `).join("")}
 
 </select>
