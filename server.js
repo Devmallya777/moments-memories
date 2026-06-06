@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const express = require("express");
@@ -8,82 +7,51 @@ const SibApiV3Sdk = require("sib-api-v3-sdk");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
+
 if (!fs.existsSync("uploads")) {
     fs.mkdirSync("uploads");
 }
+
 const app = express();
-
 const mongoose = require("mongoose");
-
-const Inventory =
-require("./models/inventory");
-
-const Order =
-require("./models/Order");
-
+const Inventory = require("./models/inventory");
+const Order = require("./models/Order");
 
 // ======================
 // MIDDLEWARE
 // ======================
 
 app.use(cors());
-
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static(path.join(__dirname, "public")));
 
 console.log("MONGO_URI =", process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-
-    console.log("MongoDB Connected ✅");
-
-})
-.catch((err) => {
-
-    console.error("Mongo Error:");
-    console.error(err.message);
-    console.error(err);
-
-});
-// ======================
-// TEMP DATABASE
-// ======================
-
-// MongoDB will store orders
+    .then(() => { console.log("MongoDB Connected ✅"); })
+    .catch((err) => {
+        console.error("Mongo Error:");
+        console.error(err.message);
+        console.error(err);
+    });
 
 // ======================
 // BREVO CONFIG
 // ======================
 
 const client = SibApiV3Sdk.ApiClient.instance;
-
 const apiKey = client.authentications["api-key"];
-
 apiKey.apiKey = process.env.BREVO_API_KEY;
-
 const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
+
 // ======================
 // MULTER STORAGE
 // ======================
 
 const storage = multer.diskStorage({
-
-    destination: function(req, file, cb){
-
-        cb(null, "uploads/");
-
-    },
-
-    filename: function(req, file, cb){
-
-        cb(null, Date.now() + "-" + file.originalname);
-
-    }
-
+    destination: function (req, file, cb) { cb(null, "uploads/"); },
+    filename: function (req, file, cb) { cb(null, Date.now() + "-" + file.originalname); }
 });
 
 const upload = multer({ storage });
@@ -93,389 +61,158 @@ const upload = multer({ storage });
 // ======================
 
 app.get("/", (req, res) => {
-
     res.sendFile(path.join(__dirname, "public", "index.html"));
-
 });
 
 // ======================
 // PLACE ORDER
 // ======================
 
-// ======================
-// PLACE ORDER
-// ======================
-
-app.post(
-"/api/Order",
-upload.array("images", 10),
-
-async (req, res) => {
-
+app.post("/api/Order", upload.array("images", 10), async (req, res) => {
     try {
+        const { product, price, name, email, phone, address, message } = req.body;
 
-        const {
-
-            product,
-            price,
-            name,
-            email,
-            phone,
-            address,
-            message
-
-        } = req.body;
-
-        // ======================
-        // SAVE ORDER
-        // ======================
-
+        // ✅ STEP 1: Save order first — always happens regardless of email
         await Order.create({
-
-    customerName: name,
-
-    email: email,
-
-    phone: phone,
-
-    address: address,
-
-    products: product,
-
-total: parseInt(
-    String(price).replace(/[^\d]/g,"")
-) || 0,
-    status: "Pending",
-
-    assignedTo: "",
-
-    paymentMethod: "",
-
-    paymentStatus: "Pending",
-
-    createdAt: new Date()
-
-});
-
-        // ======================
-        // ADMIN EMAIL
-        // ======================
-
-        await tranEmailApi.sendTransacEmail({
-
-            sender: {
-
-                email: "mm.giftboxes04@gmail.com",
-                name: "Moments & Memories"
-
-            },
-
-            to: [
-
-                {
-                    email: "mm.giftboxes04@gmail.com"
-                }
-
-            ],
-
-            subject: `💖 New Order From ${name}`,
-
-            attachment:
-            req.files?.map(file => ({
-
-            content:
-            fs.readFileSync(path.join(__dirname, file.path))
-            .toString("base64"),
-
-             name: file.originalname
-
-            })) || [],
-
-            htmlContent: `
-
-            <div style="font-family:Poppins;padding:20px;background:#fff4f7;border-radius:10px;">
-
-            <h2 style="color:#c95b84;">
-            New Order Received 💖
-            </h2>
-
-            <hr>
-
-            <p><strong>Product:</strong> ${product}</p>
-
-            <p><strong>Price:</strong> ${price}</p>
-
-            <p><strong>Name:</strong> ${name}</p>
-
-            <p><strong>Email:</strong> ${email}</p>
-
-            <p><strong>Phone:</strong> ${phone}</p>
-
-            <p><strong>Address:</strong> ${address}</p>
-
-            <p><strong>Gift Message:</strong> ${message}</p>
-
-            </div>
-
-            `
-
+            customerName: name,
+            email: email,
+            phone: phone,
+            address: address,
+            products: product,
+            total: parseInt(String(price).replace(/[^\d]/g, "")) || 0,
+            status: "Pending",
+            assignedTo: "",
+            paymentMethod: "",
+            paymentStatus: "Pending",
+            createdAt: new Date()
         });
 
-        // ======================
-        // CUSTOMER EMAIL
-        // ======================
+        console.log("✅ Order saved to DB");
 
-        await tranEmailApi.sendTransacEmail({
+        // ✅ STEP 2: Send emails in a SEPARATE try/catch
+        // A Brevo failure will NOT cause the order to fail
+        try {
 
-            sender: {
+            // Admin email
+            await tranEmailApi.sendTransacEmail({
+                sender: { email: "mm.giftboxes04@gmail.com", name: "Moments & Memories" },
+                to: [{ email: "mm.giftboxes04@gmail.com" }],
+                subject: `💖 New Order From ${name}`,
+                attachment: req.files?.map(file => ({
+                    content: fs.readFileSync(path.join(__dirname, file.path)).toString("base64"),
+                    name: file.originalname
+                })) || [],
+                htmlContent: `
+                    <div style="font-family:Poppins;padding:20px;background:#fff4f7;border-radius:10px;">
+                        <h2 style="color:#c95b84;">New Order Received 💖</h2>
+                        <hr>
+                        <p><strong>Product:</strong> ${product}</p>
+                        <p><strong>Price:</strong> ${price}</p>
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Phone:</strong> ${phone}</p>
+                        <p><strong>Address:</strong> ${address}</p>
+                        <p><strong>Gift Message:</strong> ${message}</p>
+                    </div>`
+            });
 
-                email: "mm.giftboxes04@gmail.com",
-                name: "Moments & Memories 💖"
+            console.log("✅ Admin email sent");
 
-            },
+            // Customer email
+            await tranEmailApi.sendTransacEmail({
+                sender: { email: "mm.giftboxes04@gmail.com", name: "Moments & Memories 💖" },
+                to: [{ email: email, name: name }],
+                subject: "💖 Your order is confirmed!",
+                htmlContent: `
+                    <div style="font-family:Poppins;background:#fff4f8;padding:40px;border-radius:20px;color:#5a1248;">
+                        <h1 style="color:#c21870;text-align:center;">Thank You For Your Order 💖</h1>
+                        <p style="font-size:18px;line-height:1.8;">
+                            Hi <strong>${name}</strong>,<br><br>
+                            Your order has been received successfully ✨
+                            We are now preparing your customized gift box with love 💕
+                        </p>
+                    </div>`
+            });
 
-            to: [
+            console.log("✅ Customer email sent");
 
-                {
-                    email: email,
-                    name: name
-                }
+        } catch (emailErr) {
+            // Email failed but order is already saved — just log it
+            console.error("❌ Email sending failed:", emailErr.message);
+        }
 
-            ],
+        res.json({ success: true, message: "Order placed successfully 💖" });
 
-            subject: "💖 Your order is confirmed!",
-
-            htmlContent: `
-
-            <div style="
-                font-family:Poppins;
-                background:#fff4f8;
-                padding:40px;
-                border-radius:20px;
-                color:#5a1248;
-            ">
-
-                <h1 style="
-                    color:#c21870;
-                    text-align:center;
-                ">
-                    Thank You For Your Order 💖
-                </h1>
-
-                <p style="
-                    font-size:18px;
-                    line-height:1.8;
-                ">
-                    Hi <strong>${name}</strong>,
-                    <br><br>
-
-                    Your order has been received successfully ✨
-
-                    We are now preparing your customized gift box with love 💕
-
-                </p>
-
-            </div>
-
-            `
-
-        });
-
-        res.json({
-
-            success: true,
-            message: "Order placed successfully 💖"
-
-        });
-
+    } catch (error) {
+        console.error("❌ Order failed:", error.message);
+        res.status(500).json({ success: false, message: "Something went wrong" });
     }
-
-    catch (error) {
-
-        console.log(error);
-
-        res.status(500).json({
-
-            success: false,
-            message: "Something went wrong"
-
-        });
-
-    }
-
 });
 
 // ======================
 // GET ALL ORDERS
 // ======================
 
-app.get(
-"/api/orders",
-async(req,res)=>{
-
-    try{
-
-        const orders =
-        await Order.find()
-        .sort({createdAt:-1});
-
+app.get("/api/orders", async (req, res) => {
+    try {
+        const orders = await Order.find().sort({ createdAt: -1 });
         res.json(orders);
-
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
     }
-
-    catch(err){
-
-        res.status(500).json({
-            success:false,
-            message:err.message
-        });
-
-    }
-
 });
+
 // ======================
 // DASHBOARD STATS
 // ======================
-app.get(
-"/api/stats",
-async(req,res)=>{
 
-    try{
-
-        const orders =
-        await Order.find();
-
-        const totalOrders =
-        orders.length;
-
-        const pendingOrders =
-        orders.filter(
-            o => o.status === "Pending"
-        ).length;
-
-        const deliveredOrders =
-        orders.filter(
-            o => o.status === "Delivered"
-        ).length;
-
-        const totalCustomers =
-        new Set(
-            orders.map(o => o.email)
-        ).size;
-
-        res.json({
-
-            totalOrders,
-            pendingOrders,
-            deliveredOrders,
-            totalCustomers
-
-        });
-
+app.get("/api/stats", async (req, res) => {
+    try {
+        const orders = await Order.find();
+        const totalOrders = orders.length;
+        const pendingOrders = orders.filter(o => o.status === "Pending").length;
+        const deliveredOrders = orders.filter(o => o.status === "Delivered").length;
+        const totalCustomers = new Set(orders.map(o => o.email)).size;
+        res.json({ totalOrders, pendingOrders, deliveredOrders, totalCustomers });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
     }
-
-    catch(err){
-
-        res.status(500).json({
-            success:false,
-            message:err.message
-        });
-
-    }
-
 });
 
+// ======================
+// INVENTORY
+// ======================
 
-app.get(
-"/api/inventory",
-async(req,res)=>{
-
-    try{
-
-        const items =
-        await Inventory.find();
-
+app.get("/api/inventory", async (req, res) => {
+    try {
+        const items = await Inventory.find();
         res.json(items);
-
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
     }
-
-    catch(err){
-
-        res.status(500).json({
-            success:false,
-            message:err.message
-        });
-
-    }
-
 });
-app.post(
-"/api/inventory",
-async(req,res)=>{
 
-    const {
-
-        itemName,
-        stock,
-        unitCost,
-        lowStockAlert
-
-    } = req.body;
-
-    const item =
-    await Inventory.create({
-
-        itemName,
-        stock,
-        unitCost,
-        lowStockAlert
-
-    });
-
+app.post("/api/inventory", async (req, res) => {
+    const { itemName, stock, unitCost, lowStockAlert } = req.body;
+    const item = await Inventory.create({ itemName, stock, unitCost, lowStockAlert });
     res.json(item);
-
 });
-app.put(
-"/api/inventory/:id",
-async(req,res)=>{
 
-    const item =
-    await Inventory.findByIdAndUpdate(
-
-        req.params.id,
-
-        req.body,
-
-        {new:true}
-
-    );
-
+app.put("/api/inventory/:id", async (req, res) => {
+    const item = await Inventory.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(item);
-
 });
-app.delete(
-"/api/inventory/:id",
-async(req,res)=>{
 
-    await Inventory.findByIdAndDelete(
-        req.params.id
-    );
-
-    res.json({
-        success:true
-    });
-
+app.delete("/api/inventory/:id", async (req, res) => {
+    await Inventory.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
 });
 
 // ======================
 // SERVER
 // ======================
+
 app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, () => {
-
-    console.log(`Server Running On Port ${PORT}`);
-
-});
+app.listen(PORT, () => { console.log(`Server Running On Port ${PORT}`); });
