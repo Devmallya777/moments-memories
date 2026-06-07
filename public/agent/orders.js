@@ -1,239 +1,107 @@
-const agent =
-localStorage.getItem("agentName");
+const agent = localStorage.getItem("agentName");
 
-if(!agent){
-window.location.href="login.html";
+if (!agent) {
+  window.location.href = "login.html";
 }
 
-async function loadOrders(){
+async function loadOrders() {
 
-const res =
-await fetch("/api/orders");
+  const res = await fetch("/api/orders");
+  const orders = await res.json();
 
-const orders =
-await res.json();
+  const myOrders = orders.filter(o => o.assignedTo === agent);
 
-const myOrders =
-orders.filter(
-o => o.assignedTo === agent
-);
+  const table = document.getElementById("ordersTable");
 
-const table =
-document.getElementById(
-"ordersTable"
-);
-
-if(myOrders.length===0){
-
-table.innerHTML=`
-
-<tr>
-<td colspan="5">
-No Assigned Orders
-</td>
-</tr>
-`;
-
-return;
-}
-
-table.innerHTML =
-myOrders.map(order=>`
-
-<tr>
-
-<td>${order.customerName}</td>
-
-<td>${order.products}</td>
-
-<td>₹${order.total}</td>
-
-<td>${order.status}</td>
-
-<td>
-  ${
-    order.status === "Delivered"
-    ? `<span style="color:green;font-weight:600;">✔ Delivered</span>`
-    : `
-      <button onclick="outForDelivery('${order._id}')">🚚 OFD</button>
-      <button onclick="arrived('${order._id}')">📍 Arrived</button>
-      <button onclick="verifyOtp('${order._id}')">🔐 OTP</button>
-      <button onclick="markDelivered('${order._id}')">✅ Delivered</button>
-    `
+  if (myOrders.length === 0) {
+    table.innerHTML = `
+      <tr>
+        <td colspan="5">No Assigned Orders</td>
+      </tr>
+    `;
+    return;
   }
-</td>
 
-</tr>
+  table.innerHTML = myOrders.map(order => `
+    <tr>
 
-`).join("");
+      <td>${order.customerName}</td>
+      <td>${order.products}</td>
+      <td>₹${order.total}</td>
+      <td>${order.status}</td>
 
+      <td>
+        ${
+          order.status === "Delivered"
+          ? `<span style="color:green;font-weight:600;">✔ Delivered</span>`
+          : `
+            <button onclick="outForDelivery('${order._id}')">🚚 OFD</button>
+            <button onclick="arrived('${order._id}')">📍 Arrived</button>
+            <button onclick="markDelivered('${order._id}')">✅ Delivered</button>
+          `
+        }
+      </td>
+
+    </tr>
+  `).join("");
 }
 
-async function outForDelivery(id){
+/* ---------------- OUT FOR DELIVERY ---------------- */
+async function outForDelivery(id) {
 
-const otp =
-Math.floor(
-100000 + Math.random()*900000
-);
+  await fetch(`/api/order/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      status: "Out For Delivery"
+    })
+  });
 
-await fetch(`/api/order/${id}`,{
-
-method:"PUT",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-status:"Out For Delivery",
-deliveryOtp:otp
-
-})
-
-});
-
-alert(
-"OTP Generated : " + otp
-);
-
-loadOrders();
-
+  alert("Marked: Out For Delivery");
+  loadOrders();
 }
 
-async function arrived(id){
+/* ---------------- ARRIVED (WHATSAPP ONLY) ---------------- */
+async function arrived(id) {
 
-const phone =
-prompt(
-"Customer Phone Number"
-);
+  const phone = prompt("Customer Phone Number");
 
-const otp =
-prompt(
-"Enter Generated OTP"
-);
-
-const text =
-encodeURIComponent(
-
+  const text = encodeURIComponent(
 `🚚 Moments & Memories
 
 Your order has arrived.
 
-🔐 OTP : ${otp}
-
-Please share this OTP only after receiving your parcel.
+Please receive your parcel.
 
 Thank You ❤️`
+  );
 
-);
-
-window.open(
-`https://wa.me/91${phone}?text=${text}`
-);
-
+  window.open(`https://wa.me/91${phone}?text=${text}`);
 }
 
-async function verifyOtp(id){
+/* ---------------- MARK DELIVERED ---------------- */
+async function markDelivered(id) {
 
-const enteredOtp =
-prompt(
-"Enter Customer OTP"
-);
+  const payment = prompt("Payment Type? Cash / UPI");
 
-const orders =
-await fetch("/api/orders");
+  await fetch(`/api/order/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      status: "Delivered",
+      paymentMethod: payment,
+      paymentStatus: "Paid"
+    })
+  });
 
-const data =
-await orders.json();
-
-const order =
-data.find(
-o => o._id === id
-);
-
-if(
-enteredOtp === order.deliveryOtp
-){
-
-alert(
-"OTP Verified Successfully"
-);
-
-await fetch(`/api/order/${id}`,{
-
-method:"PUT",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-status:"OTP Verified"
-
-})
-
-});
-
+  alert("Order Delivered Successfully");
+  loadOrders();
 }
 
-else{
-
-alert(
-"Wrong OTP"
-);
-
-}
-
-loadOrders();
-
-}
-
-async function markDelivered(id){
-
-const payment =
-prompt(
-"Payment Type?\nCash / UPI"
-);
-
-await fetch(`/api/order/${id}`,{
-
-method:"PUT",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-status:"Delivered",
-
-paymentMethod:payment,
-
-paymentStatus:"Paid"
-
-})
-
-});
-
-alert(
-"Order Delivered Successfully"
-);
-
-loadOrders();
-
-}
-
-function logoutAgent(){
-
-localStorage.removeItem(
-"agentName"
-);
-
-window.location.href =
-"login.html";
-
+/* ---------------- LOGOUT ---------------- */
+function logoutAgent() {
+  localStorage.removeItem("agentName");
+  window.location.href = "login.html";
 }
 
 loadOrders();

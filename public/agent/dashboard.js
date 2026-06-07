@@ -1,119 +1,79 @@
-const agent =
-localStorage.getItem(
-"agentName"
-);
+const agent = localStorage.getItem("agentName");
 
-if(!agent){
-
-window.location.href =
-"login.html";
-
+if (!agent) {
+  window.location.href = "login.html";
 }
 
-document.getElementById(
-"agentName"
-).innerHTML =
-agent;
+const nameEl = document.getElementById("agentName");
+if (nameEl) nameEl.innerHTML = agent;
 
 // Greeting
+const hour = new Date().getHours();
+const greeting = document.getElementById("greeting");
 
-const hour =
-new Date().getHours();
-
-const greeting =
-document.getElementById(
-"greeting"
-);
-
-if(hour < 12){
-
-greeting.innerHTML =
-"Good Morning ☀️";
-
+if (greeting) {
+  if (hour < 12) {
+    greeting.innerHTML = "Good Morning ☀️";
+  } else if (hour < 18) {
+    greeting.innerHTML = "Good Afternoon 🌤️";
+  } else {
+    greeting.innerHTML = "Good Evening 🌙";
+  }
 }
 
-else if(hour < 18){
-
-greeting.innerHTML =
-"Good Afternoon 🌤️";
-
+// ✅ TODAY CHECK FUNCTION
+function isToday(dateString) {
+  const d = new Date(dateString);
+  return d.toDateString() === new Date().toDateString();
 }
 
-else{
+async function loadDashboard() {
 
-greeting.innerHTML =
-"Good Evening 🌙";
+  try {
 
+    const res = await fetch("/api/orders");
+    const orders = await res.json();
+
+    const myOrders = orders.filter(o => o.assignedTo === agent);
+
+    // TODAY ORDERS ONLY
+    const todayOrders = myOrders.filter(o => isToday(o.createdAt));
+
+    const assignedEl = document.getElementById("assignedCount");
+    const deliveredEl = document.getElementById("deliveredCount");
+    const cashEl = document.getElementById("cashCollected");
+
+    if (assignedEl)
+      assignedEl.innerHTML = myOrders.length;
+
+    if (deliveredEl)
+      deliveredEl.innerHTML = myOrders.filter(o => o.status === "Delivered").length;
+
+    // ✅ ONLY TODAY DELIVERED CASH
+    let total = 0;
+
+    todayOrders.forEach(order => {
+      if (order.status === "Delivered") {
+        total += Number(order.total || 0);
+      }
+    });
+
+    if (cashEl)
+      cashEl.innerHTML = "₹" + total;
+
+  }
+
+  catch (err) {
+    console.log(err);
+  }
 }
 
-async function loadDashboard(){
-
-try{
-
-const res =
-await fetch(
-"/api/orders"
-);
-
-const orders =
-await res.json();
-
-const myOrders =
-orders.filter(
-o => o.assignedTo === agent
-);
-
-document.getElementById(
-"assignedCount"
-).innerHTML =
-myOrders.length;
-
-document.getElementById(
-"deliveredCount"
-).innerHTML =
-myOrders.filter(
-o => o.status === "Delivered"
-).length;
-
-let total = 0;
-
-myOrders.forEach(order=>{
-
-if(
-order.status === "Delivered"
-){
-
-total +=
-Number(order.total || 0);
-
-}
-
-});
-
-document.getElementById(
-"cashCollected"
-).innerHTML =
-"₹" + total;
-
-}
-
-catch(err){
-
-console.log(err);
-
-}
-
-}
-
-function logoutAgent(){
-
-localStorage.removeItem(
-"agentName"
-);
-
-window.location.href =
-"login.html";
-
-}
-
+// OPTIONAL: auto refresh every 5 sec
 loadDashboard();
+setInterval(loadDashboard, 5000);
+
+// logout
+function logoutAgent() {
+  localStorage.removeItem("agentName");
+  window.location.href = "login.html";
+}
