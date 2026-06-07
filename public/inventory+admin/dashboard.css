@@ -461,77 +461,18 @@ tr:hover td {
    MOBILE RESPONSIVE
 ========================= */
 
-@media (max-width: 768px){
-
-body{
-  flex-direction:column;
-}
-
-/* Sidebar */
-.sidebar{
-  width:100%;
-  height:auto;
-  position:relative;
-  padding:15px;
-}
-
-.sidebar h2{
-  text-align:center;
-}
-
-.sidebar a{
-  padding:12px;
-  margin:4px 0;
-}
-
-/* Main content */
-.main{
-  margin-left:0 !important;
-  width:100%;
-  padding:15px;
-}
-
-/* Stats cards */
-.stats{
-  grid-template-columns:1fr;
-}
-
-/* Tables */
-.table-wrapper{
-  overflow-x:auto;
-}
-
-table{
-  min-width:700px;
-}
-
-/* Inputs */
-.add-box{
-  flex-direction:column;
-}
-
-.add-box input,
-.add-box button{
-  width:100%;
-}
-
-/* Buttons */
-button{
-  width:100%;
-  margin-top:5px;
-}
-
-/* Cards */
-.card{
-  padding:15px;
-}
-}
 #menuBtn{
   display:none;
 }
 
 @media (max-width:768px){
 
+  /* Layout */
+  body{
+    display:block;
+  }
+
+  /* Menu Button */
   #menuBtn{
     display:block;
     position:fixed;
@@ -543,26 +484,149 @@ button{
     border-radius:8px;
     background:#111827;
     color:white;
+    font-size:14px;
     cursor:pointer;
   }
 
+  /* Sidebar */
   .sidebar{
     position:fixed;
     top:0;
     left:-260px;
     width:250px;
     height:100vh;
+    padding:20px;
     z-index:1000;
-    transition:left .3s ease;
     overflow-y:auto;
+    transition:left .3s ease;
   }
 
   .sidebar.show{
     left:0;
   }
 
+  .sidebar h2{
+    margin-bottom:20px;
+  }
+
+  .sidebar a{
+    font-size:14px;
+    padding:12px;
+  }
+
+  /* Main Content */
   .main{
     width:100%;
     padding:70px 15px 15px;
+    margin-left:0 !important;
+  }
+
+  /* Top Bar */
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .topbar-left h1{
+    font-size:22px;
+  }
+
+  .topbar-right{
+    width:100%;
+  }
+
+  .topbar-user{
+    width:100%;
+    justify-content:center;
+  }
+
+  /* Stats Cards */
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .stat-card{
+    padding:15px;
+  }
+
+  .stat-card h3{
+    font-size:22px;
+  }
+
+  .stat-icon{
+    width:45px;
+    height:45px;
+    font-size:22px;
+  }
+
+  /* Bottom Grid */
+  .bottom-grid{
+    grid-template-columns:1fr;
+  }
+
+  .right-col{
+    width:100%;
+  }
+
+  /* Table */
+  .table-wrapper{
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:700px;
+    font-size:12px;
+  }
+
+  th,
+  td{
+    padding:8px;
+  }
+
+  /* Forms */
+  .add-box{
+    flex-direction:column;
+  }
+
+  .add-box input,
+  .add-box button{
+    width:100%;
+  }
+
+  /* Buttons */
+  button{
+    width:100%;
+  }
+
+  /* Team Widget */
+  .team-item{
+    padding:12px;
+  }
+
+  /* Cards */
+  .card{
+    padding:15px;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width:480px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .topbar-left h1{
+    font-size:20px;
+  }
+
+  .stat-card{
+    flex-direction:row;
+  }
+
+  .stat-card h3{
+    font-size:20px;
   }
 }
