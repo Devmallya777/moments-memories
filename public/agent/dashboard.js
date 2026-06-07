@@ -21,12 +21,6 @@ if (greeting) {
   }
 }
 
-// ✅ TODAY CHECK FUNCTION
-function isToday(dateString) {
-  const d = new Date(dateString);
-  return d.toDateString() === new Date().toDateString();
-}
-
 async function loadDashboard() {
 
   try {
@@ -35,30 +29,31 @@ async function loadDashboard() {
     const orders = await res.json();
 
     const myOrders = orders.filter(o =>
-  (o.assignedTo || "").trim().toLowerCase() === agent.trim().toLowerCase()
-);
-
-    // TODAY ORDERS ONLY
-    const todayOrders = myOrders.filter(o => isToday(o.createdAt));
+      (o.assignedTo || "").trim().toLowerCase() === agent.trim().toLowerCase()
+    );
 
     const assignedEl = document.getElementById("assignedCount");
     const deliveredEl = document.getElementById("deliveredCount");
     const cashEl = document.getElementById("cashCollected");
 
+    // Assigned Orders
     if (assignedEl)
       assignedEl.innerHTML = myOrders.length;
 
-    if (deliveredEl)
-      deliveredEl.innerHTML = myOrders.filter(o => (o.status || "").toLowerCase() === "delivered").length;
+    // Delivered Orders
+    const delivered = myOrders.filter(o =>
+      (o.status || "").toLowerCase() === "delivered"
+    );
 
-    // ✅ ONLY TODAY DELIVERED CASH
+    if (deliveredEl)
+      deliveredEl.innerHTML = delivered.length;
+
+    // Cash Collected
     let total = 0;
 
-myOrders.forEach(order => {
-  if ((order.status || "").toLowerCase() === "delivered") {
-    total += Number(order.total ?? 0);
-  }
-});
+    delivered.forEach(order => {
+      total += Number(order.total ?? 0);
+    });
 
     if (cashEl)
       cashEl.innerHTML = "₹" + total;
@@ -70,7 +65,7 @@ myOrders.forEach(order => {
   }
 }
 
-// OPTIONAL: auto refresh every 5 sec
+// INIT
 loadDashboard();
 setInterval(loadDashboard, 5000);
 
