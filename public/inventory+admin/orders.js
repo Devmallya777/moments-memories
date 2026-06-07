@@ -168,3 +168,11 @@ const sidebar = document.querySelector(".sidebar");
 menuBtn.addEventListener("click",()=>{
   sidebar.classList.toggle("show");
 });
+function toggleSidebar(){
+
+const sidebar =
+document.getElementById("sidebar");
+
+sidebar.classList.toggle("show");
+
+}

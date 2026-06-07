@@ -9,9 +9,8 @@
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-<button id="menuBtn">☰ Menu</button>
   <!-- SIDEBAR -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2>🎁 M&M Admin</h2>
     <a href="dashboard.html" class="active">📊 Dashboard</a>
     <a href="inventory.html">📦 Inventory</a>
@@ -25,6 +24,10 @@
 
   <!-- MAIN -->
   <div class="main">
+
+    <button class="menu-btn" onclick="toggleSidebar()">
+☰ Menu
+</button>
 
     <!-- TOPBAR -->
     <div class="topbar">

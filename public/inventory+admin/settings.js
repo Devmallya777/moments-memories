@@ -355,3 +355,11 @@ document.body.classList.add(
 }
 
 }
+function toggleSidebar(){
+
+const sidebar =
+document.getElementById("sidebar");
+
+sidebar.classList.toggle("show");
+
+}

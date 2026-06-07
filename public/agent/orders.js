@@ -1,107 +1,165 @@
-const agent = localStorage.getItem("agentName");
+const agent =
+localStorage.getItem("agentName");
 
-if (!agent) {
-  window.location.href = "login.html";
+if(!agent){
+
+window.location.href =
+"login.html";
+
 }
 
-async function loadOrders() {
+async function loadOrders(){
 
-  const res = await fetch("/api/orders");
-  const orders = await res.json();
+try{
 
-  const myOrders = orders.filter(o => o.assignedTo === agent);
+const res =
+await fetch("/api/orders");
 
-  const table = document.getElementById("ordersTable");
+const orders =
+await res.json();
 
-  if (myOrders.length === 0) {
-    table.innerHTML = `
-      <tr>
-        <td colspan="5">No Assigned Orders</td>
-      </tr>
-    `;
-    return;
-  }
+const myOrders =
+orders.filter(
+o => o.assignedTo === agent
+);
 
-  table.innerHTML = myOrders.map(order => `
-    <tr>
+const container =
+document.getElementById(
+"ordersContainer"
+);
 
-      <td>${order.customerName}</td>
-      <td>${order.products}</td>
-      <td>₹${order.total}</td>
-      <td>${order.status}</td>
+if(myOrders.length === 0){
 
-      <td>
-        ${
-          order.status === "Delivered"
-          ? `<span style="color:green;font-weight:600;">✔ Delivered</span>`
-          : `
-            <button onclick="outForDelivery('${order._id}')">🚚 OFD</button>
-            <button onclick="arrived('${order._id}')">📍 Arrived</button>
-            <button onclick="markDelivered('${order._id}')">✅ Delivered</button>
-          `
-        }
-      </td>
+container.innerHTML =
+"<h3>No Assigned Orders</h3>";
 
-    </tr>
-  `).join("");
+return;
+
 }
 
-/* ---------------- OUT FOR DELIVERY ---------------- */
-async function outForDelivery(id) {
+container.innerHTML =
+myOrders.map(order=>`
 
-  await fetch(`/api/order/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      status: "Out For Delivery"
-    })
-  });
+<div class="order-card">
 
-  alert("Marked: Out For Delivery");
-  loadOrders();
+<h3>👤 ${order.customerName}</h3>
+
+<p>📞 ${order.phone || "-"}</p>
+
+<p>📍 ${order.address || "-"}</p>
+
+<p>🎁 ${order.products}</p>
+
+<p>💰 ₹${order.total}</p>
+
+<p>📦 Status: <strong>${order.status}</strong></p>
+
+<div class="btn-group">
+
+<button
+class="call"
+onclick="callCustomer('${order.phone}')">
+📞 Call
+</button>
+
+<button
+class="map"
+onclick="openMap('${order.address}')">
+🗺 Maps
+</button>
+
+<button
+class="ofd"
+onclick="updateStatus('${order._id}','Out For Delivery')">
+🚚 OFD
+</button>
+
+<button
+class="arrived"
+onclick="updateStatus('${order._id}','Arrived')">
+📍 Arrived
+</button>
+
+<button
+class="cash"
+onclick="updateStatus('${order._id}','Cash Collected')">
+💰 Cash
+</button>
+
+<button
+class="delivered"
+onclick="updateStatus('${order._id}','Delivered')">
+✅ Delivered
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+catch(err){
+
+console.log(err);
+
 }
 
-/* ---------------- ARRIVED (WHATSAPP ONLY) ---------------- */
-async function arrived(id) {
-
-  const phone = prompt("Customer Phone Number");
-
-  const text = encodeURIComponent(
-`🚚 Moments & Memories
-
-Your order has arrived.
-
-Please receive your parcel.
-
-Thank You ❤️`
-  );
-
-  window.open(`https://wa.me/91${phone}?text=${text}`);
 }
 
-/* ---------------- MARK DELIVERED ---------------- */
-async function markDelivered(id) {
+function callCustomer(phone){
 
-  const payment = prompt("Payment Type? Cash / UPI");
+window.location.href =
+`tel:${phone}`;
 
-  await fetch(`/api/order/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      status: "Delivered",
-      paymentMethod: payment,
-      paymentStatus: "Paid"
-    })
-  });
-
-  alert("Order Delivered Successfully");
-  loadOrders();
 }
 
-/* ---------------- LOGOUT ---------------- */
-function logoutAgent() {
-  localStorage.removeItem("agentName");
-  window.location.href = "login.html";
+function openMap(address){
+
+window.open(
+`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
+);
+
+}
+
+async function updateStatus(id,status){
+
+try{
+
+await fetch(`/api/order/${id}`,{
+
+method:"PUT",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+status
+})
+
+});
+
+loadOrders();
+
+}
+catch(err){
+
+console.log(err);
+
+}
+
+}
+
+function logoutAgent(){
+
+localStorage.removeItem(
+"agentName"
+);
+
+window.location.href =
+"login.html";
+
 }
 
 loadOrders();

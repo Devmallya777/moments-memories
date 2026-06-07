@@ -203,3 +203,11 @@ document.addEventListener("click", (e) => {
     sidebar.classList.remove("show");
   }
 });
+function toggleSidebar(){
+
+const sidebar =
+document.getElementById("sidebar");
+
+sidebar.classList.toggle("show");
+
+}
