@@ -209,14 +209,3 @@ grid-template-columns:1fr !important;
 }
 
 }
-.table-container{
-
-overflow-x:auto;
-
-}
-
-table{
-
-min-width:800px;
-
-}
