@@ -166,3 +166,27 @@ cursor:pointer;
 .action-btn:hover {
   opacity: 0.85;
 }
+#menuBtn{
+  display:none;
+}
+
+@media(max-width:768px){
+
+#menuBtn{
+  display:block;
+  width:100%;
+  padding:12px;
+  border:none;
+  background:#111827;
+  color:white;
+  font-size:18px;
+}
+
+.sidebar{
+  display:none;
+}
+
+.sidebar.show{
+  display:flex;
+}
+}

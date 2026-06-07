@@ -106,3 +106,27 @@ color:white;
 border-radius:8px;
 cursor:pointer;
 }
+#menuBtn{
+  display:none;
+}
+
+@media(max-width:768px){
+
+#menuBtn{
+  display:block;
+  width:100%;
+  padding:12px;
+  border:none;
+  background:#111827;
+  color:white;
+  font-size:18px;
+}
+
+.sidebar{
+  display:none;
+}
+
+.sidebar.show{
+  display:flex;
+}
+}
