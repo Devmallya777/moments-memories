@@ -16,6 +16,8 @@ const app = express();
 const mongoose = require("mongoose");
 const Inventory = require("./models/inventory");
 const Order = require("./models/Order");
+let onlineUsers = {};
+let activityLog = [];
 
 // ======================
 // MIDDLEWARE
@@ -241,4 +243,87 @@ const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
     console.log(`Server Running On Port ${PORT}`);
+});
+
+
+app.post("/api/heartbeat", (req, res) => {
+    const { name } = req.body;
+
+    if (!name) return res.json({ success: false });
+
+    onlineUsers[name] = Date.now();
+
+    res.json({ success: true });
+});
+
+
+app.get("/api/online-users", (req, res) => {
+
+    const now = Date.now();
+
+    const online = Object.keys(onlineUsers).filter(name => {
+        return now - onlineUsers[name] < 15000; // 15 sec rule
+    });
+
+    res.json(online);
+});
+
+
+app.post("/api/log", (req, res) => {
+
+    const { user, action } = req.body;
+
+    activityLog.unshift({
+        user,
+        action,
+        time: new Date().toLocaleString()
+    });
+
+    // keep only last 50 logs
+    activityLog = activityLog.slice(0, 50);
+
+    res.json({ success: true });
+});
+
+
+app.get("/api/activity-log", (req, res) => {
+    res.json(activityLog);
+});
+
+
+
+setInterval(() => {
+
+    const now = Date.now();
+
+    for (let user in onlineUsers) {
+        if (now - onlineUsers[user] > 15000) {
+            delete onlineUsers[user];
+        }
+    }
+
+}, 10000);
+
+
+
+
+setInterval(() => {
+    fetch("/api/heartbeat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: localStorage.getItem("agentName")
+        })
+    });
+}, 5000);
+
+
+
+fetch("/api/log", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        user: localStorage.getItem("agentName"),
+        action: "Delivered Order #123"
+    })
 });
