@@ -258,11 +258,10 @@ app.post("/api/heartbeat", (req, res) => {
 
 
 app.get("/api/online-users", (req, res) => {
-
     const now = Date.now();
 
     const online = Object.keys(onlineUsers).filter(name => {
-        return now - onlineUsers[name] < 15000; // 15 sec rule
+        return now - onlineUsers[name] < 15000;
     });
 
     res.json(online);
@@ -270,7 +269,6 @@ app.get("/api/online-users", (req, res) => {
 
 
 app.post("/api/log", (req, res) => {
-
     const { user, action } = req.body;
 
     activityLog.unshift({
@@ -279,7 +277,6 @@ app.post("/api/log", (req, res) => {
         time: new Date().toLocaleString()
     });
 
-    // keep only last 50 logs
     activityLog = activityLog.slice(0, 50);
 
     res.json({ success: true });
@@ -293,7 +290,6 @@ app.get("/api/activity-log", (req, res) => {
 
 
 setInterval(() => {
-
     const now = Date.now();
 
     for (let user in onlineUsers) {
@@ -301,29 +297,4 @@ setInterval(() => {
             delete onlineUsers[user];
         }
     }
-
 }, 10000);
-
-
-
-
-setInterval(() => {
-    fetch("/api/heartbeat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            name: localStorage.getItem("agentName")
-        })
-    });
-}, 5000);
-
-
-
-fetch("/api/log", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-        user: localStorage.getItem("agentName"),
-        action: "Delivered Order #123"
-    })
-});

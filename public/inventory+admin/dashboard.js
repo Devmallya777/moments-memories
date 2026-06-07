@@ -178,3 +178,13 @@ setInterval(() => {
   loadLowStock();
   loadTeam();
 }, 60000);
+
+setInterval(() => {
+    fetch("/api/heartbeat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: localStorage.getItem("agentName")
+        })
+    });
+}, 5000);
