@@ -532,23 +532,37 @@ button{
 
 @media (max-width:768px){
 
-.main{
-    margin-left:0 !important;
-    padding:10px;
-}
+  #menuBtn{
+    display:block;
+    position:fixed;
+    top:15px;
+    left:15px;
+    z-index:1001;
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    background:#111827;
+    color:white;
+    cursor:pointer;
+  }
 
-table{
-    font-size:12px;
-}
+  .sidebar{
+    position:fixed;
+    top:0;
+    left:-260px;
+    width:250px;
+    height:100vh;
+    z-index:1000;
+    transition:left .3s ease;
+    overflow-y:auto;
+  }
 
-th,
-td{
-    padding:8px 5px;
-    word-break:break-word;
-}
+  .sidebar.show{
+    left:0;
+  }
 
-button{
-    padding:6px 8px;
-    font-size:12px;
-}
+  .main{
+    width:100%;
+    padding:70px 15px 15px;
+  }
 }
