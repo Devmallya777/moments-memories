@@ -34,7 +34,9 @@ async function loadDashboard() {
     const res = await fetch("/api/orders");
     const orders = await res.json();
 
-    const myOrders = orders.filter(o => o.assignedTo === agent);
+    const myOrders = orders.filter(o =>
+  (o.assignedTo || "").trim().toLowerCase() === agent.trim().toLowerCase()
+);
 
     // TODAY ORDERS ONLY
     const todayOrders = myOrders.filter(o => isToday(o.createdAt));
@@ -47,16 +49,16 @@ async function loadDashboard() {
       assignedEl.innerHTML = myOrders.length;
 
     if (deliveredEl)
-      deliveredEl.innerHTML = myOrders.filter(o => o.status === "Delivered").length;
+      deliveredEl.innerHTML = myOrders.filter(o => (o.status || "").toLowerCase() === "delivered").length;
 
     // ✅ ONLY TODAY DELIVERED CASH
     let total = 0;
 
-    todayOrders.forEach(order => {
-      if (order.status === "Delivered") {
-        total += Number(order.total || 0);
-      }
-    });
+myOrders.forEach(order => {
+  if ((order.status || "").toLowerCase() === "delivered") {
+    total += Number(order.total ?? 0);
+  }
+});
 
     if (cashEl)
       cashEl.innerHTML = "₹" + total;
