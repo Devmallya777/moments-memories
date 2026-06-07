@@ -194,3 +194,12 @@ const sidebar = document.querySelector(".sidebar");
 menuBtn.addEventListener("click",()=>{
   sidebar.classList.toggle("show");
 });
+document.addEventListener("click", (e) => {
+  if (
+    sidebar.classList.contains("show") &&
+    !sidebar.contains(e.target) &&
+    e.target !== menuBtn
+  ) {
+    sidebar.classList.remove("show");
+  }
+});
