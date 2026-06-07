@@ -1,0 +1,206 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f7fb;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:250px;
+background:#111827;
+padding:25px;
+position:fixed;
+height:100vh;
+overflow-y:auto;
+}
+
+.sidebar h2{
+color:white;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+padding:12px;
+margin-bottom:8px;
+color:white;
+text-decoration:none;
+border-radius:10px;
+transition:.3s;
+}
+
+.sidebar a:hover,
+.sidebar .active{
+background:#1f2937;
+}
+
+/* MAIN */
+
+.main{
+margin-left:250px;
+padding:30px;
+width:100%;
+}
+
+.main h1{
+margin-bottom:25px;
+color:#111827;
+}
+
+/* SECTION */
+
+.section{
+background:white;
+padding:25px;
+border-radius:18px;
+margin-bottom:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.section h2{
+margin-bottom:20px;
+color:#111827;
+}
+
+/* FORM GRID */
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.form-grid input{
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+outline:none;
+width:100%;
+}
+
+.form-grid input:focus{
+border-color:#111827;
+}
+
+/* CHECKBOX */
+
+.checkbox{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:20px;
+font-size:14px;
+}
+
+/* BUTTONS */
+
+button{
+padding:14px 20px;
+border:none;
+border-radius:10px;
+background:#111827;
+color:white;
+cursor:pointer;
+transition:.3s;
+font-weight:600;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+/* THEME BUTTONS */
+
+.theme-box{
+display:flex;
+gap:15px;
+margin-bottom:20px;
+}
+
+.theme-box button{
+flex:1;
+}
+
+/* SAVE ALL */
+
+.save-all-btn{
+width:100%;
+font-size:18px;
+padding:18px;
+background:#16a34a;
+}
+
+/* DARK MODE */
+
+body.dark{
+background:#0f172a;
+}
+
+body.dark .main h1{
+color:white;
+}
+
+body.dark .section{
+background:#1e293b;
+color:white;
+}
+
+body.dark .section h2{
+color:white;
+}
+
+body.dark input{
+background:#334155;
+color:white;
+border:1px solid #475569;
+}
+
+body.dark button{
+background:#2563eb;
+}
+
+body.dark .save-all-btn{
+background:#16a34a;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+flex-direction:column;
+}
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+padding:15px;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.theme-box{
+flex-direction:column;
+}
+
+button{
+width:100%;
+}
+
+}

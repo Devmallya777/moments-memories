@@ -1,0 +1,217 @@
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings</title>
+
+<link rel="stylesheet" href="settings.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>🎁 M&M Admin</h2>
+
+<a href="dashboard.html">📊 Dashboard</a>
+
+<a href="inventory.html">📦 Inventory</a>
+
+<a href="orders.html">🛒 Orders</a>
+
+<a href="agents.html">🚚 Delivery Agents</a>
+
+<a href="finance.html">💰 Finance</a>
+
+<a href="members.html">👥 Team Members</a>
+
+<a href="settings.html" class="active">⚙️ Settings</a>
+
+<a href="login.html">🚪 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<h1>⚙️ Settings</h1>
+
+<!-- BUSINESS SETTINGS -->
+
+<div class="section">
+
+<h2>🏪 Business Settings</h2>
+
+<div class="form-grid">
+
+<input type="text" id="businessName" placeholder="Business Name">
+
+<input type="text" id="businessTagline" placeholder="Business Tagline">
+
+<input type="email" id="businessEmail" placeholder="Business Email">
+
+<input type="text" id="businessPhone" placeholder="Business Phone">
+
+<input type="text" id="businessAddress" placeholder="Business Address">
+
+<input type="text" id="gstNumber" placeholder="GST Number">
+
+<input type="file" id="businessLogo">
+
+</div>
+
+<button onclick="saveBusinessSettings()">
+💾 Save Business Settings
+</button>
+
+</div>
+
+<!-- WEBSITE SETTINGS -->
+
+<div class="section">
+
+<h2>🎨 Website Settings</h2>
+
+<div class="form-grid">
+
+<input type="file" id="websiteBanner">
+
+<input type="text" id="footerText" placeholder="Footer Text">
+
+<label>
+
+Primary Color
+
+<input type="color" id="primaryColor">
+
+</label>
+
+<label>
+
+Secondary Color
+
+<input type="color" id="secondaryColor">
+
+</label>
+
+</div>
+
+<div class="theme-box">
+
+<button onclick="setTheme('light')">
+☀️ Light Mode
+</button>
+
+<button onclick="setTheme('dark')">
+🌙 Dark Mode
+</button>
+
+</div>
+
+<button onclick="saveWebsiteSettings()">
+💾 Save Website Settings
+</button>
+
+</div>
+
+<!-- INVENTORY SETTINGS -->
+
+<div class="section">
+
+<h2>📦 Inventory Settings</h2>
+
+<div class="form-grid">
+
+<input type="number" id="lowStockAlert" placeholder="Low Stock Alert Quantity">
+
+<input type="number" id="minimumStock" placeholder="Minimum Stock Quantity">
+
+</div>
+
+<label class="checkbox">
+
+<input type="checkbox" id="autoDeduction">
+
+Enable Auto Stock Deduction
+
+</label>
+
+<button onclick="saveInventorySettings()">
+💾 Save Inventory Settings
+</button>
+
+</div>
+
+<!-- FINANCE SETTINGS -->
+
+<div class="section">
+
+<h2>💰 Finance Settings</h2>
+
+<div class="form-grid">
+
+<input type="number" id="investorShare" placeholder="Investor Profit Share %">
+
+<input type="number" id="reserveFund" placeholder="Reserve Fund %">
+
+<input type="number" id="operatingFund" placeholder="Operating Fund %">
+
+</div>
+
+<button onclick="saveFinanceSettings()">
+💾 Save Finance Settings
+</button>
+
+</div>
+
+<!-- SECURITY SETTINGS -->
+
+<div class="section">
+
+<h2>🔒 Security Settings</h2>
+
+<div class="form-grid">
+
+<input type="password" id="currentPassword" placeholder="Current Password">
+
+<input type="password" id="newPassword" placeholder="New Password">
+
+<input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+<input type="number" id="sessionTimeout" placeholder="Session Timeout (Minutes)">
+
+</div>
+
+<button onclick="updatePassword()">
+🔒 Update Password
+</button>
+
+</div>
+
+<!-- SAVE ALL -->
+
+<div class="section">
+
+<button class="save-all-btn" onclick="saveAllSettings()">
+💾 Save All Settings
+</button>
+
+</div>
+
+</div>
+
+<script src="settings.js"></script>
+
+</body>
+
+</html>

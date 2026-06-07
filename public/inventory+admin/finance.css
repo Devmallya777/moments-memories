@@ -1,0 +1,235 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:#111827;
+padding:25px;
+position:fixed;
+left:0;
+top:0;
+height:100vh;
+overflow-y:auto;
+}
+
+.sidebar h2{
+color:white;
+margin-bottom:30px;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:12px 15px;
+border-radius:10px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.sidebar a:hover,
+.sidebar .active{
+background:#374151;
+}
+
+/* MAIN */
+
+.main{
+margin-left:260px;
+padding:30px;
+width:100%;
+}
+
+.main h1{
+margin-bottom:25px;
+color:#111827;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.card h3{
+font-size:30px;
+color:#111827;
+margin-bottom:10px;
+}
+
+.card p{
+color:#666;
+}
+
+/* SECTION */
+
+.section{
+background:white;
+padding:25px;
+border-radius:15px;
+margin-bottom:25px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.section h2{
+margin-bottom:20px;
+color:#111827;
+}
+
+/* INPUTS */
+
+input{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+margin-bottom:12px;
+outline:none;
+font-size:14px;
+}
+
+input:focus{
+border-color:#111827;
+}
+
+/* BUTTON */
+
+button{
+background:#111827;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+font-size:14px;
+transition:.3s;
+margin-bottom:15px;
+}
+
+button:hover{
+background:#1f2937;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+thead{
+background:#111827;
+color:white;
+}
+
+th{
+padding:15px;
+text-align:left;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+tr:hover{
+background:#f9fafb;
+}
+
+/* PROFIT TABLE */
+
+#profitTable tr{
+font-weight:500;
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+display:block;
+}
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+padding:15px;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.section{
+padding:18px;
+}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+input{
+font-size:16px;
+}
+
+button{
+width:100%;
+}
+
+}
+
+@media(max-width:480px){
+
+.main h1{
+font-size:24px;
+}
+
+.card h3{
+font-size:24px;
+}
+
+.sidebar a{
+font-size:14px;
+}
+
+}

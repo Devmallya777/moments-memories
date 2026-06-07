@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Finance Management</title>
+
+<link rel="stylesheet" href="finance.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+  <div class="sidebar">
+    <h2>🎁 M&M Admin</h2>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="inventory.html">📦 Inventory</a>
+    <a href="orders.html">🛒 Orders</a>
+    <a href="agents.html">🚚 Delivery Agents</a>
+    <a href="finance.html" class="active">💰 Finance</a>
+    <a href="team.html">👥 Team Members</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="login.html" id="logout-btn">🚪 Logout</a>
+  </div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<h1>💰 Finance Dashboard</h1>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="card">
+<h3 id="totalInvestment">₹0</h3>
+<p>Total Investment</p>
+</div>
+
+<div class="card">
+<h3 id="totalRevenue">₹0</h3>
+<p>Total Revenue</p>
+</div>
+
+<div class="card">
+<h3 id="totalExpenses">₹0</h3>
+<p>Total Expenses</p>
+</div>
+
+<div class="card">
+<h3 id="netProfit">₹0</h3>
+<p>Net Profit</p>
+</div>
+
+<div class="card">
+    <h3 id="cashInHand">₹0</h3>
+    <p>Cash In Hand</p>
+</div>
+
+<div class="card">
+    <h3 id="pendingPayments">₹0</h3>
+    <p>Pending COD</p>
+</div>
+
+<div class="card">
+    <h3 id="agentCollection">₹0</h3>
+    <p>Agent Collections</p>
+</div>
+
+<div class="card">
+    <h3 id="businessWorth">₹0</h3>
+    <p>Business Worth</p>
+</div>
+
+</div>
+
+<!-- INVESTORS -->
+
+<div class="section">
+
+<h2>👥 Investors</h2>
+
+<input
+type="text"
+id="investorName"
+placeholder="Investor Name">
+
+<input
+type="number"
+id="investorAmount"
+placeholder="Investment Amount">
+
+<button onclick="addInvestor()">
+➕ Add Investor
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Investment</th>
+<th>Profit Share</th>
+</tr>
+</thead>
+
+<tbody id="investorTable">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- COLLECTIONS -->
+
+<div class="section">
+
+<h2>💵 Collections</h2>
+
+<input
+type="text"
+id="collectionReason"
+placeholder="Collection Source">
+
+<input
+type="number"
+id="collectionAmount"
+placeholder="Amount">
+
+<button onclick="addCollection()">
+➕ Add Collection
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Source</th>
+<th>Amount</th>
+</tr>
+</thead>
+
+<tbody id="collectionTable">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- EXPENSES -->
+
+<div class="section">
+
+<h2>📉 Expenses</h2>
+
+<input
+type="text"
+id="expenseReason"
+placeholder="Expense Reason">
+
+<input
+type="number"
+id="expenseAmount"
+placeholder="Amount">
+
+<button onclick="addExpense()">
+➕ Add Expense
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Reason</th>
+<th>Amount</th>
+</tr>
+</thead>
+
+<tbody id="expenseTable">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- WITHDRAWALS -->
+
+<div class="section">
+
+<h2>💸 Withdrawals</h2>
+
+<input
+type="text"
+id="withdrawPerson"
+placeholder="Person Name">
+
+<input
+type="number"
+id="withdrawAmount"
+placeholder="Amount">
+
+<button onclick="addWithdrawal()">
+➕ Add Withdrawal
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Person</th>
+<th>Amount</th>
+</tr>
+</thead>
+
+<tbody id="withdrawTable">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- PROFIT DISTRIBUTION -->
+
+<div class="section">
+
+<h2>📊 Profit Distribution</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Investor</th>
+<th>Investment</th>
+<th>Profit Share</th>
+</tr>
+</thead>
+
+<tbody id="profitTable">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- MONTHLY REPORT -->
+
+<div class="section">
+
+<h2>📈 Monthly Report</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Month</th>
+<th>Revenue</th>
+<th>Expenses</th>
+<th>Profit</th>
+</tr>
+</thead>
+
+<tbody id="monthlyReport">
+</tbody>
+
+</table>
+
+</div>
+
+<!-- INVESTOR SETTLEMENT -->
+
+<div class="section">
+
+<h2>🏦 Investor Settlement</h2>
+
+<button onclick="settleProfit()">
+Pay Profit
+</button>
+
+</div>
+
+<!-- CASH FLOW -->
+
+<div class="section">
+
+<h2>💸 Cash Flow</h2>
+
+<p>Total Inflow: ₹0</p>
+
+<p>Total Outflow: ₹0</p>
+
+<p>Current Balance: ₹0</p>
+
+</div>
+
+<!-- EXPORT -->
+
+<button onclick="exportFinance()">
+📄 Export Report
+</button>
+
+</div><!-- END MAIN -->
+
+<script src="finance.js"></script>
+
+</body>
+</html>
