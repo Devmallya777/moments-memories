@@ -291,7 +291,11 @@ app.post("/api/inventory", async (req, res) => {
 });
 
 app.put("/api/inventory/:id", async (req, res) => {
-    const item = await Inventory.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const item = await Inventory.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { returnDocument: "after" }
+);
     res.json(item);
 });
 
@@ -308,11 +312,11 @@ app.put("/api/order/:id", async (req, res) => {
 
     try {
 
-        const order = await Order.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
+const order = await Order.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { returnDocument: "after" }
+);
 
         res.json(order);
 
@@ -419,3 +423,43 @@ setInterval(() => {
         }
     }
 }, 10000);
+app.get("/api/finance", async (req, res) => {
+    try {
+
+        const orders = await Order.find();
+
+        const totalRevenue = orders.reduce(
+            (sum, order) => sum + (order.total || 0),
+            0
+        );
+
+        const deliveredRevenue = orders
+            .filter(o => o.status === "Delivered")
+            .reduce(
+                (sum, order) => sum + (order.total || 0),
+                0
+            );
+
+        const pendingRevenue = orders
+            .filter(o => o.status !== "Delivered")
+            .reduce(
+                (sum, order) => sum + (order.total || 0),
+                0
+            );
+
+        res.json({
+            totalRevenue,
+            deliveredRevenue,
+            pendingRevenue,
+            totalOrders: orders.length
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+});

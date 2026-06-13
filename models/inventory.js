@@ -28,33 +28,6 @@ const inventorySchema = new mongoose.Schema({
     }
 
 });
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedItem =
-      await Inventory.findByIdAndUpdate(
-        req.params.id,
-        {
-          itemName: req.body.itemName,
-          stock: req.body.stock,
-          unitCost: req.body.unitCost,
-          lowStockAlert:
-            req.body.lowStockAlert,
-          updatedAt: Date.now(),
-        },
-        { new: true }
-      );
-
-    res.json({
-      success: true,
-      item: updatedItem,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-});
 module.exports =
 mongoose.model(
     "Inventory",
