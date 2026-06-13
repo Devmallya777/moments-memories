@@ -92,5 +92,33 @@ router.delete("/:id", async(req,res)=>{
     }
 
 });
+// ========================
+// UPDATE ITEM
+// ========================
 
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedItem =
+      await Inventory.findByIdAndUpdate(
+        req.params.id,
+        {
+          itemName: req.body.itemName,
+          stock: req.body.stock,
+          unitCost: req.body.unitCost,
+        },
+        { new: true }
+      );
+
+    res.json({
+      success: true,
+      message: "Item Updated",
+      item: updatedItem,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 module.exports = router;

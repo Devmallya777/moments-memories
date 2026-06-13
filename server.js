@@ -170,14 +170,104 @@ app.get("/api/orders", async (req, res) => {
 
 app.get("/api/stats", async (req, res) => {
     try {
+
         const orders = await Order.find();
+
         const totalOrders = orders.length;
-        const pendingOrders = orders.filter(o => o.status === "Pending").length;
-        const deliveredOrders = orders.filter(o => o.status === "Delivered").length;
-        const totalCustomers = new Set(orders.map(o => o.email)).size;
-        res.json({ totalOrders, pendingOrders, deliveredOrders, totalCustomers });
+
+        const pendingOrders =
+            orders.filter(
+                o => o.status === "Pending"
+            ).length;
+
+        const deliveredOrders =
+            orders.filter(
+                o => o.status === "Delivered"
+            ).length;
+
+        const assignedOrders =
+            orders.filter(
+                o => o.status === "Assigned"
+            ).length;
+
+        const totalCustomers =
+            new Set(
+                orders.map(
+                    o => o.email
+                )
+            ).size;
+
+        const totalRevenue =
+            orders
+                .filter(
+                    o => o.status === "Delivered"
+                )
+                .reduce(
+                    (sum, order) =>
+                        sum + (order.total || 0),
+                    0
+                );
+
+        res.json({
+            totalOrders,
+            pendingOrders,
+            deliveredOrders,
+            assignedOrders,
+            totalCustomers,
+            totalRevenue
+        });
+
     } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+});
+// ======================
+// FINANCE STATS
+// ======================
+
+app.get("/api/finance", async (req, res) => {
+    try {
+
+        const orders = await Order.find();
+
+        const totalRevenue = orders.reduce(
+            (sum, order) => sum + (order.total || 0),
+            0
+        );
+
+        const deliveredRevenue = orders
+            .filter(order => order.status === "Delivered")
+            .reduce(
+                (sum, order) => sum + (order.total || 0),
+                0
+            );
+
+        const pendingRevenue = orders
+            .filter(order => order.status !== "Delivered")
+            .reduce(
+                (sum, order) => sum + (order.total || 0),
+                0
+            );
+
+        res.json({
+            totalRevenue,
+            deliveredRevenue,
+            pendingRevenue,
+            totalOrders: orders.length
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
     }
 });
 
@@ -210,6 +300,10 @@ app.delete("/api/inventory/:id", async (req, res) => {
     res.json({ success: true });
 });
 
+// ======================
+// UPDATE ORDER
+// ======================
+
 app.put("/api/order/:id", async (req, res) => {
 
     try {
@@ -221,6 +315,33 @@ app.put("/api/order/:id", async (req, res) => {
         );
 
         res.json(order);
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+
+});
+
+// ======================
+// DELETE ORDER
+// ======================
+
+app.delete("/api/order/:id", async (req, res) => {
+
+    try {
+
+        await Order.findByIdAndDelete(
+            req.params.id
+        );
+
+        res.json({
+            success: true
+        });
 
     } catch (err) {
 
