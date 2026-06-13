@@ -365,6 +365,43 @@ app.delete("/api/order/:id", async (req, res) => {
 app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 10000;
+// ======================
+// TEAM MANAGEMENT
+// ======================
+
+let teamMembers = [
+  { id: 1, name: "Admin", role: "Admin", phone: "", active: true }
+];
+
+app.get("/api/team", (req, res) => {
+  res.json(teamMembers);
+});
+
+app.post("/api/team", (req, res) => {
+  const { name, role, phone } = req.body;
+  const newMember = {
+    id: Date.now(),
+    name,
+    role: role || "Staff",
+    phone: phone || "",
+    active: true
+  };
+  teamMembers.push(newMember);
+  res.json({ success: true, member: newMember });
+});
+
+app.delete("/api/team/:id", (req, res) => {
+  teamMembers = teamMembers.filter(m => m.id != req.params.id);
+  res.json({ success: true });
+});
+
+app.put("/api/team/:id", (req, res) => {
+  const index = teamMembers.findIndex(m => m.id == req.params.id);
+  if (index !== -1) {
+    teamMembers[index] = { ...teamMembers[index], ...req.body };
+  }
+  res.json({ success: true });
+});
 
 app.listen(PORT, () => {
     console.log(`Server Running On Port ${PORT}`);
@@ -423,43 +460,3 @@ setInterval(() => {
         }
     }
 }, 10000);
-app.get("/api/finance", async (req, res) => {
-    try {
-
-        const orders = await Order.find();
-
-        const totalRevenue = orders.reduce(
-            (sum, order) => sum + (order.total || 0),
-            0
-        );
-
-        const deliveredRevenue = orders
-            .filter(o => o.status === "Delivered")
-            .reduce(
-                (sum, order) => sum + (order.total || 0),
-                0
-            );
-
-        const pendingRevenue = orders
-            .filter(o => o.status !== "Delivered")
-            .reduce(
-                (sum, order) => sum + (order.total || 0),
-                0
-            );
-
-        res.json({
-            totalRevenue,
-            deliveredRevenue,
-            pendingRevenue,
-            totalOrders: orders.length
-        });
-
-    } catch (err) {
-
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-
-    }
-});
